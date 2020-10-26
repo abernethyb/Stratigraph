@@ -29,6 +29,6 @@ namespace Stratigraph.Models
         public string Email { get; set; }
 
         [StringLength(28, MinimumLength = 28)]
-        public string FirebaseUserId { get; set; }
+        public string FirebaseId { get; set; }
     }
 }
