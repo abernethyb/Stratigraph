@@ -38,7 +38,7 @@ namespace Stratigraph.Repositories
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
                             Email = DbUtils.GetString(reader, "Email"),
-                            FirebaseId = DbUtils.GetString(reader, "FirebaseId")
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseId")
                         };
                     }
                     reader.Close();
@@ -63,7 +63,7 @@ namespace Stratigraph.Repositories
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-                    DbUtils.AddParameter(cmd, "@FirebaseId", userProfile.FirebaseId);
+                    DbUtils.AddParameter(cmd, "@FirebaseId", userProfile.FirebaseUserId);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }

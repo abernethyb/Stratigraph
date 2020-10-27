@@ -37,7 +37,7 @@ namespace Stratigraph.Controllers
         {
             _userProfileRepository.Add(userProfile);
             return CreatedAtAction(
-                nameof(GetByFirebaseId), new { firebaseId = userProfile.FirebaseId }, userProfile);
+                nameof(GetByFirebaseId), new { firebaseId = userProfile.FirebaseUserId }, userProfile);
         }
     }
 }
