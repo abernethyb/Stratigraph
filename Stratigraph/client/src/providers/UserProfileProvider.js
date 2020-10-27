@@ -1,7 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { Spinner } from "reactstrap";
 import firebase from 'firebase/app'
-
 import "firebase/auth";
 
 export const UserProfileContext = createContext();
@@ -11,7 +10,6 @@ export function UserProfileProvider(props) {
 
     const userProfile = sessionStorage.getItem("userProfile");
     const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
-    const [currentUser, setCurrentUser] = useState([]);
 
     const [isFirebaseReady, setIsFirebaseReady] = useState(false);
     useEffect(() => {
@@ -55,11 +53,10 @@ export function UserProfileProvider(props) {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json().then(setCurrentUser)));
+            }).then(resp => resp.json()));
     };
 
     const saveUser = (userProfile) => {
-        debugger
         return getToken().then((token) =>
             fetch(apiUrl, {
                 method: "POST",
@@ -71,18 +68,8 @@ export function UserProfileProvider(props) {
             }).then(resp => resp.json()));
     };
 
-    // const getCurrentUser = (firebaseUserId) => {
-    //     return getToken().then((token) =>
-    //       fetch(`${apiUrl}/${firebaseUserId}`, {
-    //         method: "GET",
-    //         headers: {
-    //           Authorization: `Bearer ${token}`
-    //         }
-    //       }).then(resp => resp.json().then(setCurrentUser)));
-    //   };
-
     return (
-        <UserProfileContext.Provider value={{ isLoggedIn, currentUser, login, logout, register, getToken }}>
+        <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken }}>
             {isFirebaseReady
                 ? props.children
                 : <Spinner className="app-spinner dark" />}
