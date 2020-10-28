@@ -11,7 +11,7 @@ using Stratigraph.Repositories;
 
 namespace Stratigraph.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportController : ControllerBase
@@ -58,10 +58,10 @@ namespace Stratigraph.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Report report)
         {
-            //var currentUserProfile = GetCurrentUserProfile();
-            //var uprFromDB = _reportRepository.GetUserProfileReportById(id);
-            //if (uprFromDB.UserProfileId == currentUserProfile.Id)
-            //{
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id);
+            if (uprFromDB.UserProfileId == currentUserProfile.Id)
+            {
                 if (id != report.Id)
                 {
                     return BadRequest();
@@ -70,13 +70,13 @@ namespace Stratigraph.Controllers
                 _reportRepository.Update(report);
 
                 return Ok();
-            //}
-            //else
-            //{
-            //    return Unauthorized();
-            //}
-
         }
+            else
+            {
+                return Unauthorized();
+    }
+
+}
 
 
         private UserProfile GetCurrentUserProfile()

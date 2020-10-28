@@ -103,8 +103,8 @@ namespace Stratigraph.Repositories
                         upr = new UserProfileReport()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
-                            UserProfileId = DbUtils.GetInt(reader, "Id"),
-                            ReportId = DbUtils.GetInt(reader, "Id"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            ReportId = DbUtils.GetInt(reader, "ReportId"),
                         };
                     }
 
@@ -162,7 +162,7 @@ namespace Stratigraph.Repositories
                 }
             }
         }
-        public void MarkAsComplete(Report report)
+        public void MarkAsComplete(int reportId)
         {
             using (var conn = Connection)
             {
@@ -174,7 +174,7 @@ namespace Stratigraph.Repositories
                         SET CompleteDate = GETDATE()
                         WHERE Id = @Id";
 
-                    DbUtils.AddParameter(cmd, "@Id", report.Id);
+                    DbUtils.AddParameter(cmd, "@Id", reportId);
 
                     cmd.ExecuteNonQuery();
                 }
