@@ -70,13 +70,13 @@ namespace Stratigraph.Controllers
                 _reportRepository.Update(report);
 
                 return Ok();
-        }
+            }
             else
             {
                 return Unauthorized();
-    }
+            }
 
-}
+        }
 
 
         private UserProfile GetCurrentUserProfile()
