@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Stratigraph.Repositories
 {
-    public class ReportRepository : BaseRepository
+    public class ReportRepository : BaseRepository, IReportRepository
     {
-        public ReportRepository(IConfiguration configuration): base(configuration) { }
+        public ReportRepository(IConfiguration configuration) : base(configuration) { }
 
         public List<Report> GetReportsByUserId(int userId)
         {
@@ -35,7 +35,7 @@ namespace Stratigraph.Repositories
                             Id = DbUtils.GetInt(reader, "Id"),
                             Name = DbUtils.GetString(reader, "Name"),
                             CreateDate = DbUtils.GetDateTime(reader, "CreateDate"),
-                            CompleteDate = DbUtils.GetDateTime(reader, "CompleteDate")
+                            CompleteDate = DbUtils.GetNullableDateTime(reader, "CompleteDate")
                         });
                     }
 
