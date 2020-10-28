@@ -24,43 +24,91 @@ namespace Stratigraph.Repositories
                                         WHERE ur.UserProfileId = @userId;";
 
                     DbUtils.AddParameter(cmd, "@userId", userId);
+
                     var reader = cmd.ExecuteReader();
 
-                    var posts = new List<Post>();
+                    var reports = new List<Report>();
                     while (reader.Read())
                     {
-                        posts.Add(new Post()
+                        reports.Add(new Report()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
-                            Title = DbUtils.GetString(reader, "Title"),
-                            Content = DbUtils.GetString(reader, "Content"),
-                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            PublishDateTime = DbUtils.GetDateTime(reader, "PublishDateTime"),
-                            IsApproved = reader.GetBoolean(reader.GetOrdinal("IsApproved")),
-                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                            UserProfile = new UserProfile()
-                            {
-                                Id = DbUtils.GetInt(reader, "UserProfileId"),
-                                FirstName = DbUtils.GetString(reader, "PosterFirstName"),
-                                LastName = DbUtils.GetString(reader, "PosterLastName")
-                            },
-                            Category = new Category()
-                            {
-                                Id = DbUtils.GetInt(reader, "CategoryId"),
-                                Name = DbUtils.GetString(reader, "CategoryName")
-
-                            }
+                            Name = DbUtils.GetString(reader, "Name"),
+                            CreateDate = DbUtils.GetDateTime(reader, "CreateDate"),
+                            CompleteDate = DbUtils.GetDateTime(reader, "CompleteDate")
                         });
                     }
 
                     reader.Close();
 
-                    return posts;
+                    return reports;
                 }
             }
         }
 
+        public void Add(Report report)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Report (Name, CreateDate, CompleteDate)
+                        OUTPUT INSERTED.ID
+                        VALUES (@Name, GETDATE(), NULL)";
+
+                    DbUtils.AddParameter(cmd, "@Title", report.Name);
+
+                    report.Id = (int)cmd.ExecuteScalar();
+
+                    cmd.CommandText = @"
+                        INSERT INTO UserProfileReport (UserProfileId, ReportId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@UserProfileId, @ReportId)";
+
+                    DbUtils.AddParameter(cmd, "@UserProfileId", report.CreatingUserProfileId);
+                    DbUtils.AddParameter(cmd, "@ReportId", report.Id);
+                }
+            }
+        }
+
+        public void Update(Report report)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Report
+                        SET Name = '@Name'
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Name", report.Name);
+                    DbUtils.AddParameter(cmd, "@Id", report.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void MarkAsComplete(Report report)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Report
+                        SET CompleteDate = GETDATE()
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", report.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

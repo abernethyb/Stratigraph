@@ -20,5 +20,8 @@ namespace Stratigraph.Models
         public DateTime CreateDate { get; set; }
 
         public DateTime CompleteDate { get; set; }
+
+        [Required]
+        public int CreatingUserProfileId { get; set; }
     }
 }
