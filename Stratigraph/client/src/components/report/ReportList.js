@@ -21,7 +21,7 @@ const ReportList = () => {
             <div className="container">
                 <div className="row justify-content-left">
                     <Button color="danger"
-                    // onClick={() => { history.push(`/ReportForm/`) }}
+                        onClick={() => { history.push(`/reports/add`) }}
                     >
                         Add Report
                     </Button>

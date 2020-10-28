@@ -93,7 +93,7 @@ namespace Stratigraph.Repositories
                         OUTPUT INSERTED.ID
                         VALUES (@Name, GETDATE(), NULL)";
 
-                    DbUtils.AddParameter(cmd, "@Title", report.Name);
+                    DbUtils.AddParameter(cmd, "@Name", report.Name);
 
                     report.Id = (int)cmd.ExecuteScalar();
 
@@ -104,6 +104,8 @@ namespace Stratigraph.Repositories
 
                     DbUtils.AddParameter(cmd, "@UserProfileId", report.CreatingUserProfileId);
                     DbUtils.AddParameter(cmd, "@ReportId", report.Id);
+
+                    cmd.ExecuteScalar();
                 }
             }
         }
