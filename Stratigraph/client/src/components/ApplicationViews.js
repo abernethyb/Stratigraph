@@ -4,6 +4,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import HiThere from "./HiThere";
+import ReportList from "./report/ReportList";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -12,7 +13,7 @@ export default function ApplicationViews() {
         <main>
             <Switch>
                 <Route path="/" exact>
-                    {isLoggedIn ? <HiThere /> : <Redirect to="/login" />}
+                    {isLoggedIn ? <ReportList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">

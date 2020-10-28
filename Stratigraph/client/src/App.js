@@ -5,13 +5,16 @@ import { UserProfileProvider } from "./providers/UserProfileProvider";
 import ApplicationViews from "./components/ApplicationViews";
 import './App.css';
 import Header from './components/Header';
+import { ReportProvider } from './providers/ReportProvider';
 
 function App() {
   return (
     <Router>
       <UserProfileProvider>
-        <Header />
-        <ApplicationViews />
+        <ReportProvider>
+          <Header />
+          <ApplicationViews />
+        </ReportProvider>
       </UserProfileProvider>
     </Router>
   );
