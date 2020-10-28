@@ -55,7 +55,29 @@ namespace Stratigraph.Controllers
             return CreatedAtAction("Get", new { id = report.Id }, report);
         }
 
-       
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Report report)
+        {
+            //var currentUserProfile = GetCurrentUserProfile();
+            //var uprFromDB = _reportRepository.GetUserProfileReportById(id);
+            //if (uprFromDB.UserProfileId == currentUserProfile.Id)
+            //{
+                if (id != report.Id)
+                {
+                    return BadRequest();
+                }
+
+                _reportRepository.Update(report);
+
+                return Ok();
+            //}
+            //else
+            //{
+            //    return Unauthorized();
+            //}
+
+        }
+
 
         private UserProfile GetCurrentUserProfile()
         {

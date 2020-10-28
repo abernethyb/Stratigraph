@@ -8,6 +8,7 @@ namespace Stratigraph.Repositories
         void Add(Report report);
         Report GetReportsById(int Id);
         List<Report> GetReportsByUserId(int userId);
+        UserProfileReport GetUserProfileReportById(int Id);
         void MarkAsComplete(Report report);
         void Update(Report report);
     }

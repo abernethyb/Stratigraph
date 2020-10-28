@@ -32,8 +32,8 @@ export const ReportProvider = (props) => {
         );
     //Name, CreateDate, CompleteDate
 
-    const addReport = (report) =>
-        getToken().then((token) =>
+    const addReport = (report) => {
+        return getToken().then((token) =>
             fetch("/api/Report/", {
                 method: "POST",
                 headers: {
@@ -47,21 +47,23 @@ export const ReportProvider = (props) => {
                 }
                 throw new Error("Unauthorized");
             }));
+    };
 
 
-    // const EditPost = (post) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/post/${post.id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(post),
-    //         }));
+    const EditReport = (report) => {
+        return getToken().then((token) =>
+            fetch(`/api/Report/${report.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(report),
+            }));
+    };
 
     return (
-        <ReportContext.Provider value={{ reports, getReportsByUserId, getSingleReport, addReport }}>
+        <ReportContext.Provider value={{ reports, getReportsByUserId, getSingleReport, addReport, EditReport }}>
             {props.children}
         </ReportContext.Provider>
     );

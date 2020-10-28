@@ -81,6 +81,39 @@ namespace Stratigraph.Repositories
                 }
             }
         }
+
+        public UserProfileReport GetUserProfileReportById(int Id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, UserProfileId, ReportId FROM UserProfileReport
+                                        WHERE ReportId = @Id;";
+
+                    DbUtils.AddParameter(cmd, "@Id", Id);
+
+                    var reader = cmd.ExecuteReader();
+
+
+                    UserProfileReport upr = null;
+                    if (reader.Read())
+                    {
+                        upr = new UserProfileReport()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            UserProfileId = DbUtils.GetInt(reader, "Id"),
+                            ReportId = DbUtils.GetInt(reader, "Id"),
+                        };
+                    }
+
+                    reader.Close();
+
+                    return upr;
+                }
+            }
+        }
         public void Add(Report report)
         {
             using (var conn = Connection)
@@ -119,7 +152,7 @@ namespace Stratigraph.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE Report
-                        SET Name = '@Name'
+                        SET Name = @Name
                         WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Name", report.Name);
