@@ -21,6 +21,16 @@ export const ReportProvider = (props) => {
                 .then(setReports));
     };
 
+    const getSingleReport = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/Report/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+        );
+
 
     // const addPost = (post) =>
     //     getToken().then((token) =>
@@ -51,7 +61,7 @@ export const ReportProvider = (props) => {
     //         }));
 
     return (
-        <ReportContext.Provider value={{ reports, getReportsByUserId }}>
+        <ReportContext.Provider value={{ reports, getReportsByUserId, getSingleReport }}>
             {props.children}
         </ReportContext.Provider>
     );

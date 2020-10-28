@@ -42,10 +42,10 @@ const ReportList = () => {
                             <tbody key={report.id}>
                                 <tr>
                                     <th scope="row">
-                                        {/* <Link to={`/reports/${report.id}`}>
-                                            {report.title}
-                                        </Link> */}
-                                        {report.name}
+                                        <Link to={`/reports/${report.id}`}>
+                                            {report.name}
+                                        </Link>
+                                        {/* {report.name} */}
                                     </th>
                                     <td>
                                         {report.createDate}
