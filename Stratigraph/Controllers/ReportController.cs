@@ -11,7 +11,7 @@ using Stratigraph.Repositories;
 
 namespace Stratigraph.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportController : ControllerBase
@@ -33,6 +33,17 @@ namespace Stratigraph.Controllers
 
             return Ok(_reportRepository.GetReportsByUserId(userProfileId));
             
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var report = _reportRepository.GetReportsById(id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+            return Ok(report);
         }
 
         [HttpPost]

@@ -50,9 +50,16 @@ const ReportList = () => {
                                     <td>
                                         {report.createDate}
                                     </td>
-                                    <td>
-                                        {report.completeDate}
-                                    </td>
+                                    {report.completeDate ?
+                                        <td>
+                                            {report.completeDate}
+                                        </td>
+                                        :
+                                        <td>
+                                            IN PROGRESS
+                                        </td>
+                                    }
+
 
                                 </tr>
                             </tbody>

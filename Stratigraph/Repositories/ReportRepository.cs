@@ -21,7 +21,8 @@ namespace Stratigraph.Repositories
                 {
                     cmd.CommandText = @"SELECT r.Id, r.Name, r.CreateDate, r.CompleteDate FROM UserProfileReport ur
                                         LEFT JOIN Report r on ur.ReportId = r.Id
-                                        WHERE ur.UserProfileId = @userId;";
+                                        WHERE ur.UserProfileId = @userId
+                                        ORDER BY CompleteDate;";
 
                     DbUtils.AddParameter(cmd, "@userId", userId);
 
@@ -46,6 +47,40 @@ namespace Stratigraph.Repositories
             }
         }
 
+        public Report GetReportsById(int Id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT r.Id, r.Name, r.CreateDate, r.CompleteDate FROM UserProfileReport ur
+                                        LEFT JOIN Report r on ur.ReportId = r.Id
+                                        WHERE r.Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", Id);
+
+                    var reader = cmd.ExecuteReader();
+
+
+                    Report report = null;
+                    if (reader.Read())
+                    {
+                        report = new Report()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            CreateDate = DbUtils.GetDateTime(reader, "CreateDate"),
+                            CompleteDate = DbUtils.GetNullableDateTime(reader, "CompleteDate")
+                        };
+                    }
+
+                    reader.Close();
+
+                    return report;
+                }
+            }
+        }
         public void Add(Report report)
         {
             using (var conn = Connection)
