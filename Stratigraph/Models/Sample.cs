@@ -44,5 +44,7 @@ namespace Stratigraph.Models
         [Required]
         public int RoomNumber { get; set; }
 
+        public string StructureName { get; set; }
+
     }
 }

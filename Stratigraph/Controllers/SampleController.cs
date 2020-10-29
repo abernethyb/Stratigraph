@@ -26,11 +26,20 @@ namespace Stratigraph.Controllers
         }
 
         [HttpGet("structureSamples/{structureId}")]
-        public IActionResult GetAllByReportId(int structureId)
+        public IActionResult GetAllByStructureId(int structureId)
         {
 
 
             return Ok(_sampleRepository.GetSampleByStructureId(structureId));
+
+        }
+
+        [HttpGet("reportSamples/{reportId}")]
+        public IActionResult GetAllByReportId(int reportId)
+        {
+
+
+            return Ok(_sampleRepository.GetSampleByReportId(reportId));
 
         }
 

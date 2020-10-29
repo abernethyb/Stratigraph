@@ -11,6 +11,7 @@ import EditReport from "./report/EditReport";
 import StructuretList from "./structure/StructureList";
 import AddStructure from "./structure/AddStructure";
 import EditStructure from "./structure/EditStructure";
+import SampletList from "./sample/SampleList";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -48,6 +49,11 @@ export default function ApplicationViews() {
 
                 <Route path="/reports/:reportId(\d+)/structures/edit/:structureId(\d+)" exact>
                     {isLoggedIn ? <EditStructure /> : <Redirect to="/login" />}
+                </Route>
+
+                {/* Samples */}
+                <Route path="/reports/:reportId(\d+)/samples" exact>
+                    {isLoggedIn ? <SampletList /> : <Redirect to="/login" />}
                 </Route>
 
                 {/* Auth */}
