@@ -30,7 +30,12 @@ const Report = () => {
                     >
                         Edit
                     </Button>
-
+                    {/* /reports/:reportId(\d+)/structures */}
+                    <Button color="danger"
+                        onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                    >
+                        View Structures
+                    </Button>
 
                     <Table>
 
