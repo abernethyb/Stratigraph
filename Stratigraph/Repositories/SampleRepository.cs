@@ -123,14 +123,14 @@ namespace Stratigraph.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE Structure
+                        UPDATE Sample
                         SET Name = @Name,
                             UserProfileId = @UserProfileId,
                             StratigraphyId = @StratigraphyId,
                             StructureId = @StructureId,
-                            DateTaken = @DateTaken
-                            Image = @Image
-                            LocationDescription = @LocationDescription
+                            DateTaken = @DateTaken,
+                            Image = @Image,
+                            LocationDescription = @LocationDescription,
                             RoomNumber = @RoomNumber
                         WHERE Id = @Id";
 
