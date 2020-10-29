@@ -31,6 +31,7 @@ namespace Stratigraph
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IReportRepository, ReportRepository>();
             services.AddTransient<IStructureRepository, StructureRepository>();
+            services.AddTransient<ISampleRepository, SampleRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

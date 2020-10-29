@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Stratigraph.Repositories
 {
-    public class SampleRepository : BaseRepository
+    public class SampleRepository : BaseRepository, ISampleRepository
     {
         public SampleRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<Sample> GetStructureByStructureId(int structureId)
+        public List<Sample> GetSampleByStructureId(int structureId)
         {
             using (var conn = Connection)
             {
