@@ -77,6 +77,24 @@ namespace Stratigraph.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var sample = _sampleRepository.GetSampleById(id);
+
+            if (sample.UserProfileId == currentUserProfile.Id)
+            {
+                _sampleRepository.DeleteSample(id);
+                return NoContent();
+            }
+
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
 
         private UserProfile GetCurrentUserProfile()
         {

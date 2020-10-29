@@ -71,8 +71,17 @@ export const SampleProvider = (props) => {
             }));
     };
 
+    const DeleteSample = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/sample/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }));
+
     return (
-        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample, getSingleSample, EditSample }}>
+        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample, getSingleSample, EditSample, DeleteSample }}>
             {props.children}
         </SampleContext.Provider>
     );

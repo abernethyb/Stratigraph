@@ -14,6 +14,7 @@ import EditStructure from "./structure/EditStructure";
 import SampletList from "./sample/SampleList";
 import AddSample from "./sample/AddSample";
 import EditSample from "./sample/EditSample";
+import ConfirmDeleteSample from "./sample/ConfirmDeleteSample";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -62,6 +63,9 @@ export default function ApplicationViews() {
                 </Route>
                 <Route path="/reports/:reportId(\d+)/samples/edit/:sampleId(\d+)" exact>
                     {isLoggedIn ? <EditSample /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/samples/delete/:sampleId(\d+)" exact>
+                    {isLoggedIn ? <ConfirmDeleteSample /> : <Redirect to="/login" />}
                 </Route>
 
                 {/* Auth */}

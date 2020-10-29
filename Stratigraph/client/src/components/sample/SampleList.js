@@ -62,7 +62,9 @@ const SampletList = () => {
                                         >Edit</Button>
                                         <Button color="danger"
 
-                                        // onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
+                                            ///reports/:reportId(\d+)/samples/delete/:sampleId(\d+)
+                                            onClick={() => { history.push(`/reports/${reportId}/samples/delete/${sample.id}`) }}
+
                                         >DELETE</Button>
 
                                     </th>
