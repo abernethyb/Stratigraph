@@ -41,7 +41,7 @@ const AddStructure = () => {
         };
 
 
-        if (report.name !== "") {
+        if (structure.name !== "") {
             addStructure(structure).then((res) => {
                 history.push(`/structures/${res.id}`);
             });

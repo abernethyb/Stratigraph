@@ -24,7 +24,8 @@ const StructuretList = () => {
             <div className="container">
                 <div className="row justify-content-left">
                     <Button color="danger"
-                    // onClick={() => { history.push(`/structures/add`) }}
+                        ///reports/:reportId(\d+)/structures/add
+                        onClick={() => { history.push(`/reports/${reportId}/structures/add`) }}
                     >
                         Add Structure
                     </Button>
