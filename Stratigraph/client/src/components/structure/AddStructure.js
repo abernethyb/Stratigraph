@@ -43,7 +43,7 @@ const AddStructure = () => {
 
         if (structure.name !== "") {
             addStructure(structure).then((res) => {
-                history.push(`/structures/${res.id}`);
+                history.push(`/reports/${reportId}/structures`);
             });
         } else {
             window.alert("Please add a name")
