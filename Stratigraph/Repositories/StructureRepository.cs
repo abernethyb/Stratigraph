@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Stratigraph.Repositories
 {
-    public class StructureRepository : BaseRepository
+    public class StructureRepository : BaseRepository, IStructureRepository
     {
         public StructureRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -131,6 +131,6 @@ namespace Stratigraph.Repositories
                 }
             }
         }
-        
+
     }
 }
