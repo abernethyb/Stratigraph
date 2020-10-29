@@ -10,6 +10,7 @@ import AddReport from "./report/AddReport";
 import EditReport from "./report/EditReport";
 import StructuretList from "./structure/StructureList";
 import AddStructure from "./structure/AddStructure";
+import EditStructure from "./structure/EditStructure";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -43,6 +44,10 @@ export default function ApplicationViews() {
 
                 <Route path="/reports/:reportId(\d+)/structures/add" exact>
                     {isLoggedIn ? <AddStructure /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/reports/:reportId(\d+)/structures/edit/:structureId(\d+)" exact>
+                    {isLoggedIn ? <EditStructure /> : <Redirect to="/login" />}
                 </Route>
 
                 {/* Auth */}

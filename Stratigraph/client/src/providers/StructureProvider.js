@@ -21,16 +21,15 @@ export const StructureProvider = (props) => {
                 .then(setStructures));
     };
 
-    // const getSingleReport = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/Report/${id}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then((res) => res.json())
-    //     );
-    // //Name, CreateDate, CompleteDate
+    const getSingleStructure = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/structure/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+        );
 
     const addStructure = (structure) => {
         return getToken().then((token) =>
@@ -50,20 +49,20 @@ export const StructureProvider = (props) => {
     };
 
 
-    // const EditReport = (report) => {
-    //     return getToken().then((token) =>
-    //         fetch(`/api/Report/${report.id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(report),
-    //         }));
-    // };
+    const EditStructure = (structure) => {
+        return getToken().then((token) =>
+            fetch(`/api/structure/${structure.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(structure),
+            }));
+    };
 
     return (
-        <StructureContext.Provider value={{ structures, getStructuresByReportId, addStructure }}>
+        <StructureContext.Provider value={{ structures, getStructuresByReportId, addStructure, getSingleStructure, EditStructure }}>
             {props.children}
         </StructureContext.Provider>
     );

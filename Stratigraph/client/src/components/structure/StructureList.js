@@ -1,8 +1,9 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
 //import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
-import { Button, Table } from "reactstrap";
+import { Button, CardImg, Table } from "reactstrap";
 import { StructureContext } from "../../providers/StructureProvider";
+import Image from 'react-bootstrap/Image'
 
 
 const StructuretList = () => {
@@ -37,8 +38,9 @@ const StructuretList = () => {
                             <h2>My Reports</h2>
                             <tr>
                                 <th>Name</th>
-                                <th>Imang</th>
+                                <th>Image</th>
                                 <th>Address</th>
+                                <th>Year Built</th>
                             </tr>
                         </thead>
 
@@ -46,17 +48,27 @@ const StructuretList = () => {
                             <tbody key={structure.id}>
                                 <tr>
                                     <th scope="row">
-                                        {/* <Link to={`/structures/${structure.id}`}>
-                                            {structure.name}
-                                        </Link> */}
+
                                         {structure.name}
+                                        <Button
+
+                                            onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
+                                        >Edit</Button>
+                                        <Button
+
+                                        //onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
+                                        >View Samples</Button>
                                     </th>
                                     <td>
-                                        {structure.image}
+                                        <Image fluid rounded src={structure.image} alt={structure.name}></Image>
+
                                     </td>
 
                                     <td>
                                         {structure.location}
+                                    </td>
+                                    <td>
+                                        {structure.yearCunstructed}
                                     </td>
 
                                 </tr>
