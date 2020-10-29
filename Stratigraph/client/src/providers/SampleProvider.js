@@ -8,8 +8,6 @@ export const SampleProvider = (props) => {
     const { getToken } = useContext(UserProfileContext);
 
 
-
-
     const getSamplesByStructureId = (structureId) => {
         getToken().then((token) =>
             fetch(`/api/sample/structureSamples/${structureId}`, {
@@ -20,8 +18,6 @@ export const SampleProvider = (props) => {
             }).then((res) => res.json())
                 .then(setSamples));
     };
-
-    ///api/sample/reportSamples/9
 
     const getSamplesByReportId = (reportId) => {
         getToken().then((token) =>
@@ -34,15 +30,15 @@ export const SampleProvider = (props) => {
                 .then(setSamples));
     };
 
-    // const getSingleStructure = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/structure/${id}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then((res) => res.json())
-    //     );
+    const getSingleSample = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/sample/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+        );
 
     const addSample = (sample) => {
         return getToken().then((token) =>
@@ -62,20 +58,21 @@ export const SampleProvider = (props) => {
     };
 
 
-    // const EditStructure = (structure) => {
-    //     return getToken().then((token) =>
-    //         fetch(`/api/structure/${structure.id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(structure),
-    //         }));
-    // };
+    const EditSample = (sample) => {
+        debugger
+        return getToken().then((token) =>
+            fetch(`/api/sample/${sample.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(sample),
+            }));
+    };
 
     return (
-        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample }}>
+        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample, getSingleSample, EditSample }}>
             {props.children}
         </SampleContext.Provider>
     );
