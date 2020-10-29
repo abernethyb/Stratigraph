@@ -108,6 +108,7 @@ const AddSample = () => {
                                 <Label for="dateTaken">dateTaken</Label>
                                 <Input
                                     id="dateTaken"
+                                    type="date"
                                     innerRef={dateTaken}
                                 />
                             </FormGroup>
