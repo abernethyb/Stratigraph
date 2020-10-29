@@ -6,14 +6,17 @@ import ApplicationViews from "./components/ApplicationViews";
 import './App.css';
 import Header from './components/Header';
 import { ReportProvider } from './providers/ReportProvider';
+import { StructureProvider } from './providers/StructureProvider';
 
 function App() {
   return (
     <Router>
       <UserProfileProvider>
         <ReportProvider>
-          <Header />
-          <ApplicationViews />
+          <StructureProvider>
+            <Header />
+            <ApplicationViews />
+          </StructureProvider>
         </ReportProvider>
       </UserProfileProvider>
     </Router>

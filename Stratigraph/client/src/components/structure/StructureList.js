@@ -15,6 +15,10 @@ const StructuretList = () => {
         getStructuresByReportId(reportId);
     }, []);
 
+    if (!structures) {
+        return null;
+    }
+
     return (
         <>
             <div className="container">
