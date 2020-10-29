@@ -11,7 +11,7 @@ using Stratigraph.Repositories;
 
 namespace Stratigraph.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SampleController : ControllerBase
@@ -55,8 +55,8 @@ namespace Stratigraph.Controllers
         [HttpPost]
         public IActionResult Post(Sample sample)
         {
-            //TO DO: 
-            //Auth...
+            var currentUserProfile = GetCurrentUserProfile();
+            sample.UserProfileId = currentUserProfile.Id;
             _sampleRepository.Add(sample);
             return CreatedAtAction("Get", new { id = sample.Id }, sample);
         }

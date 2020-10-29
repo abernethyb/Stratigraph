@@ -14,42 +14,60 @@ import {
 } from "reactstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { StructureContext } from "../../providers/StructureProvider";
+import { SampleContext } from "../../providers/SampleProvider";
 
-const AddStructure = () => {
+const AddSample = () => {
 
     const { reportId } = useParams();
-    const { addStructure } = useContext(StructureContext)
+    const { addSample } = useContext(SampleContext)
+    const { structures, getStructuresByReportId } = useContext(StructureContext);
     const history = useHistory();
     const name = useRef(null)
+    const structureId = useRef(null)
+    const dateTaken = useRef(null)
     const image = useRef(null)
-    const location = useRef(null)
-    const yearCunstructed = useRef(null)
+    const locationDescription = useRef(null)
+    const roomNumber = useRef(null)
 
-    // "reportId": 8,
-    // "name": "edited Structure for 8th rpt from postman",
-    // "image": "http://dummyimage.com/216x206.bmp/dddddd/000000",
-    // "location": "6598 Novick Plaza",
-    // "yearCunstructed": 2090
+    // "name": "Brendan762545270-0",
+    // "userProfileId": 15,
+    // "stratigraphyId": null,
+    // "structureId": 32,
+    // "dateTaken": "2020-08-16T00:00:00",
+    // "image": "http://dummyimage.com/226x232.png/ff4444/ffffff",
+    // "locationDescription": "main door, top.",
+    // "roomNumber": 109
 
     const submit = () => {
-        const structure = {
-            reportId: parseInt(reportId),
+        debugger
+        const sample = {
             name: name.current.value,
+            //userProfileId: parseInt(),
+            stratigraphyId: null,
+            structureId: parseInt(structureId.current.value),
+            dateTaken: dateTaken.current.value,
             image: image.current.value,
-            location: location.current.value,
-            yearCunstructed: parseInt(yearCunstructed.current.value)
+            locationDescription: locationDescription.current.value,
+            roomNumber: parseInt(roomNumber.current.value)
         };
 
 
-        if (structure.name !== "") {
-            addStructure(structure).then((res) => {
-                history.push(`/reports/${reportId}/structures`);
+        if (sample.name !== "") {
+            addSample(sample).then((res) => {
+                history.push(`/reports/${reportId}/samples`);
             });
         } else {
             window.alert("Please add a name")
         }
 
     };
+    useEffect(() => {
+        getStructuresByReportId(reportId);
+    }, []);
+
+    if (!structures) {
+        return null;
+    }
 
     return (
         <div className="container pt-4">
@@ -64,6 +82,35 @@ const AddStructure = () => {
                                     innerRef={name}
                                 />
                             </FormGroup>
+
+                            {/* <select defaultValue="" name="location" ref={location} id="employeeLocation" className="form-control" >
+                        <option value="0">Select a location</option>
+                        {locations.map(e => (
+                            <option key={e.id} value={e.id}>
+                                {e.name}
+                            </option> */}
+
+                            <FormGroup>
+                                <Label for="structureId">Category</Label>
+                                <select defaultValue="" name="structureId" ref={structureId} id="structureId" className="form-control">
+                                    <option value="0">Select a Structur</option>
+                                    {structures.map(e => (
+                                        <option key={e.id} value={e.id}>
+                                            {e.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </FormGroup>
+
+
+
+                            <FormGroup>
+                                <Label for="dateTaken">dateTaken</Label>
+                                <Input
+                                    id="dateTaken"
+                                    innerRef={dateTaken}
+                                />
+                            </FormGroup>
                             <FormGroup>
                                 <Label for="image">Image</Label>
                                 <Input
@@ -72,17 +119,17 @@ const AddStructure = () => {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="location">Address</Label>
+                                <Label for="locationDescription">locationDescription</Label>
                                 <Input
-                                    id="location"
-                                    innerRef={location}
+                                    id="locationDescription"
+                                    innerRef={locationDescription}
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="yearCunstructed">Year Cunstructed (YYYY)</Label>
+                                <Label for="roomNumber">roomNumber</Label>
                                 <Input
-                                    id="yearCunstructed"
-                                    innerRef={yearCunstructed}
+                                    id="roomNumber"
+                                    innerRef={roomNumber}
                                 />
                             </FormGroup>
 
@@ -101,4 +148,4 @@ const AddStructure = () => {
     );
 };
 
-export default AddStructure;
+export default AddSample;

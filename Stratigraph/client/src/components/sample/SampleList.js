@@ -28,7 +28,7 @@ const SampletList = () => {
                 <div className="row justify-content-left">
                     <Button color="success"
 
-                    //onClick={() => { history.push(`/reports/${reportId}/structures/add`) }}
+                        onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
                     >
                         Add Sample
                     </Button>

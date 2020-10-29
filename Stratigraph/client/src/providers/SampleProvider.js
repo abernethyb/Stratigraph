@@ -44,22 +44,22 @@ export const SampleProvider = (props) => {
     //         }).then((res) => res.json())
     //     );
 
-    // const addStructure = (structure) => {
-    //     return getToken().then((token) =>
-    //         fetch("/api/structure/", {
-    //             method: "POST",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(structure)
-    //         }).then(resp => {
-    //             if (resp.ok) {
-    //                 return resp.json();
-    //             }
-    //             throw new Error("Unauthorized");
-    //         }));
-    // };
+    const addSample = (sample) => {
+        return getToken().then((token) =>
+            fetch("/api/sample/", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(sample)
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                }
+                throw new Error("Unauthorized");
+            }));
+    };
 
 
     // const EditStructure = (structure) => {
@@ -75,7 +75,7 @@ export const SampleProvider = (props) => {
     // };
 
     return (
-        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId }}>
+        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample }}>
             {props.children}
         </SampleContext.Provider>
     );
