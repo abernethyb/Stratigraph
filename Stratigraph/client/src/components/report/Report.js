@@ -25,16 +25,26 @@ const Report = () => {
         <>
             <div className="container">
                 <div className="row justify-content-left">
-                    <Button color="danger"
+                    <Button color="info"
                         onClick={() => { history.push(`/reports/edit/${reportId}`) }}
                     >
                         Edit
                     </Button>
                     {/* /reports/:reportId(\d+)/structures */}
-                    <Button color="danger"
+                    <Button color="info"
                         onClick={() => { history.push(`/reports/${reportId}/structures`) }}
                     >
                         View Structures
+                    </Button>
+                    <Button color="info"
+                    //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                    >
+                        View Samples
+                    </Button>
+                    <Button color="info"
+                    //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                    >
+                        View Stratigraphies
                     </Button>
 
                     <Table>
