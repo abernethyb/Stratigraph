@@ -32,22 +32,22 @@ export const StructureProvider = (props) => {
     //     );
     // //Name, CreateDate, CompleteDate
 
-    // const addReport = (report) => {
-    //     return getToken().then((token) =>
-    //         fetch("/api/Report/", {
-    //             method: "POST",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(report)
-    //         }).then(resp => {
-    //             if (resp.ok) {
-    //                 return resp.json();
-    //             }
-    //             throw new Error("Unauthorized");
-    //         }));
-    // };
+    const addStructure = (structure) => {
+        return getToken().then((token) =>
+            fetch("/api/structure/", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(structure)
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                }
+                throw new Error("Unauthorized");
+            }));
+    };
 
 
     // const EditReport = (report) => {
@@ -63,7 +63,7 @@ export const StructureProvider = (props) => {
     // };
 
     return (
-        <StructureContext.Provider value={{ structures, getStructuresByReportId }}>
+        <StructureContext.Provider value={{ structures, getStructuresByReportId, addStructure }}>
             {props.children}
         </StructureContext.Provider>
     );
