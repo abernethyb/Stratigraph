@@ -32,6 +32,7 @@ namespace Stratigraph.Repositories
                         structures.Add(new Structure()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
+                            ReportId = DbUtils.GetInt(reader, "ReportId"),
                             Name = DbUtils.GetString(reader, "Name"),
                             Image = DbUtils.GetString(reader, "Image"),
                             Location = DbUtils.GetString(reader, "Location"),
@@ -67,6 +68,7 @@ namespace Stratigraph.Repositories
                         structure = new Structure()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
+                            ReportId = DbUtils.GetInt(reader, "ReportId"),
                             Name = DbUtils.GetString(reader, "Name"),
                             Image = DbUtils.GetString(reader, "Image"),
                             Location = DbUtils.GetString(reader, "Location"),

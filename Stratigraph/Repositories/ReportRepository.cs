@@ -96,7 +96,7 @@ namespace Stratigraph.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-
+                    //need to change this to a list
                     UserProfileReport upr = null;
                     if (reader.Read())
                     {
