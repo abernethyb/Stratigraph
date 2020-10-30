@@ -27,5 +27,7 @@ namespace Stratigraph.Models
 
         [MaxLength(500)]
         public string Notes { get; set; }
+
+        public int InitialSampleId { get; set; }
     }
 }

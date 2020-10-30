@@ -4,7 +4,7 @@ namespace Stratigraph.Repositories
 {
     public interface IStratigraphyRepository
     {
-        void AddStratigraphyAndAddToSample(Stratigraphy stratigraphy, int sampleId);
+        void AddStratigraphyAndAddToSample(Stratigraphy stratigraphy);
         Stratigraphy GetStratigraphyById(int Id);
         void Update(Stratigraphy stratigraphy);
     }

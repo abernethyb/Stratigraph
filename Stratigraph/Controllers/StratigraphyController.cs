@@ -40,7 +40,7 @@ namespace Stratigraph.Controllers
         {
             //var currentUserProfile = GetCurrentUserProfile();
             //stratigraphy.UserProfileId = currentUserProfile.Id;
-            _stratigraphyRepository.Add(stratigraphy);
+            _stratigraphyRepository.AddStratigraphyAndAddToSample(stratigraphy);
             return CreatedAtAction("Get", new { id = stratigraphy.Id }, stratigraphy);
         }
 
