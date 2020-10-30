@@ -86,6 +86,7 @@ const EditLayer = () => {
                                     id="finishPeriod"
                                     innerRef={finishPeriod}
                                     defaultValue={layer.finishPeriod}
+                                    maxLength="49"
                                 />
                             </FormGroup>
 
@@ -113,6 +114,7 @@ const EditLayer = () => {
                                     id="pigments"
                                     innerRef={pigments}
                                     defaultValue={layer.pigments}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -121,6 +123,7 @@ const EditLayer = () => {
                                     id="colors"
                                     innerRef={colors}
                                     defaultValue={layer.colors}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -129,6 +132,7 @@ const EditLayer = () => {
                                     id="medium"
                                     innerRef={medium}
                                     defaultValue={layer.medium}
+                                    maxLength="49"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -137,6 +141,7 @@ const EditLayer = () => {
                                     id="gloss"
                                     innerRef={gloss}
                                     defaultValue={layer.gloss}
+                                    maxLength="49"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -145,6 +150,8 @@ const EditLayer = () => {
                                     id="notes"
                                     innerRef={notes}
                                     defaultValue={layer.notes}
+                                    type="textarea"
+                                    maxLength="500"
                                 />
                             </FormGroup>
 
@@ -153,8 +160,9 @@ const EditLayer = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
-                            Cancel
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            CANCEL
                         </Button>
                     </CardBody>
                 </Card>

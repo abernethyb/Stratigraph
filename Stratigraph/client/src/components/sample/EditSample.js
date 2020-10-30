@@ -64,12 +64,12 @@ const EditSample = () => {
         }
 
 
-        if (sample.name !== "") {
+        if (editedSample.name !== "" && editedSample.structureId !== 0 && editedSample.image !== "" && roomNumber.current.value !== "") {
             EditSample(editedSample).then((res) => {
                 history.push(`/reports/${reportId}/samples`);
             });
         } else {
-            window.alert("Please add a name")
+            window.alert("Please fill in all required fields")
         }
 
     };
@@ -95,6 +95,7 @@ const EditSample = () => {
                                     id="name"
                                     innerRef={name}
                                     defaultValue={sample.name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
 
@@ -127,6 +128,7 @@ const EditSample = () => {
                                     id="image"
                                     innerRef={image}
                                     defaultValue={sample.image}
+                                    maxLength="3500"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -135,6 +137,7 @@ const EditSample = () => {
                                     id="locationDescription"
                                     innerRef={locationDescription}
                                     defaultValue={sample.locationDescription}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -143,6 +146,7 @@ const EditSample = () => {
                                     id="roomNumber"
                                     innerRef={roomNumber}
                                     defaultValue={sample.roomNumber}
+                                    type="number"
                                 />
                             </FormGroup>
 
@@ -151,7 +155,7 @@ const EditSample = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
+                            onClick={() => { history.goBack() }}>
                             Cancel
                         </Button>
                     </CardBody>

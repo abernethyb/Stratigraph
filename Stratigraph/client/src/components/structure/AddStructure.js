@@ -40,6 +40,9 @@ const AddStructure = () => {
             yearCunstructed: parseInt(yearCunstructed.current.value)
         };
 
+        if (yearCunstructed.current.value == "") {
+            structure.yearCunstructed = null;
+        }
 
         if (structure.name !== "") {
             addStructure(structure).then((res) => {
@@ -62,6 +65,7 @@ const AddStructure = () => {
                                 <Input
                                     id="name"
                                     innerRef={name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -69,6 +73,7 @@ const AddStructure = () => {
                                 <Input
                                     id="image"
                                     innerRef={image}
+                                    maxLength="3900"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -76,6 +81,7 @@ const AddStructure = () => {
                                 <Input
                                     id="location"
                                     innerRef={location}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -91,9 +97,10 @@ const AddStructure = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
-                            Cancel
-                        </Button>
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            CANCEL
+                    </Button>
                     </CardBody>
                 </Card>
             </div>

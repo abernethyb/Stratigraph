@@ -38,12 +38,21 @@ namespace Stratigraph.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var report = _reportRepository.GetReportsById(id);
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id);
+            if (uprFromDB.UserProfileId == currentUserProfile.Id)
+            {
+                var report = _reportRepository.GetReportsById(id);
             if (report == null)
             {
                 return NotFound();
             }
             return Ok(report);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPost]

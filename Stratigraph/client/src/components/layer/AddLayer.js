@@ -52,6 +52,13 @@ const AddLayer = () => {
             notes: notes.current.value
         };
 
+        if (layer.beginDate == "") {
+            layer.beginDate = null
+        }
+        if (layer.endDate == "") {
+            layer.endDate = null
+        }
+
 
         addLayer(layer).then((res) => {
             history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}`);
@@ -72,6 +79,7 @@ const AddLayer = () => {
                                 <Input
                                     id="finishPeriod"
                                     innerRef={finishPeriod}
+                                    maxLength="49"
                                 />
                             </FormGroup>
 
@@ -96,6 +104,7 @@ const AddLayer = () => {
                                 <Input
                                     id="pigments"
                                     innerRef={pigments}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -103,6 +112,7 @@ const AddLayer = () => {
                                 <Input
                                     id="colors"
                                     innerRef={colors}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -110,6 +120,7 @@ const AddLayer = () => {
                                 <Input
                                     id="medium"
                                     innerRef={medium}
+                                    maxLength="49"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -117,6 +128,7 @@ const AddLayer = () => {
                                 <Input
                                     id="gloss"
                                     innerRef={gloss}
+                                    maxLength="49"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -124,6 +136,8 @@ const AddLayer = () => {
                                 <Input
                                     id="notes"
                                     innerRef={notes}
+                                    type="textarea"
+                                    maxLength="500"
                                 />
                             </FormGroup>
 
@@ -132,8 +146,9 @@ const AddLayer = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
-                            Cancel
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            CANCEL
                         </Button>
                     </CardBody>
                 </Card>

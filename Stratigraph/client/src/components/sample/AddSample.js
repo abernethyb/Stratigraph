@@ -51,12 +51,12 @@ const AddSample = () => {
         };
 
 
-        if (sample.name !== "") {
+        if (sample.name !== "" && sample.structureId !== 0 && sample.image !== "" && roomNumber.current.value !== "") {
             addSample(sample).then((res) => {
                 history.push(`/reports/${reportId}/samples`);
             });
         } else {
-            window.alert("Please add a name")
+            window.alert("Please fill in Required fields")
         }
 
     };
@@ -79,6 +79,7 @@ const AddSample = () => {
                                 <Input
                                     id="name"
                                     innerRef={name}
+                                    maxLength="100"
                                 />
                             </FormGroup>
 
@@ -116,6 +117,7 @@ const AddSample = () => {
                                 <Input
                                     id="image"
                                     innerRef={image}
+                                    maxLength="3500"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -123,6 +125,7 @@ const AddSample = () => {
                                 <Input
                                     id="locationDescription"
                                     innerRef={locationDescription}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -130,6 +133,7 @@ const AddSample = () => {
                                 <Input
                                     id="roomNumber"
                                     innerRef={roomNumber}
+                                    type="number"
                                 />
                             </FormGroup>
 
@@ -138,7 +142,7 @@ const AddSample = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
+                            onClick={() => { history.goBack() }}>
                             Cancel
                         </Button>
                     </CardBody>

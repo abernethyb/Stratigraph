@@ -66,6 +66,7 @@ const EditReport = () => {
                                     id="name"
                                     defaultValue={report.name}
                                     innerRef={name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
 

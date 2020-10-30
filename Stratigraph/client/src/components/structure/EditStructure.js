@@ -74,6 +74,7 @@ const EditStructure = () => {
                                     id="name"
                                     innerRef={name}
                                     defaultValue={structure.name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -82,6 +83,7 @@ const EditStructure = () => {
                                     id="image"
                                     innerRef={image}
                                     defaultValue={structure.image}
+                                    maxLength="3900"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -90,6 +92,7 @@ const EditStructure = () => {
                                     id="location"
                                     innerRef={location}
                                     defaultValue={structure.location}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -106,8 +109,9 @@ const EditStructure = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
-                            Cancel
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            CANCEL
                         </Button>
                     </CardBody>
                 </Card>

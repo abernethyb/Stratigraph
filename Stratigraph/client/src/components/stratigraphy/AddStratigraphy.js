@@ -55,6 +55,8 @@ const AddStratigraphy = () => {
                                 <Input
                                     id="notes"
                                     innerRef={notes}
+                                    type="textarea"
+                                    maxLength="500"
                                 />
                             </FormGroup>
 
@@ -63,8 +65,9 @@ const AddStratigraphy = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
-                            Cancel
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            CANCEL
                         </Button>
                     </CardBody>
                 </Card>

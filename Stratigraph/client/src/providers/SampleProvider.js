@@ -29,6 +29,18 @@ export const SampleProvider = (props) => {
             }).then((res) => res.json())
                 .then(setSamples));
     };
+
+    const getSamplesByStratigraphyId = (stratigraphyId) => {
+        getToken().then((token) =>
+            fetch(`/api/sample/stratigraphySamples/${stratigraphyId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+                .then(setSamples));
+    };
+
     ///api/sample/reportSamples/22/room/109
     const searcSamplesByRoomViaReport = (reportId, roomNumber) => {
         getToken().then((token) =>
@@ -91,7 +103,7 @@ export const SampleProvider = (props) => {
             }));
 
     return (
-        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample, getSingleSample, EditSample, DeleteSample, searcSamplesByRoomViaReport }}>
+        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample, getSingleSample, EditSample, DeleteSample, searcSamplesByRoomViaReport, getSamplesByStratigraphyId }}>
             {props.children}
         </SampleContext.Provider>
     );

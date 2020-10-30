@@ -48,6 +48,7 @@ const AddReport = () => {
                                 <Input
                                     id="name"
                                     innerRef={name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
 
@@ -56,8 +57,9 @@ const AddReport = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
-                            Cancel
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            CANCEL
                         </Button>
                     </CardBody>
                 </Card>

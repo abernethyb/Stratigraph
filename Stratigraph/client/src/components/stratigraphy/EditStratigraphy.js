@@ -65,6 +65,8 @@ const EditStratigraphy = () => {
                                     id="notes"
                                     innerRef={notes}
                                     defaultValue={stratigraphy.notes}
+                                    type="textarea"
+                                    maxLength="500"
                                 />
                             </FormGroup>
 
@@ -73,8 +75,9 @@ const EditStratigraphy = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
-                            Cancel
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            CANCEL
                         </Button>
                     </CardBody>
                 </Card>
