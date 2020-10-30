@@ -35,7 +35,7 @@ namespace Stratigraph.Models
         public DateTime DateTaken { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(4000)]
         public string Image { get; set; }
 
         [MaxLength(255)]

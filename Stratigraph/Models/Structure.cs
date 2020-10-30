@@ -26,7 +26,7 @@ namespace Stratigraph.Models
         [MaxLength(255)]
         public string Name { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(4000)]
         public string Image { get; set; }
 
         [MaxLength(255)]
