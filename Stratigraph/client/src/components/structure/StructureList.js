@@ -50,6 +50,7 @@ const StructuretList = () => {
                                     <th scope="row">
 
                                         {structure.name}
+                                        <hr />
                                         <Button
                                             style={{ margin: 10 }}
                                             color="warning"
