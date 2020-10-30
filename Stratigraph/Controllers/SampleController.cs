@@ -42,6 +42,14 @@ namespace Stratigraph.Controllers
             return Ok(_sampleRepository.GetSampleByReportId(reportId));
 
         }
+        [HttpGet("reportSamples/{reportId}/room/{roomNumber}")]
+        public IActionResult SearchByRoomViReportId(int reportId, int roomNumber)
+        {
+
+
+            return Ok(_sampleRepository.SearchSampleByRoomNumberViaReport(reportId, roomNumber));
+
+        }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
