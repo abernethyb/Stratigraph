@@ -52,6 +52,13 @@ const AddLayer = () => {
             notes: notes.current.value
         };
 
+        if (layer.beginDate == "") {
+            layer.beginDate = null
+        }
+        if (layer.endDate == "") {
+            layer.endDate = null
+        }
+
 
         addLayer(layer).then((res) => {
             history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}`);
