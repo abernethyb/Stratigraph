@@ -56,10 +56,22 @@ const SampletList = () => {
                                             {sample.name}
                                         </Link>
                                         <hr />
-                                        <Button color="info"
-                                            style={{ margin: 10 }}
-                                        //onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
-                                        >Stratigraphy</Button>
+                                        {sample.stratigraphyId ?
+                                            <Button color="info"
+                                                style={{ margin: 10 }}
+                                                ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)
+                                                onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${sample.stratigraphyId}`) }}
+                                            >View Stratigraphy</Button>
+
+                                            :
+                                            <Button color="info"
+                                                style={{ margin: 10 }}
+                                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)
+                                            //onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${sample.stratigraphyId}`) }}
+                                            >Add Stratigraphy</Button>
+
+                                        }
+
                                         <Button color="warning"
                                             style={{ margin: 10 }}
                                             ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
