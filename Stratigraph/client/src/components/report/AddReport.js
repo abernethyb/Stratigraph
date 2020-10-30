@@ -48,6 +48,7 @@ const AddReport = () => {
                                 <Input
                                     id="name"
                                     innerRef={name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
 

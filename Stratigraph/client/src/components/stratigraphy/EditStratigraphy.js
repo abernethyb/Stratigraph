@@ -65,6 +65,8 @@ const EditStratigraphy = () => {
                                     id="notes"
                                     innerRef={notes}
                                     defaultValue={stratigraphy.notes}
+                                    type="textarea"
+                                    maxLength="500"
                                 />
                             </FormGroup>
 

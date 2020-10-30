@@ -150,6 +150,7 @@ const EditLayer = () => {
                                     id="notes"
                                     innerRef={notes}
                                     defaultValue={layer.notes}
+                                    type="textarea"
                                     maxLength="500"
                                 />
                             </FormGroup>

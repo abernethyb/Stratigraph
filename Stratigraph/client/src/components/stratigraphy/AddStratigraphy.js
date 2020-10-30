@@ -55,6 +55,8 @@ const AddStratigraphy = () => {
                                 <Input
                                     id="notes"
                                     innerRef={notes}
+                                    type="textarea"
+                                    maxLength="500"
                                 />
                             </FormGroup>
 
