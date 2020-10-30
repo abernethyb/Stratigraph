@@ -64,12 +64,12 @@ const EditSample = () => {
         }
 
 
-        if (sample.name !== "") {
+        if (editedSample.name !== "" && editedSample.structureId !== 0 && editedSample.image !== "" && roomNumber.current.value !== "") {
             EditSample(editedSample).then((res) => {
                 history.push(`/reports/${reportId}/samples`);
             });
         } else {
-            window.alert("Please add a name")
+            window.alert("Please fill in all required fields")
         }
 
     };
