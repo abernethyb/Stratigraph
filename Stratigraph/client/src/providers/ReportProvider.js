@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const ReportContext = React.createContext();
 

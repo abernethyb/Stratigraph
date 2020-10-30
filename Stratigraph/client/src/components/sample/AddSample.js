@@ -133,6 +133,7 @@ const AddSample = () => {
                                 <Input
                                     id="roomNumber"
                                     innerRef={roomNumber}
+                                    type="number"
                                 />
                             </FormGroup>
 

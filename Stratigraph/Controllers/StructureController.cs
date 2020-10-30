@@ -17,20 +17,31 @@ namespace Stratigraph.Controllers
     public class StructureController : ControllerBase
     {
         private readonly IStructureRepository _structureRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IUserProfileRepository _userProfileRepository;
         public StructureController(IStructureRepository structureRepository,
-                                IUserProfileRepository userProfileRepository)
+                                IUserProfileRepository userProfileRepository,
+                                IReportRepository reportRepository)
         {
             _structureRepository = structureRepository;
             _userProfileRepository = userProfileRepository;
+            _reportRepository = reportRepository;
         }
 
         [HttpGet("reportStructures/{reportId}")]
         public IActionResult GetAllByReportId(int reportId)
         {
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId);
+            if (uprFromDB.UserProfileId == currentUserProfile.Id)
+            {
 
-
-            return Ok(_structureRepository.GetStructureByReportId(reportId));
+                return Ok(_structureRepository.GetStructureByReportId(reportId));
+            }
+            else
+            {
+                return Unauthorized();
+            }
 
         }
 
@@ -69,10 +80,10 @@ namespace Stratigraph.Controllers
         }
 
 
-        //private UserProfile GetCurrentUserProfile()
-        //{
-        //    var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    return _userProfileRepository.GetByFirebaseId(firebaseId);
-        //}
-    }
+            private UserProfile GetCurrentUserProfile()
+            {
+                var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return _userProfileRepository.GetByFirebaseId(firebaseId);
+            }
+        }
 }

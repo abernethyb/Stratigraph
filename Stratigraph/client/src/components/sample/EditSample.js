@@ -146,6 +146,7 @@ const EditSample = () => {
                                     id="roomNumber"
                                     innerRef={roomNumber}
                                     defaultValue={sample.roomNumber}
+                                    type="number"
                                 />
                             </FormGroup>
 
