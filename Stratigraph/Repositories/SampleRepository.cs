@@ -90,7 +90,46 @@ namespace Stratigraph.Repositories
                 }
             }
         }
+        public List<Sample> GetSampleByStratigraphyId(int stratigraphyId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT st.ReportId AS ReportID, st.Name StructureName, sa.Id AS SampleID, sa.Name AS SampleName, sa.UserProfileId, sa.StratigraphyId, sa.StructureId, 
+                                        sa.DateTaken, sa.Image, sa.LocationDescription, sa.RoomNumber FROM Sample sa
+                                        LEFT JOIN Structure st on sa.StructureId = st.Id
+                                        WHERE sa.StratigraphyId = @stratigraphyId;";
 
+                    DbUtils.AddParameter(cmd, "@stratigraphyId", stratigraphyId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var samples = new List<Sample>();
+                    while (reader.Read())
+                    {
+                        samples.Add(new Sample()
+                        {
+                            Id = DbUtils.GetInt(reader, "SampleID"),
+                            Name = DbUtils.GetString(reader, "SampleName"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            StratigraphyId = DbUtils.GetNullableInt(reader, "StratigraphyId"),
+                            StructureId = DbUtils.GetInt(reader, "StructureId"),
+                            DateTaken = DbUtils.GetDateTime(reader, "DateTaken"),
+                            Image = DbUtils.GetString(reader, "Image"),
+                            LocationDescription = DbUtils.GetString(reader, "LocationDescription"),
+                            RoomNumber = DbUtils.GetInt(reader, "RoomNumber"),
+                            StructureName = DbUtils.GetString(reader, "StructureName")
+                        });
+                    }
+
+                    reader.Close();
+
+                    return samples;
+                }
+            }
+        }
         public List<Sample> SearchSampleByRoomNumberViaReport(int reportId, int roomNumber)
         {
             using (var conn = Connection)

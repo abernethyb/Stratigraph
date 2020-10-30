@@ -9,6 +9,7 @@ namespace Stratigraph.Repositories
         void DeleteSample(int id);
         Sample GetSampleById(int Id);
         List<Sample> GetSampleByReportId(int reportId);
+        List<Sample> GetSampleByStratigraphyId(int stratigraphyId);
         List<Sample> GetSampleByStructureId(int structureId);
         List<Sample> SearchSampleByRoomNumberViaReport(int reportId, int roomNumber);
         void Update(Sample sample);
