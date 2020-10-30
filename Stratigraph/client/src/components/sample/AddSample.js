@@ -51,12 +51,12 @@ const AddSample = () => {
         };
 
 
-        if (sample.name !== "") {
+        if (sample.name !== "" && sample.structureId !== 0 && sample.image !== "" && roomNumber.current.value !== "") {
             addSample(sample).then((res) => {
                 history.push(`/reports/${reportId}/samples`);
             });
         } else {
-            window.alert("Please add a name")
+            window.alert("Please fill in Required fields")
         }
 
     };
