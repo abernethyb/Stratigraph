@@ -9,6 +9,7 @@ import { ReportProvider } from './providers/ReportProvider';
 import { StructureProvider } from './providers/StructureProvider';
 import { SampleProvider } from './providers/SampleProvider';
 import { StratigraphyProvider } from './providers/StratigraphyProvider';
+import { LayerProvider } from './providers/LayerProvider';
 
 function App() {
   return (
@@ -18,8 +19,10 @@ function App() {
           <StructureProvider>
             <SampleProvider>
               <StratigraphyProvider>
-                <Header />
-                <ApplicationViews />
+                <LayerProvider>
+                  <Header />
+                  <ApplicationViews />
+                </LayerProvider>
               </StratigraphyProvider>
             </SampleProvider>
           </StructureProvider>

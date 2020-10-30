@@ -2,12 +2,14 @@ import React, { useEffect, useContext, useState, useRef } from "react";
 //import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
+import { LayerContext } from "../../providers/LayerProvider";
 import { StratigraphyContext } from "../../providers/StratigraphyProvider";
 
 
 const Stratigraphy = () => {
 
     const { getSingleStratigraphy } = useContext(StratigraphyContext)
+    const { layers, getLayersByStratigraphyId } = useContext(LayerContext)
     const [stratigraphy, setStratigraphy] = useState();
     const { stratigraphyId, reportId } = useParams();
     const history = useHistory();
@@ -15,11 +17,13 @@ const Stratigraphy = () => {
 
     useEffect(() => {
         getSingleStratigraphy(stratigraphyId).then(setStratigraphy);
+        getLayersByStratigraphyId(stratigraphyId);
     }, []);
 
     if (!stratigraphy) {
         return null;
     }
+
 
     //TO DO:
     //GET LAYERS AND ADD AS TABLE at bottom of page
@@ -76,6 +80,75 @@ const Stratigraphy = () => {
                             View Samples
                     </Button> */}
 
+                    </Table>
+                    <Table>
+                        {/* "stratigraphyId": 10,
+                        "finishPeriod": "Speotyte cuniculata",
+                        "beginDate": "1886-08-17T00:00:00",
+                        "endDate": "2020-02-27T00:00:00",
+                        "pigments": "Charadrius tricollaris",
+                        "colors": "#73188a",
+                        "medium": "Lorythaixoides concolor",
+                        "gloss": "Phoenicopterus chilensis",
+                        "notes": "POST FROM POSTMAN." */}
+                        <thead>
+                            <h2>Layers</h2>
+                            <tr>
+                                <th>FinishPeriod</th>
+                                <th>Date Range</th>
+                                <th>Pigments</th>
+                                <th>Colors</th>
+                                <th>Medium</th>
+                                <th>Gloss</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+
+                        {layers.map((layer) => (
+                            <tbody key={layer.id}>
+                                <tr>
+                                    <th scope="row">
+
+                                        {layer.finishPeriod}
+                                        <hr />
+
+                                        {/*  TODO:
+                                         <Button color="warning"
+                                            style={{ margin: 10 }}
+                                            ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
+                                            onClick={() => { history.push(`/reports/${reportId}/samples/edit/${sample.id}`) }}
+                                        >Edit</Button>
+                                        <Button color="danger"
+                                            style={{ margin: 10 }}
+                                            ///reports/:reportId(\d+)/samples/delete/:sampleId(\d+)
+                                            onClick={() => { history.push(`/reports/${reportId}/samples/delete/${sample.id}`) }}
+
+                                        >DELETE</Button> */}
+
+                                    </th>
+                                    <td>
+                                        From {layer.beginDate} To {layer.endDate}
+                                    </td>
+
+                                    <td>
+                                        {layer.pigments}
+                                    </td>
+                                    <td>
+                                        {layer.colors}
+                                    </td>
+                                    <td>
+                                        {layer.gloss}
+                                    </td>
+                                    <td>
+                                        {layer.medium}
+                                    </td>
+                                    <td>
+                                        {layer.notes}
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        ))}
                     </Table>
                 </div>
             </div>
