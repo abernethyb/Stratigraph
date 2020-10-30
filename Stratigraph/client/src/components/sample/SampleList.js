@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
 //import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
-import { Button, CardImg, Table } from "reactstrap";
+import { Button, CardImg, Form, Table, FormGroup, Label, Input } from "reactstrap";
 import { StructureContext } from "../../providers/StructureProvider";
 import Image from 'react-bootstrap/Image'
 import { SampleContext } from "../../providers/SampleProvider";
@@ -10,8 +10,22 @@ import { SampleContext } from "../../providers/SampleProvider";
 const SampletList = () => {
     const { reportId } = useParams();
     //const { structureId } = useParams();
-    const { samples, getSamplesByReportId } = useContext(SampleContext);
+    const { samples, getSamplesByReportId, searcSamplesByRoomViaReport } = useContext(SampleContext);
     const history = useHistory();
+    const roomNumbersearch = useRef(null);
+    const [search, setsearch] = useState();
+
+    const submit = () => {
+        const RoomSearch = parseInt(roomNumbersearch.current.value)
+
+        searcSamplesByRoomViaReport(reportId, RoomSearch)
+
+        // addReport(report).then((res) => {
+        //     history.push(`/reports/${res.id}`);
+        // });
+
+
+    };
 
 
     useEffect(() => {
@@ -32,6 +46,24 @@ const SampletList = () => {
                     >
                         Add Sample
                     </Button>
+                    {/* <Form class="example" action="action_page.php">
+                        <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                    </form> */}
+                    <hr />
+                    <FormGroup>
+                        <Label for="roomNumbersearch">Search by Room</Label>
+                        <Input
+                            id="roomNumbersearch"
+                            type="search"
+                            placeholder="ex: 201"
+                            innerRef={roomNumbersearch}
+
+                        />
+                        <Button color="info" onClick={submit}>
+                            SEARCH
+                        </Button>
+                    </FormGroup>
 
 
                     <Table>
