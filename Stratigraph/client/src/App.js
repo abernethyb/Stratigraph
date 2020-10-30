@@ -7,6 +7,7 @@ import './App.css';
 import Header from './components/Header';
 import { ReportProvider } from './providers/ReportProvider';
 import { StructureProvider } from './providers/StructureProvider';
+import { SampleProvider } from './providers/SampleProvider';
 
 function App() {
   return (
@@ -14,8 +15,10 @@ function App() {
       <UserProfileProvider>
         <ReportProvider>
           <StructureProvider>
-            <Header />
-            <ApplicationViews />
+            <SampleProvider>
+              <Header />
+              <ApplicationViews />
+            </SampleProvider>
           </StructureProvider>
         </ReportProvider>
       </UserProfileProvider>

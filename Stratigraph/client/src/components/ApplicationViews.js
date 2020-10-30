@@ -11,6 +11,11 @@ import EditReport from "./report/EditReport";
 import StructuretList from "./structure/StructureList";
 import AddStructure from "./structure/AddStructure";
 import EditStructure from "./structure/EditStructure";
+import SampletList from "./sample/SampleList";
+import AddSample from "./sample/AddSample";
+import EditSample from "./sample/EditSample";
+import ConfirmDeleteSample from "./sample/ConfirmDeleteSample";
+import SampleDetail from "./sample/SampleDetail";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -48,6 +53,23 @@ export default function ApplicationViews() {
 
                 <Route path="/reports/:reportId(\d+)/structures/edit/:structureId(\d+)" exact>
                     {isLoggedIn ? <EditStructure /> : <Redirect to="/login" />}
+                </Route>
+
+                {/* Samples */}
+                <Route path="/reports/:reportId(\d+)/samples" exact>
+                    {isLoggedIn ? <SampletList /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/samples/add" exact>
+                    {isLoggedIn ? <AddSample /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/samples/edit/:sampleId(\d+)" exact>
+                    {isLoggedIn ? <EditSample /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/samples/delete/:sampleId(\d+)" exact>
+                    {isLoggedIn ? <ConfirmDeleteSample /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/samples/:sampleId(\d+)" exact>
+                    {isLoggedIn ? <SampleDetail /> : <Redirect to="/login" />}
                 </Route>
 
                 {/* Auth */}

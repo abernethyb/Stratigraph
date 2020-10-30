@@ -37,7 +37,8 @@ const Report = () => {
                         View Structures
                     </Button>
                     <Button color="info"
-                    //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        //reports/:reportId(\d+)/samples
+                        onClick={() => { history.push(`/reports/${reportId}/samples`) }}
                     >
                         View Samples
                     </Button>

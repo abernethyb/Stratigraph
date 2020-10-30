@@ -24,14 +24,14 @@ insert into Report (Name, CreateDate, CompleteDate) values ('Amphibolurus barbat
 
 insert into UserProfileReport (UserProfileId, ReportId) values (1, 1);
 insert into UserProfileReport (UserProfileId, ReportId) values (2, 2);
-insert into UserProfileReport (UserProfileId, ReportId) values (1, 3);
-insert into UserProfileReport (UserProfileId, ReportId) values (1, 4);
-insert into UserProfileReport (UserProfileId, ReportId) values (4, 5);
-insert into UserProfileReport (UserProfileId, ReportId) values (5, 6);
-insert into UserProfileReport (UserProfileId, ReportId) values (3, 7);
-insert into UserProfileReport (UserProfileId, ReportId) values (2, 8);
-insert into UserProfileReport (UserProfileId, ReportId) values (1, 9);
-insert into UserProfileReport (UserProfileId, ReportId) values (4, 10);
+insert into UserProfileReport (UserProfileId, ReportId) values (3, 3);
+insert into UserProfileReport (UserProfileId, ReportId) values (4, 4);
+insert into UserProfileReport (UserProfileId, ReportId) values (5, 5);
+insert into UserProfileReport (UserProfileId, ReportId) values (6, 6);
+insert into UserProfileReport (UserProfileId, ReportId) values (7, 7);
+insert into UserProfileReport (UserProfileId, ReportId) values (8, 8);
+insert into UserProfileReport (UserProfileId, ReportId) values (9, 9);
+insert into UserProfileReport (UserProfileId, ReportId) values (10, 10);
 
 --structure data
 
@@ -45,3 +45,17 @@ insert into Structure (ReportId, Name, Image, Location, YearCunstructed) values 
 insert into Structure (ReportId, Name, Image, Location, YearCunstructed) values (8, 'Laughing dove', 'http://dummyimage.com/176x154.bmp/5fa2dd/ffffff', '36356 Sherman Circle', 1891);
 insert into Structure (ReportId, Name, Image, Location, YearCunstructed) values (9, 'Goose, knob-nosed', 'http://dummyimage.com/101x213.png/5fa2dd/ffffff', '898 Cody Court', 1913);
 insert into Structure (ReportId, Name, Image, Location, YearCunstructed) values (10, 'Coot, red-knobbed', 'http://dummyimage.com/216x206.bmp/dddddd/000000', '6598 Novick Plaza', 1889);
+
+--data for samples
+
+
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('717505184-0', 1, null, 1, '2020-02-01', 'http://dummyimage.com/137x158.png/cc0000/ffffff', 'Ut tellus.', 890);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('377537871-5', 2, null, 2, '2020-03-13', 'http://dummyimage.com/213x109.jpg/ff4444/ffffff', 'Nulla mollis molestie lorem.', 759);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('717660774-5', 3, null, 3, '2020-06-26', 'http://dummyimage.com/105x210.bmp/ff4444/ffffff', 'Curabitur in libero ut massa volutpat convallis.', 268);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('682321189-X', 4, null, 4, '2019-12-07', 'http://dummyimage.com/246x232.png/cc0000/ffffff', 'Nulla justo. Aliquam quis turpis eget elit sodales scelerisque.', 964);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('219533483-5', 5, null, 5, '2020-10-23', 'http://dummyimage.com/125x148.png/dddddd/000000', 'Aenean lectus. Pellentesque eget nunc.', 554);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('681113732-0', 6, null, 6, '2020-10-22', 'http://dummyimage.com/170x205.png/5fa2dd/ffffff', 'Morbi vel lectus in quam fringilla rhoncus.', 467);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('586291055-7', 7, null, 7, '2020-10-01', 'http://dummyimage.com/188x163.bmp/cc0000/ffffff', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.', 696);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('753421688-5', 8, null, 8, '2020-07-17', 'http://dummyimage.com/158x175.bmp/ff4444/ffffff', 'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', 682);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('762545270-0', 9, null, 9, '2020-08-16', 'http://dummyimage.com/226x232.png/ff4444/ffffff', 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 248);
+insert into Sample (Name, UserProfileId, StratigraphyId, StructureId, DateTaken, Image, LocationDescription, RoomNumber) values ('275232837-0', 10, null, 10, '2020-08-18', 'http://dummyimage.com/239x135.png/dddddd/000000', 'Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', 824);

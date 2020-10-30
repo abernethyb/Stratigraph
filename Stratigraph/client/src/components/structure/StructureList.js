@@ -35,7 +35,7 @@ const StructuretList = () => {
                     <Table>
 
                         <thead>
-                            <h2>My Reports</h2>
+                            <h2>Structures</h2>
                             <tr>
                                 <th>Name</th>
                                 <th>Image</th>

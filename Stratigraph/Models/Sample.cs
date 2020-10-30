@@ -28,7 +28,7 @@ namespace Stratigraph.Models
 
         [Required]
         public int UserProfileId { get; set; }
-        public int StratigraphyId { get; set; }
+        public int? StratigraphyId { get; set; }
 
         [Required]
         public int StructureId { get; set; }
@@ -43,6 +43,8 @@ namespace Stratigraph.Models
 
         [Required]
         public int RoomNumber { get; set; }
+
+        public string StructureName { get; set; }
 
     }
 }
