@@ -95,6 +95,7 @@ const EditSample = () => {
                                     id="name"
                                     innerRef={name}
                                     defaultValue={sample.name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
 
@@ -127,6 +128,7 @@ const EditSample = () => {
                                     id="image"
                                     innerRef={image}
                                     defaultValue={sample.image}
+                                    maxLength="3500"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -135,6 +137,7 @@ const EditSample = () => {
                                     id="locationDescription"
                                     innerRef={locationDescription}
                                     defaultValue={sample.locationDescription}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>

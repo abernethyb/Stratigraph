@@ -72,6 +72,7 @@ const AddLayer = () => {
                                 <Input
                                     id="finishPeriod"
                                     innerRef={finishPeriod}
+                                    maxLength="49"
                                 />
                             </FormGroup>
 
@@ -96,6 +97,7 @@ const AddLayer = () => {
                                 <Input
                                     id="pigments"
                                     innerRef={pigments}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -103,6 +105,7 @@ const AddLayer = () => {
                                 <Input
                                     id="colors"
                                     innerRef={colors}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -110,6 +113,7 @@ const AddLayer = () => {
                                 <Input
                                     id="medium"
                                     innerRef={medium}
+                                    maxLength="49"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -117,6 +121,7 @@ const AddLayer = () => {
                                 <Input
                                     id="gloss"
                                     innerRef={gloss}
+                                    maxLength="49"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -124,6 +129,7 @@ const AddLayer = () => {
                                 <Input
                                     id="notes"
                                     innerRef={notes}
+                                    maxLength="500"
                                 />
                             </FormGroup>
 

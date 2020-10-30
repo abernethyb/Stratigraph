@@ -79,6 +79,7 @@ const AddSample = () => {
                                 <Input
                                     id="name"
                                     innerRef={name}
+                                    maxLength="100"
                                 />
                             </FormGroup>
 
@@ -116,6 +117,7 @@ const AddSample = () => {
                                 <Input
                                     id="image"
                                     innerRef={image}
+                                    maxLength="3500"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -123,6 +125,7 @@ const AddSample = () => {
                                 <Input
                                     id="locationDescription"
                                     innerRef={locationDescription}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
