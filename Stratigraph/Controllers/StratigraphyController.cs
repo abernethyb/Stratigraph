@@ -30,9 +30,16 @@ namespace Stratigraph.Controllers
         public IActionResult Get(int id)
         {
 
-
-            return Ok(_stratigraphyRepository.GetStratigraphyById(id));
-
+            var currentUserProfile = GetCurrentUserProfile();
+            var stratigraphy = _stratigraphyRepository.GetStratigraphyById(id);
+            if (stratigraphy.UserProfileId == currentUserProfile.Id) 
+            {
+                return Ok(stratigraphy);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPost]
@@ -48,7 +55,7 @@ namespace Stratigraph.Controllers
         public IActionResult Put(int id, Stratigraphy stratigraphy)
         {
             //TO DO: 
-            //Auth...
+            //More auth
 
             if (id != stratigraphy.Id)
             {
