@@ -28,8 +28,8 @@ namespace Stratigraph.Models
 
         [MaxLength(50)]
         public string FinishPeriod { get; set; }
-        public DateTime BeginDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? BeginDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [MaxLength(255)]
         public string Pigments { get; set; }
