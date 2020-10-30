@@ -66,9 +66,10 @@ const Stratigraphy = () => {
                             Edit
                     </Button>
                         {/* /reports/:reportId(\d+)/structures */}
-                        <Button color="info"
+                        <Button color="success"
                             style={{ margin: 10 }}
-                        //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/layers/add
+                            onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}/layers/add`) }}
                         >
                             Add Layer
                     </Button>

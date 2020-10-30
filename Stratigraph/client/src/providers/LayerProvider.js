@@ -19,16 +19,6 @@ export const LayerProvider = (props) => {
                 .then(setLayers));
     };
 
-    // const getSamplesByReportId = (reportId) => {
-    //     getToken().then((token) =>
-    //         fetch(`/api/sample/reportSamples/${reportId}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then((res) => res.json())
-    //             .then(setSamples));
-    // };
 
     // const getSingleSample = (id) =>
     //     getToken().then((token) =>
@@ -40,22 +30,22 @@ export const LayerProvider = (props) => {
     //         }).then((res) => res.json())
     //     );
 
-    // const addSample = (sample) => {
-    //     return getToken().then((token) =>
-    //         fetch("/api/sample/", {
-    //             method: "POST",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(sample)
-    //         }).then(resp => {
-    //             if (resp.ok) {
-    //                 return resp.json();
-    //             }
-    //             throw new Error("Unauthorized");
-    //         }));
-    // };
+    const addLayer = (layer) => {
+        return getToken().then((token) =>
+            fetch("/api/layer/", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(layer)
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                }
+                throw new Error("Unauthorized");
+            }));
+    };
 
 
     // const EditSample = (sample) => {
@@ -80,7 +70,7 @@ export const LayerProvider = (props) => {
     //         }));
 
     return (
-        <LayerContext.Provider value={{ layers, getLayersByStratigraphyId }}>
+        <LayerContext.Provider value={{ layers, getLayersByStratigraphyId, addLayer }}>
             {props.children}
         </LayerContext.Provider>
     );
