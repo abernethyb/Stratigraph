@@ -25,6 +25,7 @@ namespace Stratigraph.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
+        ///api/layer/stratigraphyLayers/10
         [HttpGet("stratigraphyLayers/{stratigraphyId}")]
         public IActionResult GetAllByStructureId(int stratigraphyId)
         {
@@ -34,7 +35,7 @@ namespace Stratigraph.Controllers
 
         }
 
-
+        ///api/layer/88
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {

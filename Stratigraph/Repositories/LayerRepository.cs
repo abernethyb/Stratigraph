@@ -140,8 +140,8 @@ namespace Stratigraph.Repositories
                             EndDate = @EndDate,
                             Pigments = @Pigments,
                             Colors = @Colors,
-                            Medium = @Medium
-                            Gloss = @Gloss
+                            Medium = @Medium,
+                            Gloss = @Gloss,
                             Notes = @Notes
                         WHERE Id = @Id";
 
