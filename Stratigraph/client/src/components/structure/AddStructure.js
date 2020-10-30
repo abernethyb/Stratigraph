@@ -40,6 +40,9 @@ const AddStructure = () => {
             yearCunstructed: parseInt(yearCunstructed.current.value)
         };
 
+        if (yearCunstructed.current.value == "") {
+            structure.yearCunstructed = null;
+        }
 
         if (structure.name !== "") {
             addStructure(structure).then((res) => {

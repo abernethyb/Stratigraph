@@ -31,6 +31,6 @@ namespace Stratigraph.Models
 
         [MaxLength(255)]
         public string Location { get; set; }
-        public int YearCunstructed { get; set; }
+        public int? YearCunstructed { get; set; }
     }
 }

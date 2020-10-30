@@ -36,7 +36,7 @@ namespace Stratigraph.Repositories
                             Name = DbUtils.GetString(reader, "Name"),
                             Image = DbUtils.GetString(reader, "Image"),
                             Location = DbUtils.GetString(reader, "Location"),
-                            YearCunstructed = DbUtils.GetInt(reader, "YearCunstructed")
+                            YearCunstructed = DbUtils.GetNullableInt(reader, "YearCunstructed")
                         });
                     }
 
@@ -72,7 +72,7 @@ namespace Stratigraph.Repositories
                             Name = DbUtils.GetString(reader, "Name"),
                             Image = DbUtils.GetString(reader, "Image"),
                             Location = DbUtils.GetString(reader, "Location"),
-                            YearCunstructed = DbUtils.GetInt(reader, "YearCunstructed")
+                            YearCunstructed = DbUtils.GetNullableInt(reader, "YearCunstructed")
                         };
                     }
 
