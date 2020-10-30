@@ -38,8 +38,8 @@ namespace Stratigraph.Controllers
         [HttpPost]
         public IActionResult Post(Stratigraphy stratigraphy)
         {
-            //var currentUserProfile = GetCurrentUserProfile();
-            //stratigraphy.UserProfileId = currentUserProfile.Id;
+            var currentUserProfile = GetCurrentUserProfile();
+            stratigraphy.UserProfileId = currentUserProfile.Id;
             _stratigraphyRepository.AddStratigraphyAndAddToSample(stratigraphy);
             return CreatedAtAction("Get", new { id = stratigraphy.Id }, stratigraphy);
         }

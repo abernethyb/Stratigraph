@@ -18,6 +18,7 @@ import ConfirmDeleteSample from "./sample/ConfirmDeleteSample";
 import SampleDetail from "./sample/SampleDetail";
 import StructureSampletList from "./sample/StructureSampleList";
 import Stratigraphy from "./stratigraphy/Stratigraphy";
+import AddStratigraphy from "./stratigraphy/AddStratigraphy";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -81,6 +82,9 @@ export default function ApplicationViews() {
                 {/* Stratigraphies */}
                 <Route path="/reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)" exact>
                     {isLoggedIn ? <Stratigraphy /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)" exact>
+                    {isLoggedIn ? <AddStratigraphy /> : <Redirect to="/login" />}
                 </Route>
 
 

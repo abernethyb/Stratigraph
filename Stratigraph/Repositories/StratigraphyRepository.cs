@@ -56,11 +56,11 @@ namespace Stratigraph.Repositories
                     cmd.CommandText = @"
                         INSERT INTO Stratigraphy (UserProfileId, ReportId, CreateDate, Notes)
                         OUTPUT INSERTED.ID
-                        VALUES (@UserProfileId, @ReportId, @CreateDate, @Notes)";
+                        VALUES (@UserProfileId, @ReportId, GETDATE(), @Notes)";
 
                     DbUtils.AddParameter(cmd, "@UserProfileId", stratigraphy.UserProfileId);
                     DbUtils.AddParameter(cmd, "@ReportId", stratigraphy.ReportId);
-                    DbUtils.AddParameter(cmd, "@CreateDate", stratigraphy.CreateDate);
+                    //DbUtils.AddParameter(cmd, "@CreateDate", stratigraphy.CreateDate);
                     DbUtils.AddParameter(cmd, "@Notes", stratigraphy.Notes);
 
                     stratigraphy.Id = (int)cmd.ExecuteScalar();
