@@ -39,7 +39,6 @@ const AddSample = () => {
     // "roomNumber": 109
 
     const submit = () => {
-        debugger
         const sample = {
             name: name.current.value,
             //userProfileId: parseInt(),
