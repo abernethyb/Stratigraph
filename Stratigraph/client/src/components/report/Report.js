@@ -25,32 +25,7 @@ const Report = () => {
         <>
             <div className="container">
                 <div className="row justify-content-left">
-                    <Button color="warning"
-                        style={{ margin: 10 }}
-                        onClick={() => { history.push(`/reports/edit/${reportId}`) }}
-                    >
-                        Edit
-                    </Button>
-                    {/* /reports/:reportId(\d+)/structures */}
-                    <Button color="info"
-                        style={{ margin: 10 }}
-                        onClick={() => { history.push(`/reports/${reportId}/structures`) }}
-                    >
-                        View Structures
-                    </Button>
-                    <Button color="info"
-                        style={{ margin: 10 }}
-                        //reports/:reportId(\d+)/samples
-                        onClick={() => { history.push(`/reports/${reportId}/samples`) }}
-                    >
-                        View Samples
-                    </Button>
-                    <Button color="info"
-                        style={{ margin: 10 }}
-                    //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
-                    >
-                        View Stratigraphies
-                    </Button>
+
 
                     <Table>
 
@@ -86,6 +61,33 @@ const Report = () => {
                             </tr>
                         </tbody>
 
+
+                        <Button color="warning"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(`/reports/edit/${reportId}`) }}
+                        >
+                            Edit
+                    </Button>
+                        {/* /reports/:reportId(\d+)/structures */}
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        >
+                            View Structures
+                    </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            //reports/:reportId(\d+)/samples
+                            onClick={() => { history.push(`/reports/${reportId}/samples`) }}
+                        >
+                            View Samples
+                    </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                        //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        >
+                            View Stratigraphies
+                    </Button>
                     </Table>
                 </div>
             </div>
