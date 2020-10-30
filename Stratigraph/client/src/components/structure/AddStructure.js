@@ -62,6 +62,7 @@ const AddStructure = () => {
                                 <Input
                                     id="name"
                                     innerRef={name}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -69,6 +70,7 @@ const AddStructure = () => {
                                 <Input
                                     id="image"
                                     innerRef={image}
+                                    maxLength="3900"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -76,6 +78,7 @@ const AddStructure = () => {
                                 <Input
                                     id="location"
                                     innerRef={location}
+                                    maxLength="250"
                                 />
                             </FormGroup>
                             <FormGroup>
