@@ -52,16 +52,21 @@ const SampletList = () => {
                                 <tr>
                                     <th scope="row">
 
-                                        {sample.name}
+                                        <Link to={`/reports/${reportId}/samples/${sample.id}`}>
+                                            {sample.name}
+                                        </Link>
+                                        <hr />
                                         <Button color="info"
+                                            style={{ margin: 10 }}
                                         //onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
                                         >Stratigraphy</Button>
                                         <Button color="warning"
+                                            style={{ margin: 10 }}
                                             ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
                                             onClick={() => { history.push(`/reports/${reportId}/samples/edit/${sample.id}`) }}
                                         >Edit</Button>
                                         <Button color="danger"
-
+                                            style={{ margin: 10 }}
                                             ///reports/:reportId(\d+)/samples/delete/:sampleId(\d+)
                                             onClick={() => { history.push(`/reports/${reportId}/samples/delete/${sample.id}`) }}
 
