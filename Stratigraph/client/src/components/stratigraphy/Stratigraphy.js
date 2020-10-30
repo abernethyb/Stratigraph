@@ -3,12 +3,15 @@ import React, { useEffect, useContext, useState, useRef } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
 import { LayerContext } from "../../providers/LayerProvider";
+import { SampleContext } from "../../providers/SampleProvider";
 import { StratigraphyContext } from "../../providers/StratigraphyProvider";
+import Image from 'react-bootstrap/Image'
 
 
 const Stratigraphy = () => {
 
     const { getSingleStratigraphy } = useContext(StratigraphyContext)
+    const { getSamplesByStratigraphyId, samples } = useContext(SampleContext)
     const { layers, getLayersByStratigraphyId } = useContext(LayerContext)
     const [stratigraphy, setStratigraphy] = useState();
     const { stratigraphyId, reportId } = useParams();
@@ -18,16 +21,13 @@ const Stratigraphy = () => {
     useEffect(() => {
         getSingleStratigraphy(stratigraphyId).then(setStratigraphy);
         getLayersByStratigraphyId(stratigraphyId);
-    }, []);
+        getSamplesByStratigraphyId(stratigraphyId);
+    }, [samples]);
 
     if (!stratigraphy) {
         return null;
     }
 
-
-    //TO DO:
-    //GET LAYERS AND ADD AS TABLE at bottom of page
-    //GET SAMPLES BY STRATIGRAPHY ID (this stratigraphy) and display them at top of page
 
     return (
         <>
@@ -82,6 +82,17 @@ const Stratigraphy = () => {
                     </Button> */}
 
                     </Table>
+                    <div className="stragraphySamples">
+                        <h2>Corresponding Samples</h2>
+                        {samples.map((sample) => (
+                            <div key={sample.id}>
+                                <p>Structure: {sample.structureName}</p>
+                                <p>Room: {sample.roomNumber}</p>
+                                <Image fluid rounded src={sample.image} alt={sample.name}></Image>
+                            </div>
+                        ))}
+                    </div>
+
                     <Table>
                         {/* "stratigraphyId": 10,
                         "finishPeriod": "Speotyte cuniculata",
