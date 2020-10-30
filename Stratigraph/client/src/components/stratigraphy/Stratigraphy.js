@@ -113,18 +113,18 @@ const Stratigraphy = () => {
                                         {layer.finishPeriod}
                                         <hr />
 
-                                        {/*  TODO:
-                                         <Button color="warning"
+
+                                        <Button color="warning"
                                             style={{ margin: 10 }}
-                                            ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
-                                            onClick={() => { history.push(`/reports/${reportId}/samples/edit/${sample.id}`) }}
+                                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/layers/edit/:layerId(\d+)
+                                            onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}/layers/edit/${layer.id}`) }}
                                         >Edit</Button>
                                         <Button color="danger"
                                             style={{ margin: 10 }}
-                                            ///reports/:reportId(\d+)/samples/delete/:sampleId(\d+)
-                                            onClick={() => { history.push(`/reports/${reportId}/samples/delete/${sample.id}`) }}
+                                        ///reports/:reportId(\d+)/samples/delete/:sampleId(\d+)
+                                        //onClick={() => { history.push(`/reports/${reportId}/samples/delete/${sample.id}`) }}
 
-                                        >DELETE</Button> */}
+                                        >DELETE</Button>
 
                                     </th>
                                     <td>

@@ -20,15 +20,15 @@ export const LayerProvider = (props) => {
     };
 
 
-    // const getSingleSample = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/sample/${id}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then((res) => res.json())
-    //     );
+    const getSingleLayer = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/layer/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+        );
 
     const addLayer = (layer) => {
         return getToken().then((token) =>
@@ -48,29 +48,30 @@ export const LayerProvider = (props) => {
     };
 
 
-    // const EditSample = (sample) => {
-    //     return getToken().then((token) =>
-    //         fetch(`/api/sample/${sample.id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(sample),
-    //         }));
-    // };
+    const EditLayer = (layer) => {
+        debugger
+        return getToken().then((token) =>
+            fetch(`/api/layer/${layer.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(layer),
+            }));
+    };
 
-    // const DeleteSample = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/sample/${id}`, {
-    //             method: "DELETE",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }));
+    const DeleteLayer = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/layer/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }));
 
     return (
-        <LayerContext.Provider value={{ layers, getLayersByStratigraphyId, addLayer }}>
+        <LayerContext.Provider value={{ layers, getLayersByStratigraphyId, addLayer, getSingleLayer, EditLayer, DeleteLayer }}>
             {props.children}
         </LayerContext.Provider>
     );

@@ -21,6 +21,7 @@ import Stratigraphy from "./stratigraphy/Stratigraphy";
 import AddStratigraphy from "./stratigraphy/AddStratigraphy";
 import EditStratigraphy from "./stratigraphy/EditStratigraphy";
 import AddLayer from "./layer/AddLayer";
+import EditLayer from "./layer/EditLayer";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -95,6 +96,9 @@ export default function ApplicationViews() {
                 {/* Layers */}
                 <Route path="/reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/layers/add" exact>
                     {isLoggedIn ? <AddLayer /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/layers/edit/:layerId(\d+)" exact>
+                    {isLoggedIn ? <EditLayer /> : <Redirect to="/login" />}
                 </Route>
 
                 {/* Auth */}
