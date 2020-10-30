@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
+import { useHistory, useParams } from "react-router-dom";
 
 export const ReportContext = React.createContext();
 
 export const ReportProvider = (props) => {
     const [reports, setReports] = useState([]);
     const { getToken } = useContext(UserProfileContext);
+    const history = useHistory();
 
 
 
@@ -28,8 +30,15 @@ export const ReportProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((res) => res.json())
-        );
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                } else {
+
+                    (history.push(`/unauthorized`));
+                    //throw new Error("Unauthorized")
+                }
+            }));
     //Name, CreateDate, CompleteDate
 
     const addReport = (report) => {

@@ -11,7 +11,7 @@ using Stratigraph.Repositories;
 
 namespace Stratigraph.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SampleController : ControllerBase
