@@ -9,7 +9,7 @@ const Stratigraphy = () => {
 
     const { getSingleStratigraphy } = useContext(StratigraphyContext)
     const [stratigraphy, setStratigraphy] = useState();
-    const { stratigraphyId } = useParams();
+    const { stratigraphyId, reportId } = useParams();
     const history = useHistory();
 
 
@@ -56,7 +56,8 @@ const Stratigraphy = () => {
 
                         <Button color="warning"
                             style={{ margin: 10 }}
-                        //onClick={() => { history.push(`/reports/edit/${reportId}`) }}
+                            ///reports/:reportId(\d+)/stratigraphies/edit/:stratigraphyId(\d+)
+                            onClick={() => { history.push(`/reports/${reportId}/stratigraphies/edit/${stratigraphyId}`) }}
                         >
                             Edit
                     </Button>

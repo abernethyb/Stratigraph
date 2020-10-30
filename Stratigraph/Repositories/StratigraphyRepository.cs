@@ -88,15 +88,12 @@ namespace Stratigraph.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE Stratigraphy
-                        SET UserProfileId = @UserProfileId,
-                            ReportId = @ReportId,
-                            CreateDate = @CreateDate,
-                            Notes = @Notes
+                        SET Notes = @Notes
                         WHERE Id = @Id";
 
-                    DbUtils.AddParameter(cmd, "@UserProfileId", stratigraphy.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@ReportId", stratigraphy.ReportId);
-                    DbUtils.AddParameter(cmd, "@CreateDate", stratigraphy.CreateDate);
+                    //DbUtils.AddParameter(cmd, "@UserProfileId", stratigraphy.UserProfileId);
+                    //DbUtils.AddParameter(cmd, "@ReportId", stratigraphy.ReportId);
+                    //DbUtils.AddParameter(cmd, "@CreateDate", stratigraphy.CreateDate);
                     DbUtils.AddParameter(cmd, "@Notes", stratigraphy.Notes);
                     DbUtils.AddParameter(cmd, "@Id", stratigraphy.Id);
 
