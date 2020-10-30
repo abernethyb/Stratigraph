@@ -46,7 +46,7 @@ namespace Stratigraph.Repositories
                 }
             }
         }
-        public void Add(Stratigraphy stratigraphy)
+        public void AddStratigraphyAndAddToSample(Stratigraphy stratigraphy, int sampleId)
         {
             using (var conn = Connection)
             {
@@ -65,9 +65,19 @@ namespace Stratigraph.Repositories
 
                     stratigraphy.Id = (int)cmd.ExecuteScalar();
 
+                    cmd.CommandText = @"
+                                    UPDATE Sample
+                                    SET StratigraphyId = @StratigraphyId
+                                    WHERE Id = @Id;
+                                            ";
+                    DbUtils.AddParameter(cmd, "@StratigraphyId", stratigraphy.Id);
+                    DbUtils.AddParameter(cmd, "@Id", sampleId);
+                    cmd.ExecuteScalar();
+
                 }
             }
         }
+
 
         public void Update(Stratigraphy stratigraphy)
         {

@@ -82,12 +82,13 @@ const Report = () => {
                         >
                             View Samples
                     </Button>
-                        <Button color="info"
+                        {/* TO DO */}
+                        {/* <Button color="info"
                             style={{ margin: 10 }}
                         //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
                         >
                             View Stratigraphies
-                    </Button>
+                        </Button> */}
                     </Table>
                 </div>
             </div>
