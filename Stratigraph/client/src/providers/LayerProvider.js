@@ -49,7 +49,6 @@ export const LayerProvider = (props) => {
 
 
     const EditLayer = (layer) => {
-        debugger
         return getToken().then((token) =>
             fetch(`/api/layer/${layer.id}`, {
                 method: "PUT",

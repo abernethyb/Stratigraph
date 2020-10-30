@@ -121,8 +121,8 @@ const Stratigraphy = () => {
                                         >Edit</Button>
                                         <Button color="danger"
                                             style={{ margin: 10 }}
-                                        ///reports/:reportId(\d+)/samples/delete/:sampleId(\d+)
-                                        //onClick={() => { history.push(`/reports/${reportId}/samples/delete/${sample.id}`) }}
+                                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/layers/delete/:layerId(\d+)
+                                            onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}/layers/delete/${layer.id}`) }}
 
                                         >DELETE</Button>
 
