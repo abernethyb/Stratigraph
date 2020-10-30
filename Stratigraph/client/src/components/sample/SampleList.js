@@ -16,13 +16,14 @@ const SampletList = () => {
     const [search, setsearch] = useState();
 
     const submit = () => {
-        const RoomSearch = parseInt(roomNumbersearch.current.value)
+        const roomSearch = parseInt(roomNumbersearch.current.value)
 
-        searcSamplesByRoomViaReport(reportId, RoomSearch)
+        if (roomNumbersearch.current.value == "") {
+            getSamplesByReportId(reportId);
+        } else {
 
-        // addReport(report).then((res) => {
-        //     history.push(`/reports/${res.id}`);
-        // });
+            searcSamplesByRoomViaReport(reportId, roomSearch)
+        }
 
 
     };
