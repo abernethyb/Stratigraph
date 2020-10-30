@@ -84,6 +84,8 @@ namespace Stratigraph.Repositories
 
         public UserProfileReport GetUserProfileReportById(int Id)
         {
+            //TO DO:
+            //CHANGE TO LIST OF UPRs
             using (var conn = Connection)
             {
                 conn.Open();

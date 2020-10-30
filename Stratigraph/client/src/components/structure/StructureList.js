@@ -24,7 +24,7 @@ const StructuretList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-left">
-                    <Button color="danger"
+                    <Button color="success"
                         ///reports/:reportId(\d+)/structures/add
                         onClick={() => { history.push(`/reports/${reportId}/structures/add`) }}
                     >
@@ -50,13 +50,17 @@ const StructuretList = () => {
                                     <th scope="row">
 
                                         {structure.name}
+                                        <hr />
                                         <Button
-
+                                            style={{ margin: 10 }}
+                                            color="warning"
                                             onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
                                         >Edit</Button>
                                         <Button
-
-                                        //onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
+                                            color="info"
+                                            style={{ margin: 10 }}
+                                            ///reports/${reportId}/structures/${structure.id}/samples
+                                            onClick={() => { history.push(`/reports/${reportId}/structures/${structure.id}/samples`) }}
                                         >View Samples</Button>
                                     </th>
                                     <td>

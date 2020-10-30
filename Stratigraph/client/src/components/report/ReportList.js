@@ -20,7 +20,7 @@ const ReportList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-left">
-                    <Button color="danger"
+                    <Button color="success"
                         onClick={() => { history.push(`/reports/add`) }}
                     >
                         Add Report

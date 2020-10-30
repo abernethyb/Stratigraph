@@ -59,7 +59,6 @@ export const SampleProvider = (props) => {
 
 
     const EditSample = (sample) => {
-        debugger
         return getToken().then((token) =>
             fetch(`/api/sample/${sample.id}`, {
                 method: "PUT",

@@ -1,25 +1,29 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
 //import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
-import { ReportContext } from "../../providers/ReportProvider";
 import { Button, Table } from "reactstrap";
+import { StratigraphyContext } from "../../providers/StratigraphyProvider";
 
 
-const Report = () => {
+const Stratigraphy = () => {
 
-    const { getSingleReport } = useContext(ReportContext)
-    const [report, setReport] = useState();
-    const { reportId } = useParams();
+    const { getSingleStratigraphy } = useContext(StratigraphyContext)
+    const [stratigraphy, setStratigraphy] = useState();
+    const { stratigraphyId, reportId } = useParams();
     const history = useHistory();
 
 
     useEffect(() => {
-        getSingleReport(reportId).then(setReport);
+        getSingleStratigraphy(stratigraphyId).then(setStratigraphy);
     }, []);
 
-    if (!report) {
+    if (!stratigraphy) {
         return null;
     }
+
+    //TO DO:
+    //GET LAYERS AND ADD AS TABLE at bottom of page
+    //GET SAMPLES BY STRATIGRAPHY ID (this stratigraphy) and display them at top of page
 
     return (
         <>
@@ -30,11 +34,10 @@ const Report = () => {
                     <Table>
 
                         <thead>
-                            <h2>Report</h2>
+                            <h2>Stratigraphy</h2>
                             <tr>
-                                <th>Name</th>
-                                <th>Start date</th>
-                                <th>Complete date</th>
+                                <th>Date Created</th>
+                                <th>Notes</th>
                             </tr>
                         </thead>
 
@@ -42,53 +45,37 @@ const Report = () => {
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    {report.name}
+                                    {stratigraphy.createDate}
                                 </th>
                                 <td>
-                                    {report.createDate}
+                                    {stratigraphy.notes}
                                 </td>
-                                {report.completeDate ?
-                                    <td>
-                                        {report.completeDate}
-                                    </td>
-                                    :
-                                    <td>
-                                        IN PROGRESS
-                                        </td>
-                                }
-
-
                             </tr>
                         </tbody>
 
 
                         <Button color="warning"
                             style={{ margin: 10 }}
-                            onClick={() => { history.push(`/reports/edit/${reportId}`) }}
+                            ///reports/:reportId(\d+)/stratigraphies/edit/:stratigraphyId(\d+)
+                            onClick={() => { history.push(`/reports/${reportId}/stratigraphies/edit/${stratigraphyId}`) }}
                         >
                             Edit
                     </Button>
                         {/* /reports/:reportId(\d+)/structures */}
                         <Button color="info"
                             style={{ margin: 10 }}
-                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
                         >
-                            View Structures
+                            Add Layer
                     </Button>
-                        <Button color="info"
+                        {/* <Button color="info"
                             style={{ margin: 10 }}
                             //reports/:reportId(\d+)/samples
                             onClick={() => { history.push(`/reports/${reportId}/samples`) }}
                         >
                             View Samples
-                    </Button>
-                        {/* TO DO */}
-                        {/* <Button color="info"
-                            style={{ margin: 10 }}
-                        //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
-                        >
-                            View Stratigraphies
-                        </Button> */}
+                    </Button> */}
+
                     </Table>
                 </div>
             </div>
@@ -96,4 +83,4 @@ const Report = () => {
     );
 };
 
-export default Report;
+export default Stratigraphy;

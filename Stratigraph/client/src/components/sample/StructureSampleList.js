@@ -7,15 +7,15 @@ import Image from 'react-bootstrap/Image'
 import { SampleContext } from "../../providers/SampleProvider";
 
 
-const SampletList = () => {
-    const { reportId } = useParams();
+const StructureSampletList = () => {
+    const { reportId, structureId } = useParams();
     //const { structureId } = useParams();
-    const { samples, getSamplesByReportId } = useContext(SampleContext);
+    const { samples, getSamplesByStructureId } = useContext(SampleContext);
     const history = useHistory();
 
 
     useEffect(() => {
-        getSamplesByReportId(reportId);
+        getSamplesByStructureId(structureId);
     }, []);
 
     if (!samples) {
@@ -66,12 +66,11 @@ const SampletList = () => {
                                             :
                                             <Button color="info"
                                                 style={{ margin: 10 }}
-                                                ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
-                                                onClick={() => { history.push(`/reports/${reportId}/stratigraphies/add/${sample.id}`) }}
+                                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)
+                                            //onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${sample.stratigraphyId}`) }}
                                             >Add Stratigraphy</Button>
 
                                         }
-
                                         <Button color="warning"
                                             style={{ margin: 10 }}
                                             ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
@@ -110,4 +109,4 @@ const SampletList = () => {
     );
 };
 
-export default SampletList;
+export default StructureSampletList;
