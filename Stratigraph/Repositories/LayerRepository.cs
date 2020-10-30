@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Stratigraph.Repositories
 {
-    public class LayerRepository : BaseRepository
+    public class LayerRepository : BaseRepository, ILayerRepository
     {
         public LayerRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -54,7 +54,7 @@ namespace Stratigraph.Repositories
             }
         }
 
-        
+
 
         public Layer GetLayerById(int Id)
         {
