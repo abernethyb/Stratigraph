@@ -142,7 +142,7 @@ const AddSample = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/`) }}>
+                            onClick={() => { history.goBack() }}>
                             Cancel
                         </Button>
                     </CardBody>

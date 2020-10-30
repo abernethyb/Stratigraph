@@ -29,7 +29,7 @@ const SampleDetail = () => {
                 <CardSubtitle>Structure: {sample.structureName}</CardSubtitle>
                 <Button color="info"
                     style={{ margin: 10 }}
-                    onClick={() => { history.push(`/reports/${reportId}/samples`) }}>
+                    onClick={() => { history.push(history.goBack()) }}>
                     back to list
                     </Button>
                 <Button color="info"

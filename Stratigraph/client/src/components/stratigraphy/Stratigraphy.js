@@ -57,7 +57,11 @@ const Stratigraphy = () => {
                             </tr>
                         </tbody>
 
-
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            back to samples
+                            </Button>
                         <Button color="warning"
                             style={{ margin: 10 }}
                             ///reports/:reportId(\d+)/stratigraphies/edit/:stratigraphyId(\d+)

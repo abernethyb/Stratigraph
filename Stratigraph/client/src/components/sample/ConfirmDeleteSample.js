@@ -34,7 +34,7 @@ const ConfirmDeleteSample = () => {
                     <CardSubtitle>Are you sure you want to delete "{sample.name}"</CardSubtitle>
                     <Button color="info"
                         style={{ margin: 10 }}
-                        onClick={() => { history.push(`/reports/${reportId}/samples`) }}>
+                        onClick={() => { history.push(history.goBack()) }}>
                         No, I've changed my mind. Take me back!
                     </Button>
                     <Button color="danger"
@@ -42,7 +42,7 @@ const ConfirmDeleteSample = () => {
                         onClick={() => {
                             DeleteSample(sampleId)
                                 .then(() => {
-                                    history.push(`/reports/${reportId}/samples`)
+                                    history.push(history.goBack())
                                 })
                         }
                         }
