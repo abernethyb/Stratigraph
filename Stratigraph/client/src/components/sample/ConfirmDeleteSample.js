@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button } from "reactstrap";
+import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { SampleContext } from "../../providers/SampleProvider";
 import Image from 'react-bootstrap/Image'
@@ -26,15 +26,17 @@ const ConfirmDeleteSample = () => {
         return (
             <Card className="m-4">
 
-                <h1>Please Confirm</h1>
-                <h2> Are you sure you want to delete "{sample.name}"</h2>
-                <Image fluid rounded src={sample.image} alt={sample.name}></Image>
+                {/* <h1>Please Confirm</h1> */}
+                {/* <h2> Are you sure you want to delete "{sample.name}"</h2> */}
+                {/* <Image fluid rounded src={sample.image} alt={sample.name}></Image> */}
                 <CardBody>
+                    <CardTitle>Please Confirm</CardTitle>
+                    <CardSubtitle>Are you sure you want to delete "{sample.name}"</CardSubtitle>
                     <Button color="info"
                         style={{ margin: 10 }}
                         onClick={() => { history.push(`/reports/${reportId}/samples`) }}>
                         No, I've changed my mind. Take me back!
-                </Button>
+                    </Button>
                     <Button color="danger"
                         style={{ margin: 10 }}
                         onClick={() => {
@@ -44,8 +46,10 @@ const ConfirmDeleteSample = () => {
                                 })
                         }
                         }
-                    >Yes, I know what I'm doing.
-                </Button>
+                    >   Yes, I know what I'm doing.
+                    </Button>
+                    <CardImg src={sample.image} alt={sample.name}></CardImg>
+
                 </CardBody>
             </Card>
         );
