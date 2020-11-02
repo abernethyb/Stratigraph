@@ -37,7 +37,10 @@ namespace Stratigraph.Controllers
         [HttpGet("reportSamples/{reportId}")]
         public IActionResult GetAllByReportId(int reportId)
         {
+            //var currentUserProfile = GetCurrentUserProfile();
+            //var samples = _sampleRepository.GetSampleByReportId(reportId);
 
+            //if samples
 
             return Ok(_sampleRepository.GetSampleByReportId(reportId));
 
