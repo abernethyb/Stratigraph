@@ -42,7 +42,8 @@ namespace Stratigraph.Repositories
                             Image = DbUtils.GetString(reader, "Image"),
                             LocationDescription = DbUtils.GetString(reader, "LocationDescription"),
                             RoomNumber = DbUtils.GetInt(reader, "RoomNumber"),
-                            StructureName = DbUtils.GetString(reader, "StructureName")
+                            StructureName = DbUtils.GetString(reader, "StructureName"),
+                            StructureReportId = DbUtils.GetInt(reader, "ReportID")
                         });
                     }
 
@@ -83,7 +84,8 @@ namespace Stratigraph.Repositories
                             Image = DbUtils.GetString(reader, "Image"),
                             LocationDescription = DbUtils.GetString(reader, "LocationDescription"),
                             RoomNumber = DbUtils.GetInt(reader, "RoomNumber"),
-                            StructureName = DbUtils.GetString(reader, "StructureName")
+                            StructureName = DbUtils.GetString(reader, "StructureName"),
+                            StructureReportId = DbUtils.GetInt(reader, "ReportID")
                         });
                     }
 
@@ -123,7 +125,8 @@ namespace Stratigraph.Repositories
                             Image = DbUtils.GetString(reader, "Image"),
                             LocationDescription = DbUtils.GetString(reader, "LocationDescription"),
                             RoomNumber = DbUtils.GetInt(reader, "RoomNumber"),
-                            StructureName = DbUtils.GetString(reader, "StructureName")
+                            StructureName = DbUtils.GetString(reader, "StructureName"),
+                            StructureReportId = DbUtils.GetInt(reader, "ReportID")
                         });
                     }
 
@@ -164,7 +167,8 @@ namespace Stratigraph.Repositories
                             Image = DbUtils.GetString(reader, "Image"),
                             LocationDescription = DbUtils.GetString(reader, "LocationDescription"),
                             RoomNumber = DbUtils.GetInt(reader, "RoomNumber"),
-                            StructureName = DbUtils.GetString(reader, "StructureName")
+                            StructureName = DbUtils.GetString(reader, "StructureName"),
+                            StructureReportId = DbUtils.GetInt(reader, "ReportID")
                         });
                     }
 
@@ -205,7 +209,8 @@ namespace Stratigraph.Repositories
                             Image = DbUtils.GetString(reader, "Image"),
                             LocationDescription = DbUtils.GetString(reader, "LocationDescription"),
                             RoomNumber = DbUtils.GetInt(reader, "RoomNumber"),
-                            StructureName = DbUtils.GetString(reader, "StructureName")
+                            StructureName = DbUtils.GetString(reader, "StructureName"),
+                            StructureReportId = DbUtils.GetInt(reader, "ReportID")
                         };
                     }
 

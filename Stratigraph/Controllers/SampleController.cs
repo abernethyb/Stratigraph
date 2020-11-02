@@ -40,7 +40,7 @@ namespace Stratigraph.Controllers
             //var currentUserProfile = GetCurrentUserProfile();
             //var samples = _sampleRepository.GetSampleByReportId(reportId);
 
-            //if samples
+
 
             return Ok(_sampleRepository.GetSampleByReportId(reportId));
 
