@@ -43,6 +43,7 @@ const EditLayer = () => {
     const submit = () => {
         const editedlayer = {
             id: parseInt(layerId),
+            stratigraphyId: parseInt(layer.stratigraphyId),
             finishPeriod: finishPeriod.current.value,
             beginDate: beginDate.current.value,
             endDate: endDate.current.value,
@@ -67,7 +68,7 @@ const EditLayer = () => {
     };
 
     useEffect(() => {
-        getSingleLayer(layerId).then(setLayer);
+        getSingleLayer(layerId, reportId).then(setLayer);
     }, []);
 
     if (!layer) {

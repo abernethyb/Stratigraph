@@ -14,7 +14,7 @@ const ConfirmDeleteLayer = () => {
 
 
     useEffect(() => {
-        getSingleLayer(layerId).then(setLayer);
+        getSingleLayer(layerId, reportId).then(setLayer);
     }, []);
 
     if (!layer) {
@@ -35,7 +35,7 @@ const ConfirmDeleteLayer = () => {
                 <Button color="danger"
                     style={{ margin: 10 }}
                     onClick={() => {
-                        DeleteLayer(layerId)
+                        DeleteLayer(layerId, stratigraphyId)
                             .then(() => {
                                 history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}`)
                             })

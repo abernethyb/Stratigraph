@@ -19,13 +19,16 @@ namespace Stratigraph.Controllers
         private readonly ILayerRepository _layerRepository;
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly IReportRepository _reportRepository;
+        private readonly IStratigraphyRepository _stratigraphyRepository;
         public LayerController(ILayerRepository layerRepository,
                                 IUserProfileRepository userProfileRepository,
-                                IReportRepository reportRepository)
+                                IReportRepository reportRepository,
+                                IStratigraphyRepository stratigraphyRepository)
         {
             _layerRepository = layerRepository;
             _userProfileRepository = userProfileRepository;
             _reportRepository = reportRepository;
+            _stratigraphyRepository = stratigraphyRepository;
         }
 
         ///api/layer/stratigraphyLayers/10
@@ -39,58 +42,108 @@ namespace Stratigraph.Controllers
         }
 
         ///api/layer/88
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{id}/{reportId}")]
+        public IActionResult Get(int id, int reportId)
         {
+            var layer = _layerRepository.GetLayerById(id);
+            var currentUserProfile = GetCurrentUserProfile();
 
+            if (layer != null)
+            {
+                var upr = _reportRepository.GetUserProfileReportById(reportId, currentUserProfile.Id);
+                if (upr != null)
+                {
 
-            return Ok(_layerRepository.GetLayerById(id));
+                    return Ok(layer);
+
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            
 
         }
 
         [HttpPost]
         public IActionResult Post(Layer layer)
         {
-            //TO DO:
-            //AUTH
-            _layerRepository.Add(layer);
-            return CreatedAtAction("Get", new { id = layer.Id }, layer);
+
+            var stratigraphy = _stratigraphyRepository.GetStratigraphyById(layer.StratigraphyId);
+            var currentUserProfile = GetCurrentUserProfile();
+
+            if (stratigraphy.UserProfileId == currentUserProfile.Id)
+            {
+                _layerRepository.Add(layer);
+                return CreatedAtAction("Get", new { id = layer.Id }, layer);
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+
+            
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, Layer layer)
         {
-            //TO DO: 
-            //Auth...
 
-            if (id != layer.Id)
+            var stratigraphy = _stratigraphyRepository.GetStratigraphyById(layer.StratigraphyId);
+            var currentUserProfile = GetCurrentUserProfile();
+
+            if (stratigraphy.UserProfileId == currentUserProfile.Id)
             {
-                return BadRequest();
+
+                if (id != layer.Id)
+                {
+                    return BadRequest();
+                }
+
+                _layerRepository.Update(layer);
+
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
+        [HttpDelete("{id}/{stratigraphyId}")]
+        public IActionResult Delete(int id, int stratigraphyId)
+        {
+            
+            var stratigraphy = _stratigraphyRepository.GetStratigraphyById(stratigraphyId);
+            var currentUserProfile = GetCurrentUserProfile();
+
+            if (stratigraphy.UserProfileId == currentUserProfile.Id)
+            {
+
+                _layerRepository.DeleteLayer(id);
+                return NoContent();
+            }
+            else
+            {
+                return Unauthorized();
             }
 
-            _layerRepository.Update(layer);
 
-            return Ok();
+
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+
+        private UserProfile GetCurrentUserProfile()
         {
-            //TO DO:
-            //AUTH
-
-            _layerRepository.DeleteLayer(id);
-                return NoContent();
-            
-
-            
+            var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseId(firebaseId);
         }
-
-
-        //private UserProfile GetCurrentUserProfile()
-        //{
-        //    var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    return _userProfileRepository.GetByFirebaseId(firebaseId);
-        //}
     }
 }
