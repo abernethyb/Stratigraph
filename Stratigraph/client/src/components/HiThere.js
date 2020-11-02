@@ -4,6 +4,6 @@ export default function HiThere() {
 
 
     return (
-        <h1>Hi There! ... I don't think there's anything here...let's hit that back button.</h1>
+        <h1>I'm sorry, Andy, I'm afraid I can't do that right now.</h1>
     );
 }

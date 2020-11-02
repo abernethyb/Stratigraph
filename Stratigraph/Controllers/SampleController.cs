@@ -28,21 +28,28 @@ namespace Stratigraph.Controllers
             _reportRepository = reportRepository;
         }
 
-        [HttpGet("structureSamples/{structureId}")]
-        public IActionResult GetAllByStructureId(int structureId)
+        [HttpGet("structureSamples/{structureId}/{reportId}")]
+        public IActionResult GetAllByStructureId(int structureId, int reportId)
         {
-            //var currentUserProfile = GetCurrentUserProfile();
-            //var sample = _sampleRepository.GetSampleByStructureId(structureId);
-            //var uprFromDB = _reportRepository.GetUserProfileReportById(???, currentUserProfile.Id);
-            //if (uprFromDB != null)
-            //{
-                return Ok(_sampleRepository.GetSampleByStructureId(structureId));
-            //}
-            //else
-            //{
-            //    return Unauthorized();
-            //}
+            var currentUserProfile = GetCurrentUserProfile();
+            var samples = _sampleRepository.GetSampleByStructureId(structureId);
+            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId, currentUserProfile.Id);
+            foreach (Sample sample in samples)
+            {
+                if (sample.StructureReportId != reportId)
+                {
+                    return Unauthorized();
+                }
+            }
+            if (uprFromDB != null)
+            {
+                return Ok(samples);
         }
+            else
+            {
+                return Unauthorized();
+    }
+}
 
         [HttpGet("reportSamples/{reportId}")]
         public IActionResult GetAllByReportId(int reportId)

@@ -15,7 +15,7 @@ const StructureSampletList = () => {
 
 
     useEffect(() => {
-        getSamplesByStructureId(structureId);
+        getSamplesByStructureId(structureId, reportId);
     }, []);
 
     if (!samples) {
@@ -42,7 +42,7 @@ const StructureSampletList = () => {
                     <Table>
 
                         <thead>
-                            <h2>All Samples</h2>
+                            <h2>Structure Samples</h2>
                             <tr>
                                 <th>Name</th>
                                 <th>Image</th>

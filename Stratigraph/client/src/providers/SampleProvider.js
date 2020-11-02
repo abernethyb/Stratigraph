@@ -9,9 +9,9 @@ export const SampleProvider = (props) => {
     const { getToken } = useContext(UserProfileContext);
     const history = useHistory();
 
-    const getSamplesByStructureId = (structureId) => {
+    const getSamplesByStructureId = (structureId, reportId) => {
         getToken().then((token) =>
-            fetch(`/api/sample/structureSamples/${structureId}`, {
+            fetch(`/api/sample/structureSamples/${structureId}/${reportId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`

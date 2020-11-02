@@ -18,11 +18,14 @@ namespace Stratigraph.Controllers
     {
         private readonly IStratigraphyRepository _stratigraphyRepository;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IReportRepository _reportRepository;
         public StratigraphyController(IStratigraphyRepository stratigraphyRepository,
-                                IUserProfileRepository userProfileRepository)
+                                IUserProfileRepository userProfileRepository,
+                                IReportRepository reportRepository)
         {
             _stratigraphyRepository = stratigraphyRepository;
             _userProfileRepository = userProfileRepository;
+            _reportRepository = reportRepository;
         }
 
 
@@ -32,7 +35,11 @@ namespace Stratigraph.Controllers
 
             var currentUserProfile = GetCurrentUserProfile();
             var stratigraphy = _stratigraphyRepository.GetStratigraphyById(id);
-            if (stratigraphy.UserProfileId == currentUserProfile.Id) 
+            //if (stratigraphy.UserProfileId == currentUserProfile.Id) 
+            //{
+
+            var uprFromDB = _reportRepository.GetUserProfileReportById(stratigraphy.ReportId, currentUserProfile.Id);
+            if (uprFromDB != null)
             {
                 return Ok(stratigraphy);
             }
