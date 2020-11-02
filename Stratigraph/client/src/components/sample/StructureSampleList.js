@@ -71,8 +71,8 @@ const StructureSampletList = () => {
                                             :
                                             <Button color="info"
                                                 style={{ margin: 10 }}
-                                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)
-                                            //onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${sample.stratigraphyId}`) }}
+                                                ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
+                                                onClick={() => { history.push(`/reports/${reportId}/stratigraphies/add/${sample.id}`) }}
                                             >Add Stratigraphy</Button>
 
                                         }
