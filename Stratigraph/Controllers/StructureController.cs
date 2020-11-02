@@ -32,16 +32,16 @@ namespace Stratigraph.Controllers
         public IActionResult GetAllByReportId(int reportId)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            //var uprFromDB = _reportRepository.GetUserProfileReportById(reportId);
-            //if (uprFromDB.UserProfileId == currentUserProfile.Id)
-            //{
+            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
 
                 return Ok(_structureRepository.GetStructureByReportId(reportId));
-            //}
-            //else
-            //{
-            //    return Unauthorized();
-            //}
+            }
+            else
+            {
+                return Unauthorized();
+            }
 
         }
 

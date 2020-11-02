@@ -17,33 +17,46 @@ namespace Stratigraph.Controllers
     public class SampleController : ControllerBase
     {
         private readonly ISampleRepository _sampleRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IUserProfileRepository _userProfileRepository;
         public SampleController(ISampleRepository sampleRepository,
-                                IUserProfileRepository userProfileRepository)
+                                IUserProfileRepository userProfileRepository,
+                                IReportRepository reportRepository)
         {
             _sampleRepository = sampleRepository;
             _userProfileRepository = userProfileRepository;
+            _reportRepository = reportRepository;
         }
 
         [HttpGet("structureSamples/{structureId}")]
         public IActionResult GetAllByStructureId(int structureId)
         {
-
-
-            return Ok(_sampleRepository.GetSampleByStructureId(structureId));
-
+            //var currentUserProfile = GetCurrentUserProfile();
+            //var sample = _sampleRepository.GetSampleByStructureId(structureId);
+            //var uprFromDB = _reportRepository.GetUserProfileReportById(???, currentUserProfile.Id);
+            //if (uprFromDB != null)
+            //{
+                return Ok(_sampleRepository.GetSampleByStructureId(structureId));
+            //}
+            //else
+            //{
+            //    return Unauthorized();
+            //}
         }
 
         [HttpGet("reportSamples/{reportId}")]
         public IActionResult GetAllByReportId(int reportId)
         {
-            //var currentUserProfile = GetCurrentUserProfile();
-            //var samples = _sampleRepository.GetSampleByReportId(reportId);
-
-
-
-            return Ok(_sampleRepository.GetSampleByReportId(reportId));
-
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
+                return Ok(_sampleRepository.GetSampleByReportId(reportId));
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
         [HttpGet("stratigraphySamples/{stratigraphyId}")]
         public IActionResult GetAllByStratigraphyId(int stratigraphyId)
