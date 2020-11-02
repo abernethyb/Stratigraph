@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
+import { useHistory } from "react-router-dom";
 
 export const LayerContext = React.createContext();
 
 export const LayerProvider = (props) => {
     const [layers, setLayers] = useState([]);
     const { getToken } = useContext(UserProfileContext);
+    const history = useHistory();
 
 
     const getLayersByStratigraphyId = (StratigraphyId) => {
@@ -20,15 +22,22 @@ export const LayerProvider = (props) => {
     };
 
 
-    const getSingleLayer = (id) =>
+    const getSingleLayer = (id, reportId) =>
         getToken().then((token) =>
-            fetch(`/api/layer/${id}`, {
+            fetch(`/api/layer/${id}/${reportId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((res) => res.json())
-        );
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                } else {
+
+                    (history.push(`/unauthorized`));
+                    //throw new Error("Unauthorized")
+                }
+            }))
 
     const addLayer = (layer) => {
         return getToken().then((token) =>
@@ -43,7 +52,9 @@ export const LayerProvider = (props) => {
                 if (resp.ok) {
                     return resp.json();
                 }
-                throw new Error("Unauthorized");
+                else {
+                    (history.push(`/unauthorized`));
+                }
             }));
     };
 
@@ -57,12 +68,19 @@ export const LayerProvider = (props) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(layer),
-            }));
-    };
+            }).then(resp => {
+                if (!resp.ok) {
+                    (history.push(`/unauthorized`));
+                    //return resp.json();
+                    //throw new Error("Unauthorized")
+                }
+            })
+        );
+    }
 
-    const DeleteLayer = (id) =>
+    const DeleteLayer = (id, stratigraphyId) =>
         getToken().then((token) =>
-            fetch(`/api/layer/${id}`, {
+            fetch(`/api/layer/${id}/${stratigraphyId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`

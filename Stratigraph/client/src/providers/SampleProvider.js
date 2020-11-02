@@ -1,23 +1,32 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
+import { useHistory } from "react-router-dom";
 
 export const SampleContext = React.createContext();
 
 export const SampleProvider = (props) => {
     const [samples, setSamples] = useState([]);
     const { getToken } = useContext(UserProfileContext);
+    const history = useHistory();
 
-
-    const getSamplesByStructureId = (structureId) => {
+    const getSamplesByStructureId = (structureId, reportId) => {
         getToken().then((token) =>
-            fetch(`/api/sample/structureSamples/${structureId}`, {
+            fetch(`/api/sample/structureSamples/${structureId}/${reportId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((res) => res.json())
-                .then(setSamples));
-    };
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json().then(setSamples);
+                } else {
+
+                    (history.push(`/unauthorized`));
+                    //throw new Error("Unauthorized")
+                }
+            })
+        );
+    }
 
     const getSamplesByReportId = (reportId) => {
         getToken().then((token) =>
@@ -26,9 +35,17 @@ export const SampleProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((res) => res.json())
-                .then(setSamples));
-    };
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json().then(setSamples);
+                } else {
+
+                    (history.push(`/unauthorized`));
+                    //throw new Error("Unauthorized")
+                }
+            })
+        );
+    }
 
     const getSamplesByStratigraphyId = (stratigraphyId) => {
         getToken().then((token) =>
@@ -60,8 +77,17 @@ export const SampleProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((res) => res.json())
-        );
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                } else {
+
+                    (history.push(`/unauthorized`));
+                    //throw new Error("Unauthorized")
+                }
+            }))
+
+
 
     const addSample = (sample) => {
         return getToken().then((token) =>
@@ -90,9 +116,15 @@ export const SampleProvider = (props) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(sample),
-            }));
-    };
-
+            }).then(resp => {
+                if (!resp.ok) {
+                    (history.push(`/unauthorized`));
+                    //return resp.json();
+                    //throw new Error("Unauthorized")
+                }
+            })
+        );
+    }
     const DeleteSample = (id) =>
         getToken().then((token) =>
             fetch(`/api/sample/${id}`, {

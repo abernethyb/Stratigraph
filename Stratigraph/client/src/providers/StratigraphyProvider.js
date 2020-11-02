@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
+import { useHistory } from "react-router-dom";
 
 export const StratigraphyContext = React.createContext();
 
 export const StratigraphyProvider = (props) => {
     const { getToken } = useContext(UserProfileContext);
+    const history = useHistory();
 
     const getSingleStratigraphy = (id) =>
         getToken().then((token) =>
@@ -13,8 +15,16 @@ export const StratigraphyProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((res) => res.json())
-        );
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                } else {
+
+                    (history.push(`/unauthorized`));
+                    //throw new Error("Unauthorized")
+                }
+            }));
+
 
     const addStratigraphy = (stratigraphy) => {
         return getToken().then((token) =>

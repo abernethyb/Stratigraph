@@ -32,8 +32,8 @@ namespace Stratigraph.Controllers
         public IActionResult GetAllByReportId(int reportId)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId);
-            if (uprFromDB.UserProfileId == currentUserProfile.Id)
+            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId, currentUserProfile.Id);
+            if (uprFromDB != null)
             {
 
                 return Ok(_structureRepository.GetStructureByReportId(reportId));
@@ -48,35 +48,73 @@ namespace Stratigraph.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            var structure = _structureRepository.GetStructureById(id);
+
+            var currentUserProfile = GetCurrentUserProfile();
+
+            if (structure != null)
+            {
+                var upr = _reportRepository.GetUserProfileReportById(structure.ReportId, currentUserProfile.Id);
 
 
-            return Ok(_structureRepository.GetStructureById(id));
+                if (upr != null)
+                {
+
+                    return Ok(structure);
+
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpPost]
         public IActionResult Post(Structure structure)
         {
-            //TO DO: 
-            //Auth...via upr
-            _structureRepository.Add(structure);
-            return CreatedAtAction("Get", new { id = structure.Id }, structure);
+            var currentUserProfile = GetCurrentUserProfile();
+            var upr = _reportRepository.GetUserProfileReportById(structure.ReportId, currentUserProfile.Id);
+
+            if (upr != null)
+            {
+
+                _structureRepository.Add(structure);
+                return CreatedAtAction("Get", new { id = structure.Id }, structure);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, Structure structure)
         {
-            //TO DO: 
-            //Auth...via upr
-            
+            var currentUserProfile = GetCurrentUserProfile();
+            var upr = _reportRepository.GetUserProfileReportById(structure.ReportId, currentUserProfile.Id);
+
+            if (upr != null)
+            {
+
                 if (id != structure.Id)
                 {
                     return BadRequest();
                 }
 
-            _structureRepository.Update(structure);
+                _structureRepository.Update(structure);
 
                 return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
 

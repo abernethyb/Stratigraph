@@ -39,8 +39,8 @@ namespace Stratigraph.Controllers
         public IActionResult Get(int id)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            var uprFromDB = _reportRepository.GetUserProfileReportById(id);
-            if (uprFromDB.UserProfileId == currentUserProfile.Id)
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id, currentUserProfile.Id);
+            if (uprFromDB != null)
             {
                 var report = _reportRepository.GetReportsById(id);
             if (report == null)
@@ -68,8 +68,8 @@ namespace Stratigraph.Controllers
         public IActionResult Put(int id, Report report)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            var uprFromDB = _reportRepository.GetUserProfileReportById(id);
-            if (uprFromDB.UserProfileId == currentUserProfile.Id)
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id, currentUserProfile.Id);
+            if (uprFromDB != null)
             {
                 if (id != report.Id)
                 {

@@ -46,5 +46,7 @@ namespace Stratigraph.Models
 
         public string StructureName { get; set; }
 
+        public int StructureReportId { get; set; }
+
     }
 }

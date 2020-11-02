@@ -18,11 +18,14 @@ namespace Stratigraph.Controllers
     {
         private readonly IStratigraphyRepository _stratigraphyRepository;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IReportRepository _reportRepository;
         public StratigraphyController(IStratigraphyRepository stratigraphyRepository,
-                                IUserProfileRepository userProfileRepository)
+                                IUserProfileRepository userProfileRepository,
+                                IReportRepository reportRepository)
         {
             _stratigraphyRepository = stratigraphyRepository;
             _userProfileRepository = userProfileRepository;
+            _reportRepository = reportRepository;
         }
 
 
@@ -30,9 +33,17 @@ namespace Stratigraph.Controllers
         public IActionResult Get(int id)
         {
 
-
-            return Ok(_stratigraphyRepository.GetStratigraphyById(id));
-
+            var currentUserProfile = GetCurrentUserProfile();
+            var stratigraphy = _stratigraphyRepository.GetStratigraphyById(id);
+            var uprFromDB = _reportRepository.GetUserProfileReportById(stratigraphy.ReportId, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
+                return Ok(stratigraphy);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPost]
@@ -47,17 +58,26 @@ namespace Stratigraph.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Stratigraphy stratigraphy)
         {
-            //TO DO: 
-            //Auth...
-
-            if (id != stratigraphy.Id)
+            var currentUserProfile = GetCurrentUserProfile();
+            var dbStratigraphy = _stratigraphyRepository.GetStratigraphyById(id);
+            if (dbStratigraphy.UserProfileId == currentUserProfile.Id)
             {
-                return BadRequest();
+
+
+
+                if (id != stratigraphy.Id)
+                {
+                    return BadRequest();
+                }
+
+                _stratigraphyRepository.Update(stratigraphy);
+
+                return Ok();
             }
-
-            _stratigraphyRepository.Update(stratigraphy);
-
-            return Ok();
+            else
+            {
+                return Unauthorized();
+            }
         }
 
 

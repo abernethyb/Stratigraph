@@ -82,7 +82,7 @@ namespace Stratigraph.Repositories
             }
         }
 
-        public UserProfileReport GetUserProfileReportById(int Id)
+        public UserProfileReport GetUserProfileReportById(int reportId, int userProfileId)
         {
             //TO DO:
             //CHANGE TO LIST OF UPRs
@@ -92,9 +92,10 @@ namespace Stratigraph.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT Id, UserProfileId, ReportId FROM UserProfileReport
-                                        WHERE ReportId = @Id;";
+                                        WHERE ReportId = @reportId AND UserProfileId = @userProfileId;";
 
-                    DbUtils.AddParameter(cmd, "@Id", Id);
+                    DbUtils.AddParameter(cmd, "@reportId", reportId);
+                    DbUtils.AddParameter(cmd, "@userProfileId", userProfileId);
 
                     var reader = cmd.ExecuteReader();
 

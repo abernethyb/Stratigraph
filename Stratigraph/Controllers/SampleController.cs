@@ -17,30 +17,53 @@ namespace Stratigraph.Controllers
     public class SampleController : ControllerBase
     {
         private readonly ISampleRepository _sampleRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IUserProfileRepository _userProfileRepository;
         public SampleController(ISampleRepository sampleRepository,
-                                IUserProfileRepository userProfileRepository)
+                                IUserProfileRepository userProfileRepository,
+                                IReportRepository reportRepository)
         {
             _sampleRepository = sampleRepository;
             _userProfileRepository = userProfileRepository;
+            _reportRepository = reportRepository;
         }
 
-        [HttpGet("structureSamples/{structureId}")]
-        public IActionResult GetAllByStructureId(int structureId)
+        [HttpGet("structureSamples/{structureId}/{reportId}")]
+        public IActionResult GetAllByStructureId(int structureId, int reportId)
         {
-
-
-            return Ok(_sampleRepository.GetSampleByStructureId(structureId));
-
+            var currentUserProfile = GetCurrentUserProfile();
+            var samples = _sampleRepository.GetSampleByStructureId(structureId);
+            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId, currentUserProfile.Id);
+            foreach (Sample sample in samples)
+            {
+                if (sample.StructureReportId != reportId)
+                {
+                    return Unauthorized();
+                }
+            }
+            if (uprFromDB != null)
+            {
+                return Ok(samples);
         }
+            else
+            {
+                return Unauthorized();
+    }
+}
 
         [HttpGet("reportSamples/{reportId}")]
         public IActionResult GetAllByReportId(int reportId)
         {
-
-
-            return Ok(_sampleRepository.GetSampleByReportId(reportId));
-
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(reportId, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
+                return Ok(_sampleRepository.GetSampleByReportId(reportId));
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
         [HttpGet("stratigraphySamples/{stratigraphyId}")]
         public IActionResult GetAllByStratigraphyId(int stratigraphyId)
@@ -63,9 +86,28 @@ namespace Stratigraph.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            var sample = _sampleRepository.GetSampleById(id);
+            var currentUserProfile = GetCurrentUserProfile();
+            if (sample != null)
+            {
+                var upr = _reportRepository.GetUserProfileReportById(sample.StructureReportId, currentUserProfile.Id);
 
+            
+                if (upr != null)
+                {
 
-            return Ok(_sampleRepository.GetSampleById(id));
+                    return Ok(sample);
+
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
 
         }
 
@@ -81,8 +123,12 @@ namespace Stratigraph.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Sample sample)
         {
-            //TO DO: 
-            //Auth...
+
+            var currentUserProfile = GetCurrentUserProfile();
+            var dbSample = _sampleRepository.GetSampleById(id);
+
+            if (dbSample.UserProfileId == currentUserProfile.Id)
+            {
 
             if (id != sample.Id)
             {
@@ -92,6 +138,11 @@ namespace Stratigraph.Controllers
             _sampleRepository.Update(sample);
 
             return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpDelete("{id}")]

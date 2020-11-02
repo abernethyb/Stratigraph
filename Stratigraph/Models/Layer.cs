@@ -46,5 +46,7 @@ namespace Stratigraph.Models
         [MaxLength(555)]
         public string Notes { get; set; }
 
+        public int StratigraphyReportId { get; set; }
+
     }
 }
