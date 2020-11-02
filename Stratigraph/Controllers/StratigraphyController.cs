@@ -35,9 +35,6 @@ namespace Stratigraph.Controllers
 
             var currentUserProfile = GetCurrentUserProfile();
             var stratigraphy = _stratigraphyRepository.GetStratigraphyById(id);
-            //if (stratigraphy.UserProfileId == currentUserProfile.Id) 
-            //{
-
             var uprFromDB = _reportRepository.GetUserProfileReportById(stratigraphy.ReportId, currentUserProfile.Id);
             if (uprFromDB != null)
             {
@@ -61,17 +58,26 @@ namespace Stratigraph.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Stratigraphy stratigraphy)
         {
-            //TO DO: 
-            //More auth
-
-            if (id != stratigraphy.Id)
+            var currentUserProfile = GetCurrentUserProfile();
+            var dbStratigraphy = _stratigraphyRepository.GetStratigraphyById(id);
+            if (dbStratigraphy.UserProfileId == currentUserProfile.Id)
             {
-                return BadRequest();
+
+
+
+                if (id != stratigraphy.Id)
+                {
+                    return BadRequest();
+                }
+
+                _stratigraphyRepository.Update(stratigraphy);
+
+                return Ok();
             }
-
-            _stratigraphyRepository.Update(stratigraphy);
-
-            return Ok();
+            else
+            {
+                return Unauthorized();
+            }
         }
 
 

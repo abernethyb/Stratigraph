@@ -18,11 +18,14 @@ namespace Stratigraph.Controllers
     {
         private readonly ILayerRepository _layerRepository;
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IReportRepository _reportRepository;
         public LayerController(ILayerRepository layerRepository,
-                                IUserProfileRepository userProfileRepository)
+                                IUserProfileRepository userProfileRepository,
+                                IReportRepository reportRepository)
         {
             _layerRepository = layerRepository;
             _userProfileRepository = userProfileRepository;
+            _reportRepository = reportRepository;
         }
 
         ///api/layer/stratigraphyLayers/10

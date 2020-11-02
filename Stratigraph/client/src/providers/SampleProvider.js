@@ -77,8 +77,17 @@ export const SampleProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((res) => res.json())
-        );
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                } else {
+
+                    (history.push(`/unauthorized`));
+                    //throw new Error("Unauthorized")
+                }
+            }))
+
+
 
     const addSample = (sample) => {
         return getToken().then((token) =>
@@ -107,9 +116,15 @@ export const SampleProvider = (props) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(sample),
-            }));
-    };
-
+            }).then(resp => {
+                if (!resp.ok) {
+                    (history.push(`/unauthorized`));
+                    //return resp.json();
+                    //throw new Error("Unauthorized")
+                }
+            })
+        );
+    }
     const DeleteSample = (id) =>
         getToken().then((token) =>
             fetch(`/api/sample/${id}`, {

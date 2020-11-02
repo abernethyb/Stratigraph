@@ -86,9 +86,28 @@ namespace Stratigraph.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            var sample = _sampleRepository.GetSampleById(id);
+            var currentUserProfile = GetCurrentUserProfile();
+            if (sample != null)
+            {
+                var upr = _reportRepository.GetUserProfileReportById(sample.StructureReportId, currentUserProfile.Id);
 
+            
+                if (upr != null)
+                {
 
-            return Ok(_sampleRepository.GetSampleById(id));
+                    return Ok(sample);
+
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
 
         }
 
@@ -104,8 +123,12 @@ namespace Stratigraph.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Sample sample)
         {
-            //TO DO: 
-            //Auth...
+
+            var currentUserProfile = GetCurrentUserProfile();
+            var dbSample = _sampleRepository.GetSampleById(id);
+
+            if (dbSample.UserProfileId == currentUserProfile.Id)
+            {
 
             if (id != sample.Id)
             {
@@ -115,6 +138,11 @@ namespace Stratigraph.Controllers
             _sampleRepository.Update(sample);
 
             return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpDelete("{id}")]
