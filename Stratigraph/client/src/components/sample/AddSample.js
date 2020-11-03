@@ -15,11 +15,13 @@ import {
 import { useHistory, useParams } from "react-router-dom";
 import { StructureContext } from "../../providers/StructureProvider";
 import { SampleContext } from "../../providers/SampleProvider";
+import { ImageContext } from "../../providers/ImageProvider";
 
 const AddSample = () => {
 
     const { reportId } = useParams();
     const { addSample } = useContext(SampleContext)
+    const { addImage } = useContext(ImageContext)
     const { structures, getStructuresByReportId } = useContext(StructureContext);
     const history = useHistory();
     const name = useRef(null)
@@ -42,16 +44,23 @@ const AddSample = () => {
     const HandleImageUpload = (event) => {
         setImageUpload(event.target.files[0])
         console.log(event.target.files[0])
+        console.log(imageUpload)
     }
 
     const submit = () => {
+
+        const formData = new FormData();
+        const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+        formData.append('imageUpload', imageUpload, fileName)
+        
+        addImage(formData, fileName)
         const sample = {
             name: name.current.value,
-            //userProfileId: parseInt(),
             stratigraphyId: null,
             structureId: parseInt(structureId.current.value),
             dateTaken: dateTaken.current.value,
-            image: image.current.value,
+            //image: image.current.value,
+            image: imageUpload.name,
             locationDescription: locationDescription.current.value,
             roomNumber: parseInt(roomNumber.current.value)
         };
@@ -68,7 +77,6 @@ const AddSample = () => {
     };
     useEffect(() => {
         getStructuresByReportId(reportId);
-        //console.log(image)
     }, [imageUpload]);
 
 

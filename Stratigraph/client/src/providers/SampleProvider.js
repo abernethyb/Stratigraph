@@ -101,8 +101,9 @@ export const SampleProvider = (props) => {
             }).then(resp => {
                 if (resp.ok) {
                     return resp.json();
+                } else {
+                    (history.push(`/unauthorized`));
                 }
-                throw new Error("Unauthorized");
             }));
     };
 
