@@ -25,9 +25,10 @@ const AddSample = () => {
     const name = useRef(null)
     const structureId = useRef(null)
     const dateTaken = useRef(null)
-    const image = useRef(null)
+    const image = useRef()
     const locationDescription = useRef(null)
     const roomNumber = useRef(null)
+    const [imageUpload, setImageUpload] = useState();
 
     // "name": "Brendan762545270-0",
     // "userProfileId": 15,
@@ -37,6 +38,11 @@ const AddSample = () => {
     // "image": "http://dummyimage.com/226x232.png/ff4444/ffffff",
     // "locationDescription": "main door, top.",
     // "roomNumber": 109
+
+    const HandleImageUpload = (event) => {
+        setImageUpload(event.target.files[0])
+        console.log(event.target.files[0])
+    }
 
     const submit = () => {
         const sample = {
@@ -62,7 +68,10 @@ const AddSample = () => {
     };
     useEffect(() => {
         getStructuresByReportId(reportId);
-    }, []);
+        //console.log(image)
+    }, [imageUpload]);
+
+
 
     if (!structures) {
         return null;
@@ -112,14 +121,30 @@ const AddSample = () => {
                                     innerRef={dateTaken}
                                 />
                             </FormGroup>
+                            {/* <div className="imagePreview">
+                                </div>{imageUpload ? <img src={imageUpload}/> : <p>No Image Chosen</p>}
+                            </div> */}
+                            <div>
+                                {imageUpload ? <img src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img> : <p>No image chosen</p>}
+                            </div>
                             <FormGroup>
-                                <Label for="image">Image</Label>
+                                <Label for="image">Upload Image</Label>
+                                <Input
+                                    id="image"
+                                    // innerRef={image}
+                                    maxLength="3500"
+                                    type="file"
+                                    onChange={HandleImageUpload}
+                                />
+                            </FormGroup>
+                            {/* <FormGroup>
+                                <Label for="image">Image Link</Label>
                                 <Input
                                     id="image"
                                     innerRef={image}
                                     maxLength="3500"
                                 />
-                            </FormGroup>
+                            </FormGroup> */}
                             <FormGroup>
                                 <Label for="locationDescription">locationDescription</Label>
                                 <Input
