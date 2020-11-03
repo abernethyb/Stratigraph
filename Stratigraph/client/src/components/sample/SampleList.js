@@ -5,15 +5,19 @@ import { Button, CardImg, Form, Table, FormGroup, Label, Input } from "reactstra
 import { StructureContext } from "../../providers/StructureProvider";
 import Image from 'react-bootstrap/Image'
 import { SampleContext } from "../../providers/SampleProvider";
+import { ImageContext } from "../../providers/ImageProvider";
 
 
 const SampletList = () => {
     const { reportId } = useParams();
     //const { structureId } = useParams();
     const { samples, getSamplesByReportId, searcSamplesByRoomViaReport } = useContext(SampleContext);
+    const { getImageUrl } = useContext(ImageContext);
     const history = useHistory();
     const roomNumbersearch = useRef(null);
     const [search, setsearch] = useState();
+
+
 
     const submit = () => {
         const roomSearch = parseInt(roomNumbersearch.current.value)
@@ -124,7 +128,7 @@ const SampletList = () => {
 
                                     </th>
                                     <td>
-                                        <Image fluid rounded src={sample.image} alt={sample.name}></Image>
+                                        <Image fluid rounded src={`/api/image/${sample.image}`} alt={sample.name}></Image>
 
                                     </td>
 

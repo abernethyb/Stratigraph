@@ -47,8 +47,16 @@ namespace Stratigraph.Controllers
         public IActionResult Get(string imageUrl)
         {
             var path = Path.Combine(_webhost.WebRootPath, "images/", imageUrl);
-            var imageFileStream = System.IO.File.OpenRead(path);
-            return File(imageFileStream, "image/jpeg");
+            try
+            {
+                var imageFileStream = System.IO.File.OpenRead(path);
+                return File(imageFileStream, "image/jpeg");
+            }
+            catch (Exception ex)
+            {
+                return NoContent();
+            }
+            
         }
     }
 }

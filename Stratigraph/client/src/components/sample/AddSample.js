@@ -52,7 +52,7 @@ const AddSample = () => {
         const formData = new FormData();
         const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
         formData.append('imageUpload', imageUpload, fileName)
-        
+
         addImage(formData, fileName)
         const sample = {
             name: name.current.value,
@@ -60,7 +60,7 @@ const AddSample = () => {
             structureId: parseInt(structureId.current.value),
             dateTaken: dateTaken.current.value,
             //image: image.current.value,
-            image: imageUpload.name,
+            image: fileName,
             locationDescription: locationDescription.current.value,
             roomNumber: parseInt(roomNumber.current.value)
         };

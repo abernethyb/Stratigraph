@@ -9,49 +9,6 @@ export const ImageProvider = (props) => {
     const history = useHistory();
 
 
-
-
-
-    // const getSingleSample = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/sample/${id}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then(resp => {
-    //             if (resp.ok) {
-    //                 return resp.json()
-    //             } else {
-
-    //                 (history.push(`/unauthorized`));
-    //                 //throw new Error("Unauthorized")
-    //             }
-    //         }))
-
-
-
-    // const addImage = (image) => {
-    //     //debugger
-    //     return getToken().then((token) =>
-    //         fetch("/api/Image/", {
-    //             method: "POST",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: image
-    //         }).then(resp => {
-    //             if (resp.ok) {
-    //                 return resp.json();
-    //             } else {
-    //                 (history.push(`/unauthorized`));
-    //             }
-
-    //         }));
-    // };
-
-
     const addImage = (image) => {
         return getToken().then((token) =>
             fetch('/api/image', {
@@ -68,10 +25,6 @@ export const ImageProvider = (props) => {
                 }
             }));
     }
-
-
-
-
 
 
     return (
