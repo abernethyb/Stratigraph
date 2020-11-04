@@ -51,7 +51,7 @@ const SampleDetail = () => {
 
                 <div>
                     <ReactImageFallback
-                        width="50%"
+                        width="100%"
                         src={`/api/image/${sample.image}`}
                         fallbackImage={sample.image}
                         alt={sample.name} />

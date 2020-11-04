@@ -49,7 +49,8 @@ const Stratigraphy = () => {
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    {stratigraphy.createDate}
+                                    {/* {stratigraphy.createDate} */}
+                                    {` ${new Date(stratigraphy.createDate).getMonth() + 1}/${new Date(stratigraphy.createDate).getDate()}/${new Date(stratigraphy.createDate).getFullYear()} `}
                                 </th>
                                 <td>
                                     {stratigraphy.notes}
@@ -143,7 +144,17 @@ const Stratigraphy = () => {
 
                                     </th>
                                     <td>
-                                        From {layer.beginDate} To {layer.endDate}
+                                        From:
+
+                                        {/* {layer.beginDate} */}
+
+                                        {` ${new Date(layer.beginDate).getMonth() + 1}/${new Date(layer.beginDate).getDate()}/${new Date(layer.beginDate).getFullYear()} `}
+                                        <hr />
+                                        To:
+
+                                        {/* {layer.endDate} */}
+
+                                        {` ${new Date(layer.endDate).getMonth() + 1}/${new Date(layer.endDate).getDate()}/${new Date(layer.endDate).getFullYear()} `}
                                     </td>
 
                                     <td>

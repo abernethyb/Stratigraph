@@ -16,6 +16,7 @@ const ReportList = () => {
         getReportsByUserId();
     }, []);
 
+
     return (
         <>
             <div className="container">
@@ -48,11 +49,13 @@ const ReportList = () => {
                                         {/* {report.name} */}
                                     </th>
                                     <td>
-                                        {report.createDate}
+                                        {/* {report.createDate} */}
+                                        {`${new Date(report.createDate).getMonth() + 1}/${new Date(report.createDate).getDate()}/${new Date(report.createDate).getFullYear()}`}
                                     </td>
                                     {report.completeDate ?
                                         <td>
-                                            {report.completeDate}
+                                            {/* {report.completeDate} */}
+                                            {`${new Date(report.completeDate).getMonth() + 1}/${new Date(report.completeDate).getDate()}/${new Date(report.completeDate).getFullYear()}`}
                                         </td>
                                         :
                                         <td>

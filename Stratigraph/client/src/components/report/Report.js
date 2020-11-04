@@ -21,6 +21,15 @@ const Report = () => {
         return null;
     }
 
+
+    //readable create data
+    const dateCreated = new Date(report.createDate)
+    const HumanCreateDate = `${dateCreated.getMonth() + 1}/${dateCreated.getDate()}/${dateCreated.getFullYear()}`
+
+    //readable completedate
+    const dateCompleted = new Date(report.completeDate)
+    const HumanCompleteDate = `${dateCompleted.getMonth() + 1}/${dateCompleted.getDate()}/${dateCompleted.getFullYear()}`
+
     return (
         <>
             <div className="container">
@@ -45,11 +54,13 @@ const Report = () => {
                                     {report.name}
                                 </th>
                                 <td>
-                                    {report.createDate}
+                                    {/* {report.createDate} */}
+                                    {HumanCreateDate}
                                 </td>
                                 {report.completeDate ?
                                     <td>
-                                        {report.completeDate}
+                                        {/* {report.completeDate} */}
+                                        {HumanCompleteDate}
                                     </td>
                                     :
                                     <td>
@@ -82,13 +93,7 @@ const Report = () => {
                         >
                             View Samples
                     </Button>
-                        {/* TO DO */}
-                        {/* <Button color="info"
-                            style={{ margin: 10 }}
-                        //onClick={() => { history.push(`/reports/${reportId}/structures`) }}
-                        >
-                            View Stratigraphies
-                        </Button> */}
+
                     </Table>
                 </div>
             </div>

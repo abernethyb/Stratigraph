@@ -134,7 +134,8 @@ const SampletList = () => {
                                     </td>
 
                                     <td>
-                                        {sample.dateTaken}
+                                        {/* {sample.dateTaken} */}
+                                        {`${new Date(sample.dateTaken).getMonth() + 1}/${new Date(sample.dateTaken).getDate()}/${new Date(sample.dateTaken).getFullYear()}`}
                                     </td>
                                     <td>
                                         {sample.locationDescription}
