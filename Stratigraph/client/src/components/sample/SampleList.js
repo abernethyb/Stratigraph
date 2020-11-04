@@ -11,9 +11,7 @@ import ReactImageFallback from "react-image-fallback";
 
 const SampletList = () => {
     const { reportId } = useParams();
-    //const { structureId } = useParams();
     const { samples, getSamplesByReportId, searcSamplesByRoomViaReport } = useContext(SampleContext);
-    //const { getImageUrl } = useContext(ImageContext);
     const history = useHistory();
     const roomNumbersearch = useRef(null);
     const [search, setsearch] = useState();
@@ -57,10 +55,7 @@ const SampletList = () => {
                     >
                         Add Sample
                     </Button>
-                    {/* <Form class="example" action="action_page.php">
-                        <input type="text" placeholder="Search.." name="search">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                    </form> */}
+
                     <hr />
                     <FormGroup>
                         <Label for="roomNumbersearch">Search by Room</Label>

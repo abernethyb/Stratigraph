@@ -31,11 +31,7 @@ const EditStructure = () => {
     const [structure, setStructure] = useState();
     const [imageUpload, setImageUpload] = useState();
 
-    // "reportId": 8,
-    // "name": "edited Structure for 8th rpt from postman",
-    // "image": "http://dummyimage.com/216x206.bmp/dddddd/000000",
-    // "location": "6598 Novick Plaza",
-    // "yearCunstructed": 2090
+
 
     const HandleImageUpload = (event) => {
         setImageUpload(event.target.files[0])
@@ -48,7 +44,6 @@ const EditStructure = () => {
             id: parseInt(structureId),
             reportId: parseInt(structure.reportId),
             name: name.current.value,
-            //image: image.current.value,
             location: location.current.value,
             yearCunstructed: parseInt(yearCunstructed.current.value)
         };
@@ -124,21 +119,12 @@ const EditStructure = () => {
                                 <Label for="image">Change Uploaded Image</Label>
                                 <Input
                                     id="image"
-                                    // innerRef={image}
                                     maxLength="3500"
                                     type="file"
                                     onChange={HandleImageUpload}
                                 />
                             </FormGroup>
-                            {/* <FormGroup>
-                                <Label for="image">Image</Label>
-                                <Input
-                                    id="image"
-                                    innerRef={image}
-                                    defaultValue={structure.image}
-                                    maxLength="3900"
-                                />
-                            </FormGroup> */}
+
                             <FormGroup>
                                 <Label for="location">Address</Label>
                                 <Input

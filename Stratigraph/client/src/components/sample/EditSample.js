@@ -35,14 +35,7 @@ const EditSample = () => {
     const [sample, setSample] = useState();
     const [imageUpload, setImageUpload] = useState();
 
-    // "name": "Brendan762545270-0",
-    // "userProfileId": 15,
-    // "stratigraphyId": null,
-    // "structureId": 32,
-    // "dateTaken": "2020-08-16T00:00:00",
-    // "image": "http://dummyimage.com/226x232.png/ff4444/ffffff",
-    // "locationDescription": "main door, top.",
-    // "roomNumber": 109
+
 
     const HandleImageUpload = (event) => {
         setImageUpload(event.target.files[0])
@@ -57,12 +50,9 @@ const EditSample = () => {
         const editedSample = {
             id: parseInt(sampleId),
             name: name.current.value,
-            //userProfileId: parseInt(),
             stratigraphyId: parseInt(sample.stratigraphyId),
-            //stratigraphyId: null,
             structureId: parseInt(structureId.current.value),
             dateTaken: dateTaken.current.value,
-            //image: image.current.value,
             locationDescription: locationDescription.current.value,
             roomNumber: parseInt(roomNumber.current.value)
         };
@@ -168,34 +158,17 @@ const EditSample = () => {
                                         <hr />
                                     </div>}
                             </div>
-                            {/* <div>
-                                <p>Current Image</p>
-                                <ReactImageFallback
-                                    width="50%"
-                                    src={`/api/image/${sample.image}`}
-                                    fallbackImage={sample.image}
-                                    alt={sample.name} />
-                            </div> */}
 
                             <FormGroup>
                                 <Label for="image">Change Uploaded Image</Label>
                                 <Input
                                     id="image"
-                                    // innerRef={image}
                                     maxLength="3500"
                                     type="file"
                                     onChange={HandleImageUpload}
                                 />
                             </FormGroup>
-                            {/* <FormGroup>
-                                <Label for="image">Image</Label>
-                                <Input
-                                    id="image"
-                                    innerRef={image}
-                                    defaultValue={sample.image}
-                                    maxLength="3500"
-                                />
-                            </FormGroup> */}
+
                             <FormGroup>
                                 <Label for="locationDescription">locationDescription</Label>
                                 <Input

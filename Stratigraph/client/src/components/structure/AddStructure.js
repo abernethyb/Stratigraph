@@ -35,12 +35,6 @@ const AddStructure = () => {
     }
 
 
-    // "reportId": 8,
-    // "name": "edited Structure for 8th rpt from postman",
-    // "image": "http://dummyimage.com/216x206.bmp/dddddd/000000",
-    // "location": "6598 Novick Plaza",
-    // "yearCunstructed": 2090
-
     const submit = () => {
 
         if (imageUpload) {
@@ -54,7 +48,6 @@ const AddStructure = () => {
             const structure = {
                 reportId: parseInt(reportId),
                 name: name.current.value,
-                //image: image.current.value,
                 image: fileName,
                 location: location.current.value,
                 yearCunstructed: parseInt(yearCunstructed.current.value)
@@ -100,21 +93,13 @@ const AddStructure = () => {
                                 <Label for="image">Upload Image</Label>
                                 <Input
                                     id="image"
-                                    // innerRef={image}
                                     maxLength="3500"
                                     type="file"
                                     onChange={HandleImageUpload}
                                 />
                             </FormGroup>
                             <hr />
-                            {/* <FormGroup>
-                                <Label for="image">Image</Label>
-                                <Input
-                                    id="image"
-                                    innerRef={image}
-                                    maxLength="3900"
-                                />
-                            </FormGroup> */}
+
                             <FormGroup>
                                 <Label for="location">Address</Label>
                                 <Input

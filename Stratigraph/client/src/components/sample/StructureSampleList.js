@@ -5,6 +5,7 @@ import { Button, CardImg, Table } from "reactstrap";
 import { StructureContext } from "../../providers/StructureProvider";
 import Image from 'react-bootstrap/Image'
 import { SampleContext } from "../../providers/SampleProvider";
+import ReactImageFallback from "react-image-fallback";
 
 
 const StructureSampletList = () => {
@@ -90,7 +91,12 @@ const StructureSampletList = () => {
 
                                     </th>
                                     <td>
-                                        <Image fluid rounded src={sample.image} alt={sample.name}></Image>
+
+                                        <ReactImageFallback
+                                            width="50%"
+                                            src={`/api/image/${sample.image}`}
+                                            fallbackImage={sample.image}
+                                            alt={sample.name} />
 
                                     </td>
 

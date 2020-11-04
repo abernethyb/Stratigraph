@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
-//import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Button, CardImg, Table } from "reactstrap";
 import { StructureContext } from "../../providers/StructureProvider";
@@ -70,7 +69,6 @@ const StructuretList = () => {
                                         >View Samples</Button>
                                     </th>
                                     <td>
-                                        {/* <Image fluid rounded src={structure.image} alt={structure.name}></Image> */}
 
                                         <ReactImageFallback
                                             width="50%"

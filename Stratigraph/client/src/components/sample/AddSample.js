@@ -32,14 +32,7 @@ const AddSample = () => {
     const roomNumber = useRef(null)
     const [imageUpload, setImageUpload] = useState();
 
-    // "name": "Brendan762545270-0",
-    // "userProfileId": 15,
-    // "stratigraphyId": null,
-    // "structureId": 32,
-    // "dateTaken": "2020-08-16T00:00:00",
-    // "image": "http://dummyimage.com/226x232.png/ff4444/ffffff",
-    // "locationDescription": "main door, top.",
-    // "roomNumber": 109
+
 
     const HandleImageUpload = (event) => {
         setImageUpload(event.target.files[0])
@@ -63,7 +56,6 @@ const AddSample = () => {
                 stratigraphyId: null,
                 structureId: parseInt(structureId.current.value),
                 dateTaken: dateTaken.current.value,
-                //image: image.current.value,
                 image: fileName,
                 locationDescription: locationDescription.current.value,
                 roomNumber: parseInt(roomNumber.current.value)
@@ -110,13 +102,6 @@ const AddSample = () => {
                                 />
                             </FormGroup>
 
-                            {/* <select defaultValue="" name="location" ref={location} id="employeeLocation" className="form-control" >
-                        <option value="0">Select a location</option>
-                        {locations.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
-                            </option> */}
-
                             <FormGroup>
                                 <Label for="structureId">Category</Label>
                                 <select defaultValue="" name="structureId" ref={structureId} id="structureId" className="form-control">
@@ -129,8 +114,6 @@ const AddSample = () => {
                                 </select>
                             </FormGroup>
 
-
-
                             <FormGroup>
                                 <Label for="dateTaken">dateTaken</Label>
                                 <Input
@@ -139,9 +122,7 @@ const AddSample = () => {
                                     innerRef={dateTaken}
                                 />
                             </FormGroup>
-                            {/* <div className="imagePreview">
-                                </div>{imageUpload ? <img src={imageUpload}/> : <p>No Image Chosen</p>}
-                            </div> */}
+
                             <div>
                                 <hr />
                                 {imageUpload ? <img width="50%" src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img> : <p>No image chosen</p>}
@@ -150,21 +131,13 @@ const AddSample = () => {
                                 <Label for="image">Upload Image</Label>
                                 <Input
                                     id="image"
-                                    // innerRef={image}
                                     maxLength="3500"
                                     type="file"
                                     onChange={HandleImageUpload}
                                 />
                             </FormGroup>
                             <hr />
-                            {/* <FormGroup>
-                                <Label for="image">Image Link</Label>
-                                <Input
-                                    id="image"
-                                    innerRef={image}
-                                    maxLength="3500"
-                                />
-                            </FormGroup> */}
+
                             <FormGroup>
                                 <Label for="locationDescription">locationDescription</Label>
                                 <Input

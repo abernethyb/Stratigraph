@@ -49,7 +49,6 @@ const SampleDetail = () => {
 
                 >DELETE</Button>
 
-                {/* <CardImg src={sample.image} alt={sample.name}></CardImg> */}
                 <div>
                     <ReactImageFallback
                         width="50%"

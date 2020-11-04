@@ -25,9 +25,6 @@ const ConfirmDeleteSample = () => {
     return (
         <Card className="m-4">
 
-            {/* <h1>Please Confirm</h1> */}
-            {/* <h2> Are you sure you want to delete "{sample.name}"</h2> */}
-            {/* <Image fluid rounded src={sample.image} alt={sample.name}></Image> */}
             <CardBody>
                 <CardTitle>Please Confirm</CardTitle>
                 <CardSubtitle>Are you sure you want to delete "{sample.name}"</CardSubtitle>
@@ -47,7 +44,7 @@ const ConfirmDeleteSample = () => {
                     }
                 >   Yes, I know what I'm doing.
                     </Button>
-                {/* <CardImg src={sample.image} alt={sample.name}></CardImg> */}
+
                 <div>
                     <ReactImageFallback
                         width="50%"
