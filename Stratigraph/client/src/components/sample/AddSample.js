@@ -49,29 +49,39 @@ const AddSample = () => {
 
     const submit = () => {
 
-        const formData = new FormData();
-        const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
-        formData.append('imageUpload', imageUpload, fileName)
+        if (imageUpload) {
 
-        addImage(formData, fileName)
-        const sample = {
-            name: name.current.value,
-            stratigraphyId: null,
-            structureId: parseInt(structureId.current.value),
-            dateTaken: dateTaken.current.value,
-            //image: image.current.value,
-            image: fileName,
-            locationDescription: locationDescription.current.value,
-            roomNumber: parseInt(roomNumber.current.value)
-        };
+            const formData = new FormData();
+            const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+            formData.append('imageUpload', imageUpload, fileName)
+
+            addImage(formData, fileName)
 
 
-        if (sample.name !== "" && sample.structureId !== 0 && sample.image !== "" && roomNumber.current.value !== "") {
-            addSample(sample).then((res) => {
-                history.push(`/reports/${reportId}/samples`);
-            });
+            const sample = {
+                name: name.current.value,
+                stratigraphyId: null,
+                structureId: parseInt(structureId.current.value),
+                dateTaken: dateTaken.current.value,
+                //image: image.current.value,
+                image: fileName,
+                locationDescription: locationDescription.current.value,
+                roomNumber: parseInt(roomNumber.current.value)
+            };
+
+
+
+
+            if (sample.name !== "" && sample.structureId !== 0 && sample.image !== "" && roomNumber.current.value !== "") {
+                addSample(sample).then((res) => {
+                    history.push(`/reports/${reportId}/samples`);
+                });
+            } else {
+                window.alert("Please fill in Required fields")
+            }
+
         } else {
-            window.alert("Please fill in Required fields")
+            window.alert("Please Upload an image")
         }
 
     };

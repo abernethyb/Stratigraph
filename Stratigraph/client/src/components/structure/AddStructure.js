@@ -14,16 +14,26 @@ import {
 } from "reactstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { StructureContext } from "../../providers/StructureProvider";
+import { ImageContext } from "../../providers/ImageProvider";
 
 const AddStructure = () => {
 
     const { reportId } = useParams();
     const { addStructure } = useContext(StructureContext)
+    const { addImage } = useContext(ImageContext)
     const history = useHistory();
     const name = useRef(null)
     const image = useRef(null)
     const location = useRef(null)
     const yearCunstructed = useRef(null)
+    const [imageUpload, setImageUpload] = useState();
+
+    const HandleImageUpload = (event) => {
+        setImageUpload(event.target.files[0])
+        console.log(event.target.files[0])
+        console.log(imageUpload)
+    }
+
 
     // "reportId": 8,
     // "name": "edited Structure for 8th rpt from postman",
@@ -32,10 +42,18 @@ const AddStructure = () => {
     // "yearCunstructed": 2090
 
     const submit = () => {
+
+        const formData = new FormData();
+        const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+        formData.append('imageUpload', imageUpload, fileName)
+
+        addImage(formData, fileName)
+
         const structure = {
             reportId: parseInt(reportId),
             name: name.current.value,
-            image: image.current.value,
+            //image: image.current.value,
+            image: fileName,
             location: location.current.value,
             yearCunstructed: parseInt(yearCunstructed.current.value)
         };
