@@ -14,42 +14,59 @@ import {
 } from "reactstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { StructureContext } from "../../providers/StructureProvider";
+import { ImageContext } from "../../providers/ImageProvider";
 
 const AddStructure = () => {
 
     const { reportId } = useParams();
     const { addStructure } = useContext(StructureContext)
+    const { addImage } = useContext(ImageContext)
     const history = useHistory();
     const name = useRef(null)
     const image = useRef(null)
     const location = useRef(null)
     const yearCunstructed = useRef(null)
+    const [imageUpload, setImageUpload] = useState();
 
-    // "reportId": 8,
-    // "name": "edited Structure for 8th rpt from postman",
-    // "image": "http://dummyimage.com/216x206.bmp/dddddd/000000",
-    // "location": "6598 Novick Plaza",
-    // "yearCunstructed": 2090
+    const HandleImageUpload = (event) => {
+        setImageUpload(event.target.files[0])
+        console.log(event.target.files[0])
+        console.log(imageUpload)
+    }
+
 
     const submit = () => {
-        const structure = {
-            reportId: parseInt(reportId),
-            name: name.current.value,
-            image: image.current.value,
-            location: location.current.value,
-            yearCunstructed: parseInt(yearCunstructed.current.value)
-        };
 
-        if (yearCunstructed.current.value == "") {
-            structure.yearCunstructed = null;
-        }
+        if (imageUpload) {
 
-        if (structure.name !== "") {
-            addStructure(structure).then((res) => {
-                history.push(`/reports/${reportId}/structures`);
-            });
+            const formData = new FormData();
+            const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+            formData.append('imageUpload', imageUpload, fileName)
+
+            addImage(formData, fileName)
+
+            const structure = {
+                reportId: parseInt(reportId),
+                name: name.current.value,
+                image: fileName,
+                location: location.current.value,
+                yearCunstructed: parseInt(yearCunstructed.current.value)
+            };
+
+            if (yearCunstructed.current.value == "") {
+                structure.yearCunstructed = null;
+            }
+
+            if (structure.name !== "") {
+                addStructure(structure).then((res) => {
+                    history.push(`/reports/${reportId}/structures`);
+                });
+            } else {
+                window.alert("Please add a name")
+            }
+
         } else {
-            window.alert("Please add a name")
+            window.alert("Please Upload an image")
         }
 
     };
@@ -68,14 +85,21 @@ const AddStructure = () => {
                                     maxLength="250"
                                 />
                             </FormGroup>
+                            <div>
+                                <hr />
+                                {imageUpload ? <img width="50%" src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img> : <p>No image chosen</p>}
+                            </div>
                             <FormGroup>
-                                <Label for="image">Image</Label>
+                                <Label for="image">Upload Image</Label>
                                 <Input
                                     id="image"
-                                    innerRef={image}
-                                    maxLength="3900"
+                                    maxLength="3500"
+                                    type="file"
+                                    onChange={HandleImageUpload}
                                 />
                             </FormGroup>
+                            <hr />
+
                             <FormGroup>
                                 <Label for="location">Address</Label>
                                 <Input

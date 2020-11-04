@@ -14,33 +14,51 @@ import {
 } from "reactstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { StructureContext } from "../../providers/StructureProvider";
+import ReactImageFallback from "react-image-fallback";
+import { ImageContext } from "../../providers/ImageProvider";
+
 
 const EditStructure = () => {
 
     const { structureId, reportId } = useParams();
     const { EditStructure, getSingleStructure } = useContext(StructureContext)
+    const { addImage } = useContext(ImageContext)
     const history = useHistory();
     const name = useRef(null)
     const image = useRef(null)
     const location = useRef(null)
     const yearCunstructed = useRef(null)
     const [structure, setStructure] = useState();
+    const [imageUpload, setImageUpload] = useState();
 
-    // "reportId": 8,
-    // "name": "edited Structure for 8th rpt from postman",
-    // "image": "http://dummyimage.com/216x206.bmp/dddddd/000000",
-    // "location": "6598 Novick Plaza",
-    // "yearCunstructed": 2090
+
+
+    const HandleImageUpload = (event) => {
+        setImageUpload(event.target.files[0])
+        console.log(event.target.files[0])
+        console.log(imageUpload)
+    }
 
     const submit = () => {
         const Editedstructure = {
             id: parseInt(structureId),
             reportId: parseInt(structure.reportId),
             name: name.current.value,
-            image: image.current.value,
             location: location.current.value,
             yearCunstructed: parseInt(yearCunstructed.current.value)
         };
+        if (imageUpload) {
+
+
+            const formData = new FormData();
+            const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+            formData.append('imageUpload', imageUpload, fileName)
+
+            addImage(formData, fileName)
+            Editedstructure.image = fileName;
+        } else {
+            Editedstructure.image = structure.image
+        }
 
 
         if (structure.name !== "") {
@@ -77,15 +95,36 @@ const EditStructure = () => {
                                     maxLength="250"
                                 />
                             </FormGroup>
+                            <div>
+                                {imageUpload ?
+                                    <div>
+                                        <hr />
+                                        <p>New Image:</p>
+                                        <img width="50%" src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img>
+                                        <hr />
+                                    </div>
+                                    :
+                                    <div>
+                                        <hr />
+                                        <p>Current Image:</p>
+                                        <ReactImageFallback
+                                            width="50%"
+                                            src={`/api/image/${structure.image}`}
+                                            fallbackImage={structure.image}
+                                            alt={structure.name} />
+                                        <hr />
+                                    </div>}
+                            </div>
                             <FormGroup>
-                                <Label for="image">Image</Label>
+                                <Label for="image">Change Uploaded Image</Label>
                                 <Input
                                     id="image"
-                                    innerRef={image}
-                                    defaultValue={structure.image}
-                                    maxLength="3900"
+                                    maxLength="3500"
+                                    type="file"
+                                    onChange={HandleImageUpload}
                                 />
                             </FormGroup>
+
                             <FormGroup>
                                 <Label for="location">Address</Label>
                                 <Input

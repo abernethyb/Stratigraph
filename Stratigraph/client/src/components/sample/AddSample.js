@@ -15,54 +15,73 @@ import {
 import { useHistory, useParams } from "react-router-dom";
 import { StructureContext } from "../../providers/StructureProvider";
 import { SampleContext } from "../../providers/SampleProvider";
+import { ImageContext } from "../../providers/ImageProvider";
 
 const AddSample = () => {
 
     const { reportId } = useParams();
     const { addSample } = useContext(SampleContext)
+    const { addImage } = useContext(ImageContext)
     const { structures, getStructuresByReportId } = useContext(StructureContext);
     const history = useHistory();
     const name = useRef(null)
     const structureId = useRef(null)
     const dateTaken = useRef(null)
-    const image = useRef(null)
+    const image = useRef()
     const locationDescription = useRef(null)
     const roomNumber = useRef(null)
+    const [imageUpload, setImageUpload] = useState();
 
-    // "name": "Brendan762545270-0",
-    // "userProfileId": 15,
-    // "stratigraphyId": null,
-    // "structureId": 32,
-    // "dateTaken": "2020-08-16T00:00:00",
-    // "image": "http://dummyimage.com/226x232.png/ff4444/ffffff",
-    // "locationDescription": "main door, top.",
-    // "roomNumber": 109
+
+
+    const HandleImageUpload = (event) => {
+        setImageUpload(event.target.files[0])
+        console.log(event.target.files[0])
+        console.log(imageUpload)
+    }
 
     const submit = () => {
-        const sample = {
-            name: name.current.value,
-            //userProfileId: parseInt(),
-            stratigraphyId: null,
-            structureId: parseInt(structureId.current.value),
-            dateTaken: dateTaken.current.value,
-            image: image.current.value,
-            locationDescription: locationDescription.current.value,
-            roomNumber: parseInt(roomNumber.current.value)
-        };
+
+        if (imageUpload) {
+
+            const formData = new FormData();
+            const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+            formData.append('imageUpload', imageUpload, fileName)
+
+            addImage(formData, fileName)
 
 
-        if (sample.name !== "" && sample.structureId !== 0 && sample.image !== "" && roomNumber.current.value !== "") {
-            addSample(sample).then((res) => {
-                history.push(`/reports/${reportId}/samples`);
-            });
+            const sample = {
+                name: name.current.value,
+                stratigraphyId: null,
+                structureId: parseInt(structureId.current.value),
+                dateTaken: dateTaken.current.value,
+                image: fileName,
+                locationDescription: locationDescription.current.value,
+                roomNumber: parseInt(roomNumber.current.value)
+            };
+
+
+
+
+            if (sample.name !== "" && sample.structureId !== 0 && sample.image !== "" && roomNumber.current.value !== "") {
+                addSample(sample).then((res) => {
+                    history.push(`/reports/${reportId}/samples`);
+                });
+            } else {
+                window.alert("Please fill in Required fields")
+            }
+
         } else {
-            window.alert("Please fill in Required fields")
+            window.alert("Please Upload an image")
         }
 
     };
     useEffect(() => {
         getStructuresByReportId(reportId);
-    }, []);
+    }, [imageUpload]);
+
+
 
     if (!structures) {
         return null;
@@ -83,13 +102,6 @@ const AddSample = () => {
                                 />
                             </FormGroup>
 
-                            {/* <select defaultValue="" name="location" ref={location} id="employeeLocation" className="form-control" >
-                        <option value="0">Select a location</option>
-                        {locations.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
-                            </option> */}
-
                             <FormGroup>
                                 <Label for="structureId">Category</Label>
                                 <select defaultValue="" name="structureId" ref={structureId} id="structureId" className="form-control">
@@ -102,8 +114,6 @@ const AddSample = () => {
                                 </select>
                             </FormGroup>
 
-
-
                             <FormGroup>
                                 <Label for="dateTaken">dateTaken</Label>
                                 <Input
@@ -112,14 +122,22 @@ const AddSample = () => {
                                     innerRef={dateTaken}
                                 />
                             </FormGroup>
+
+                            <div>
+                                <hr />
+                                {imageUpload ? <img width="50%" src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img> : <p>No image chosen</p>}
+                            </div>
                             <FormGroup>
-                                <Label for="image">Image</Label>
+                                <Label for="image">Upload Image</Label>
                                 <Input
                                     id="image"
-                                    innerRef={image}
                                     maxLength="3500"
+                                    type="file"
+                                    onChange={HandleImageUpload}
                                 />
                             </FormGroup>
+                            <hr />
+
                             <FormGroup>
                                 <Label for="locationDescription">locationDescription</Label>
                                 <Input

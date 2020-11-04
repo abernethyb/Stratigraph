@@ -5,15 +5,18 @@ import { Button, CardImg, Form, Table, FormGroup, Label, Input } from "reactstra
 import { StructureContext } from "../../providers/StructureProvider";
 import Image from 'react-bootstrap/Image'
 import { SampleContext } from "../../providers/SampleProvider";
+import { ImageContext } from "../../providers/ImageProvider";
+import ReactImageFallback from "react-image-fallback";
 
 
 const SampletList = () => {
     const { reportId } = useParams();
-    //const { structureId } = useParams();
     const { samples, getSamplesByReportId, searcSamplesByRoomViaReport } = useContext(SampleContext);
     const history = useHistory();
     const roomNumbersearch = useRef(null);
     const [search, setsearch] = useState();
+
+
 
     const submit = () => {
         const roomSearch = parseInt(roomNumbersearch.current.value)
@@ -52,10 +55,7 @@ const SampletList = () => {
                     >
                         Add Sample
                     </Button>
-                    {/* <Form class="example" action="action_page.php">
-                        <input type="text" placeholder="Search.." name="search">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                    </form> */}
+
                     <hr />
                     <FormGroup>
                         <Label for="roomNumbersearch">Search by Room</Label>
@@ -124,7 +124,12 @@ const SampletList = () => {
 
                                     </th>
                                     <td>
-                                        <Image fluid rounded src={sample.image} alt={sample.name}></Image>
+
+                                        <ReactImageFallback
+                                            width="50%"
+                                            src={`/api/image/${sample.image}`}
+                                            fallbackImage={sample.image}
+                                            alt={sample.name} />
 
                                     </td>
 

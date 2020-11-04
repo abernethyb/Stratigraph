@@ -1,9 +1,9 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
-//import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Button, CardImg, Table } from "reactstrap";
 import { StructureContext } from "../../providers/StructureProvider";
 import Image from 'react-bootstrap/Image'
+import ReactImageFallback from "react-image-fallback";
 
 
 const StructuretList = () => {
@@ -69,7 +69,12 @@ const StructuretList = () => {
                                         >View Samples</Button>
                                     </th>
                                     <td>
-                                        <Image fluid rounded src={structure.image} alt={structure.name}></Image>
+
+                                        <ReactImageFallback
+                                            width="50%"
+                                            src={`/api/image/${structure.image}`}
+                                            fallbackImage={structure.image}
+                                            alt={structure.name} />
 
                                     </td>
 

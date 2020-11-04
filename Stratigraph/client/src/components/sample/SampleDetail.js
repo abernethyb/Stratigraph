@@ -3,6 +3,7 @@ import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, C
 import { useParams, useHistory, Link } from "react-router-dom";
 import { SampleContext } from "../../providers/SampleProvider";
 import Image from 'react-bootstrap/Image'
+import ReactImageFallback from "react-image-fallback";
 
 
 const SampleDetail = () => {
@@ -48,10 +49,16 @@ const SampleDetail = () => {
 
                 >DELETE</Button>
 
-                <CardImg src={sample.image} alt={sample.name}></CardImg>
+                <div>
+                    <ReactImageFallback
+                        width="50%"
+                        src={`/api/image/${sample.image}`}
+                        fallbackImage={sample.image}
+                        alt={sample.name} />
+                </div>
 
             </CardBody>
-        </Card>
+        </Card >
     );
 
 
