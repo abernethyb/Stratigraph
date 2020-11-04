@@ -15,12 +15,15 @@ import {
 import { useHistory, useParams } from "react-router-dom";
 import { StructureContext } from "../../providers/StructureProvider";
 import { SampleContext } from "../../providers/SampleProvider";
+import { ImageContext } from "../../providers/ImageProvider";
+import ReactImageFallback from "react-image-fallback";
 
 const EditSample = () => {
 
     const { reportId } = useParams();
     const { sampleId } = useParams();
     const { EditSample, getSingleSample } = useContext(SampleContext)
+    const { addImage } = useContext(ImageContext)
     const { structures, getStructuresByReportId } = useContext(StructureContext);
     const history = useHistory();
     const name = useRef(null)
@@ -30,6 +33,7 @@ const EditSample = () => {
     const locationDescription = useRef(null)
     const roomNumber = useRef(null)
     const [sample, setSample] = useState();
+    const [imageUpload, setImageUpload] = useState();
 
     // "name": "Brendan762545270-0",
     // "userProfileId": 15,
@@ -40,7 +44,16 @@ const EditSample = () => {
     // "locationDescription": "main door, top.",
     // "roomNumber": 109
 
+    const HandleImageUpload = (event) => {
+        setImageUpload(event.target.files[0])
+        console.log(event.target.files[0])
+        console.log(imageUpload)
+    }
+
     const submit = () => {
+
+
+
         const editedSample = {
             id: parseInt(sampleId),
             name: name.current.value,
@@ -49,10 +62,22 @@ const EditSample = () => {
             //stratigraphyId: null,
             structureId: parseInt(structureId.current.value),
             dateTaken: dateTaken.current.value,
-            image: image.current.value,
+            //image: image.current.value,
             locationDescription: locationDescription.current.value,
             roomNumber: parseInt(roomNumber.current.value)
         };
+        if (imageUpload) {
+
+
+            const formData = new FormData();
+            const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+            formData.append('imageUpload', imageUpload, fileName)
+
+            addImage(formData, fileName)
+            editedSample.image = fileName;
+        } else {
+            editedSample.image = sample.image
+        }
 
         console.log(structureId.current.value)
 
@@ -65,6 +90,7 @@ const EditSample = () => {
 
 
         if (editedSample.name !== "" && editedSample.structureId !== 0 && editedSample.image !== "" && roomNumber.current.value !== "") {
+            debugger
             EditSample(editedSample).then((res) => {
                 history.push(`/reports/${reportId}/samples`);
             });
@@ -122,7 +148,42 @@ const EditSample = () => {
                                     defaultValue={sample.dateTaken}
                                 />
                             </FormGroup>
+                            <div>
+                                {imageUpload ?
+                                    <div>
+                                        <p>New Image</p>
+                                        <img src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img>
+                                    </div>
+                                    :
+                                    <div>
+                                        <p>Current Image</p>
+                                        <ReactImageFallback
+                                            width="50%"
+                                            src={`/api/image/${sample.image}`}
+                                            fallbackImage={sample.image}
+                                            alt={sample.name} />
+                                    </div>}
+                            </div>
+                            {/* <div>
+                                <p>Current Image</p>
+                                <ReactImageFallback
+                                    width="50%"
+                                    src={`/api/image/${sample.image}`}
+                                    fallbackImage={sample.image}
+                                    alt={sample.name} />
+                            </div> */}
+
                             <FormGroup>
+                                <Label for="image">Change Uploaded Image</Label>
+                                <Input
+                                    id="image"
+                                    // innerRef={image}
+                                    maxLength="3500"
+                                    type="file"
+                                    onChange={HandleImageUpload}
+                                />
+                            </FormGroup>
+                            {/* <FormGroup>
                                 <Label for="image">Image</Label>
                                 <Input
                                     id="image"
@@ -130,7 +191,7 @@ const EditSample = () => {
                                     defaultValue={sample.image}
                                     maxLength="3500"
                                 />
-                            </FormGroup>
+                            </FormGroup> */}
                             <FormGroup>
                                 <Label for="locationDescription">locationDescription</Label>
                                 <Input
