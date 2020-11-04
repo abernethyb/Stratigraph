@@ -27,17 +27,19 @@ const StructureSampletList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-left">
-                    <Button color="info"
-                        style={{ margin: 10 }}
-                        onClick={() => { history.push(history.goBack()) }}>
-                        Back
+                    <div>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            Back
                     </Button>
-                    <Button color="success"
+                        <Button color="success"
 
-                        onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
-                    >
-                        Add Sample
+                            onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
+                        >
+                            Add Sample
                     </Button>
+                    </div>
 
 
                     <Table>
@@ -91,12 +93,13 @@ const StructureSampletList = () => {
 
                                     </th>
                                     <td>
-
-                                        <ReactImageFallback
-                                            width="50%"
-                                            src={`/api/image/${sample.image}`}
-                                            fallbackImage={sample.image}
-                                            alt={sample.name} />
+                                        <Link to={`/reports/${reportId}/samples/${sample.id}`}>
+                                            <ReactImageFallback
+                                                width="50%"
+                                                src={`/api/image/${sample.image}`}
+                                                fallbackImage={sample.image}
+                                                alt={sample.name} />
+                                        </Link>
 
                                     </td>
 
