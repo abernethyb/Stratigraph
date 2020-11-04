@@ -151,17 +151,21 @@ const EditSample = () => {
                             <div>
                                 {imageUpload ?
                                     <div>
-                                        <p>New Image</p>
-                                        <img src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img>
+                                        <hr />
+                                        <p>New Image:</p>
+                                        <img width="50%" src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img>
+                                        <hr />
                                     </div>
                                     :
                                     <div>
-                                        <p>Current Image</p>
+                                        <hr />
+                                        <p>Current Image:</p>
                                         <ReactImageFallback
                                             width="50%"
                                             src={`/api/image/${sample.image}`}
                                             fallbackImage={sample.image}
                                             alt={sample.name} />
+                                        <hr />
                                     </div>}
                             </div>
                             {/* <div>
