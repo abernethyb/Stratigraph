@@ -6,6 +6,7 @@ import { StructureContext } from "../../providers/StructureProvider";
 import Image from 'react-bootstrap/Image'
 import { SampleContext } from "../../providers/SampleProvider";
 import { ImageContext } from "../../providers/ImageProvider";
+import ReactImageFallback from "react-image-fallback";
 
 
 const SampletList = () => {
@@ -128,7 +129,12 @@ const SampletList = () => {
 
                                     </th>
                                     <td>
-                                        <Image fluid rounded src={`/api/image/${sample.image}`} alt={sample.name}></Image>
+
+                                        <ReactImageFallback
+                                            width="50%"
+                                            src={`/api/image/${sample.image}`}
+                                            fallbackImage={sample.image}
+                                            alt={sample.name} />
 
                                     </td>
 
