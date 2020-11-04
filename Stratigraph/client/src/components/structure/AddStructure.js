@@ -43,31 +43,37 @@ const AddStructure = () => {
 
     const submit = () => {
 
-        const formData = new FormData();
-        const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
-        formData.append('imageUpload', imageUpload, fileName)
+        if (imageUpload) {
 
-        addImage(formData, fileName)
+            const formData = new FormData();
+            const fileName = `${new Date().getTime()}.${imageUpload.name.split('.').pop()}`
+            formData.append('imageUpload', imageUpload, fileName)
 
-        const structure = {
-            reportId: parseInt(reportId),
-            name: name.current.value,
-            //image: image.current.value,
-            image: fileName,
-            location: location.current.value,
-            yearCunstructed: parseInt(yearCunstructed.current.value)
-        };
+            addImage(formData, fileName)
 
-        if (yearCunstructed.current.value == "") {
-            structure.yearCunstructed = null;
-        }
+            const structure = {
+                reportId: parseInt(reportId),
+                name: name.current.value,
+                //image: image.current.value,
+                image: fileName,
+                location: location.current.value,
+                yearCunstructed: parseInt(yearCunstructed.current.value)
+            };
 
-        if (structure.name !== "") {
-            addStructure(structure).then((res) => {
-                history.push(`/reports/${reportId}/structures`);
-            });
+            if (yearCunstructed.current.value == "") {
+                structure.yearCunstructed = null;
+            }
+
+            if (structure.name !== "") {
+                addStructure(structure).then((res) => {
+                    history.push(`/reports/${reportId}/structures`);
+                });
+            } else {
+                window.alert("Please add a name")
+            }
+
         } else {
-            window.alert("Please add a name")
+            window.alert("Please Upload an image")
         }
 
     };
@@ -86,14 +92,29 @@ const AddStructure = () => {
                                     maxLength="250"
                                 />
                             </FormGroup>
+                            <div>
+                                <hr />
+                                {imageUpload ? <img width="50%" src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img> : <p>No image chosen</p>}
+                            </div>
                             <FormGroup>
+                                <Label for="image">Upload Image</Label>
+                                <Input
+                                    id="image"
+                                    // innerRef={image}
+                                    maxLength="3500"
+                                    type="file"
+                                    onChange={HandleImageUpload}
+                                />
+                            </FormGroup>
+                            <hr />
+                            {/* <FormGroup>
                                 <Label for="image">Image</Label>
                                 <Input
                                     id="image"
                                     innerRef={image}
                                     maxLength="3900"
                                 />
-                            </FormGroup>
+                            </FormGroup> */}
                             <FormGroup>
                                 <Label for="location">Address</Label>
                                 <Input

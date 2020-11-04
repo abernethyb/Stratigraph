@@ -13,7 +13,7 @@ const SampletList = () => {
     const { reportId } = useParams();
     //const { structureId } = useParams();
     const { samples, getSamplesByReportId, searcSamplesByRoomViaReport } = useContext(SampleContext);
-    const { getImageUrl } = useContext(ImageContext);
+    //const { getImageUrl } = useContext(ImageContext);
     const history = useHistory();
     const roomNumbersearch = useRef(null);
     const [search, setsearch] = useState();

@@ -143,7 +143,8 @@ const AddSample = () => {
                                 </div>{imageUpload ? <img src={imageUpload}/> : <p>No Image Chosen</p>}
                             </div> */}
                             <div>
-                                {imageUpload ? <img src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img> : <p>No image chosen</p>}
+                                <hr />
+                                {imageUpload ? <img width="50%" src={URL.createObjectURL(imageUpload)} alt="unable to show preview"></img> : <p>No image chosen</p>}
                             </div>
                             <FormGroup>
                                 <Label for="image">Upload Image</Label>
@@ -155,6 +156,7 @@ const AddSample = () => {
                                     onChange={HandleImageUpload}
                                 />
                             </FormGroup>
+                            <hr />
                             {/* <FormGroup>
                                 <Label for="image">Image Link</Label>
                                 <Input
