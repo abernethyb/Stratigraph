@@ -136,8 +136,8 @@ const Stratigraphy = () => {
                                 <th>Date Range</th>
                                 <th>Pigments</th>
                                 <th>Colors</th>
-                                <th>Medium</th>
                                 <th>Gloss</th>
+                                <th>Medium</th>
                                 <th>Notes</th>
                             </tr>
                         </thead>

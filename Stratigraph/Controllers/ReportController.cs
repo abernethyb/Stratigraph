@@ -29,9 +29,15 @@ namespace Stratigraph.Controllers
         public IActionResult Get()
         {
             var currentUserProfile = GetCurrentUserProfile();
-            int userProfileId = currentUserProfile.Id;
+            if (currentUserProfile != null)
+            {
+                int userProfileId = currentUserProfile.Id;
 
-            return Ok(_reportRepository.GetReportsByUserId(userProfileId));
+                return Ok(_reportRepository.GetReportsByUserId(userProfileId));
+            } else
+            {
+                return NoContent();
+            }
             
         }
 

@@ -47,7 +47,7 @@ export default function Header() {
                         }
                     </Nav>
                 </Collapse>
-                <NavbarBrand>Welcome, {JSON.parse(sessionStorage.getItem("userProfile")).firstName}</NavbarBrand>
+                <NavbarBrand>Welcome {sessionStorage.getItem("userProfile") && JSON.parse(sessionStorage.getItem("userProfile")).firstName}</NavbarBrand>
             </Navbar>
         </div>
     );
