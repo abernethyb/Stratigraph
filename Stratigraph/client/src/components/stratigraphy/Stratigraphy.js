@@ -119,7 +119,7 @@ const Stratigraphy = () => {
                         <thead>
                             <h2>Layers</h2>
                             <tr>
-                                <th>FinishPeriod</th>
+                                <th>Finish Period</th>
                                 <th>Date Range</th>
                                 <th>Pigments</th>
                                 <th>Colors</th>
@@ -152,17 +152,17 @@ const Stratigraphy = () => {
 
                                     </th>
                                     <td>
-                                        From:
+                                        {layer.endDate && "From:"}
 
                                         {/* {layer.beginDate} */}
 
-                                        {` ${new Date(layer.beginDate).getMonth() + 1}/${new Date(layer.beginDate).getDate()}/${new Date(layer.beginDate).getFullYear()} `}
+                                        {layer.beginDate && ` ${new Date(layer.beginDate).getMonth() + 1}/${new Date(layer.beginDate).getDate()}/${new Date(layer.beginDate).getFullYear()} `}
                                         <hr />
-                                        To:
+
 
                                         {/* {layer.endDate} */}
 
-                                        {` ${new Date(layer.endDate).getMonth() + 1}/${new Date(layer.endDate).getDate()}/${new Date(layer.endDate).getFullYear()} `}
+                                        {layer.endDate && `To: ${new Date(layer.endDate).getMonth() + 1}/${new Date(layer.endDate).getDate()}/${new Date(layer.endDate).getFullYear()} `}
                                     </td>
 
                                     <td>

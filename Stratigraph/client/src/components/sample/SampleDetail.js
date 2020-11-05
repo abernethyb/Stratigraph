@@ -33,9 +33,21 @@ const SampleDetail = () => {
                     onClick={() => { history.push(history.goBack()) }}>
                     back to list
                     </Button>
-                <Button color="info"
-                //onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
-                >Stratigraphy</Button>
+                {sample.stratigraphyId ?
+                    <Button color="info"
+                        style={{ margin: 10 }}
+                        ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)
+                        onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${sample.stratigraphyId}`) }}
+                    >View Stratigraphy</Button>
+
+                    :
+                    <Button color="info"
+                        style={{ margin: 10 }}
+                        ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
+                        onClick={() => { history.push(`/reports/${reportId}/stratigraphies/add/${sample.id}`) }}
+                    >Add Stratigraphy</Button>
+
+                }
                 <Button color="warning"
                     style={{ margin: 10 }}
                     ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
