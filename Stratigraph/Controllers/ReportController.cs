@@ -82,6 +82,24 @@ namespace Stratigraph.Controllers
             }
 
         }
+        [HttpPut("reopen/{id}")]
+        public IActionResult ReOpen(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
+
+                _reportRepository.ReOpen(id);
+
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+        }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, Report report)
