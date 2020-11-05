@@ -64,6 +64,25 @@ namespace Stratigraph.Controllers
             return CreatedAtAction("Get", new { id = report.Id }, report);
         }
 
+        [HttpPut("complete/{id}")]
+        public IActionResult MarkComplete(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
+
+                _reportRepository.MarkAsComplete(id);
+
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+        }
+
         [HttpPut("{id}")]
         public IActionResult Put(int id, Report report)
         {

@@ -70,9 +70,19 @@ export const ReportProvider = (props) => {
                 body: JSON.stringify(report),
             }));
     };
+    const CompleteReport = (reportId) => {
+        return getToken().then((token) =>
+            fetch(`/api/Report/complete/${reportId}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                }
+            }));
+    };
 
     return (
-        <ReportContext.Provider value={{ reports, getReportsByUserId, getSingleReport, addReport, EditReport }}>
+        <ReportContext.Provider value={{ reports, getReportsByUserId, getSingleReport, addReport, EditReport, CompleteReport }}>
             {props.children}
         </ReportContext.Provider>
     );

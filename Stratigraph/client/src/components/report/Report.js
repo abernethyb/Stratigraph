@@ -7,15 +7,16 @@ import { Button, Table } from "reactstrap";
 
 const Report = () => {
 
-    const { getSingleReport } = useContext(ReportContext)
+    const { getSingleReport, CompleteReport } = useContext(ReportContext)
     const [report, setReport] = useState();
     const { reportId } = useParams();
     const history = useHistory();
+    const [completed, setCompleted] = useState(false)
 
 
     useEffect(() => {
         getSingleReport(reportId).then(setReport);
-    }, []);
+    }, [completed]);
 
     if (!report) {
         return null;
@@ -61,11 +62,19 @@ const Report = () => {
                                     <td>
                                         {/* {report.completeDate} */}
                                         {HumanCompleteDate}
+
                                     </td>
                                     :
                                     <td>
                                         IN PROGRESS
-                                        </td>
+                                        <hr />
+                                        <Button color="warning"
+                                            style={{ margin: 10 }}
+                                            onClick={() => { CompleteReport(reportId).then(setCompleted(true)) }}
+                                        >
+                                            Mark Complete
+                                        </Button>
+                                    </td>
                                 }
 
 
