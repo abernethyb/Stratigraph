@@ -49,7 +49,13 @@ const SampletList = () => {
                             style={{ margin: 10 }}
                             onClick={() => { history.push(history.goBack()) }}>
                             Back
-                    </Button>
+                        </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        >
+                            View Structures
+                        </Button>
                         <Button color="success"
 
                             onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
@@ -138,7 +144,7 @@ const SampletList = () => {
 
                                     <td>
                                         {/* {sample.dateTaken} */}
-                                        {`${new Date(sample.dateTaken).getMonth() + 1}/${new Date(sample.dateTaken).getDate()}/${new Date(sample.dateTaken).getFullYear()}`}
+                                        {sample.dateTaken && `${new Date(sample.dateTaken).getMonth() + 1}/${new Date(sample.dateTaken).getDate()}/${new Date(sample.dateTaken).getFullYear()}`}
                                     </td>
                                     <td>
                                         {sample.locationDescription}

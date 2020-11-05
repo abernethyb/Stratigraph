@@ -62,8 +62,21 @@ const Stratigraphy = () => {
                         <Button color="info"
                             style={{ margin: 10 }}
                             onClick={() => { history.push(history.goBack()) }}>
-                            back to samples
+                            back
                             </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            //reports/:reportId(\d+)/samples
+                            onClick={() => { history.push(`/reports/${reportId}/samples`) }}
+                        >
+                            View All Samples
+                         </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        >
+                            View Structures
+                        </Button>
                         <Button color="warning"
                             style={{ margin: 10 }}
                             ///reports/:reportId(\d+)/stratigraphies/edit/:stratigraphyId(\d+)

@@ -29,6 +29,13 @@ const StructuretList = () => {
                         onClick={() => { history.push(history.goBack()) }}>
                         Back
                     </Button>
+                    <Button color="info"
+                        style={{ margin: 10 }}
+                        //reports/:reportId(\d+)/samples
+                        onClick={() => { history.push(`/reports/${reportId}/samples`) }}
+                    >
+                        View All Samples
+                         </Button>
                     <Button color="success"
                         ///reports/:reportId(\d+)/structures/add
                         onClick={() => { history.push(`/reports/${reportId}/structures/add`) }}

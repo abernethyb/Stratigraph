@@ -32,13 +32,26 @@ const StructureSampletList = () => {
                             style={{ margin: 10 }}
                             onClick={() => { history.push(history.goBack()) }}>
                             Back
-                    </Button>
+                        </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        >
+                            View Structures
+                        </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            //reports/:reportId(\d+)/samples
+                            onClick={() => { history.push(`/reports/${reportId}/samples`) }}
+                        >
+                            All Samples
+                         </Button>
                         <Button color="success"
 
                             onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
                         >
                             Add Sample
-                    </Button>
+                        </Button>
                     </div>
 
 

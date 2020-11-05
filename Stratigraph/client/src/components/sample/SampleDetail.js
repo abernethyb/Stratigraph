@@ -31,7 +31,14 @@ const SampleDetail = () => {
                 <Button color="info"
                     style={{ margin: 10 }}
                     onClick={() => { history.push(history.goBack()) }}>
-                    back to list
+                    Back
+                    </Button>
+                <Button color="info"
+                    style={{ margin: 10 }}
+                    //reports/:reportId(\d+)/samples
+                    onClick={() => { history.push(`/reports/${reportId}/samples`) }}
+                >
+                    All Samples
                     </Button>
                 {sample.stratigraphyId ?
                     <Button color="info"

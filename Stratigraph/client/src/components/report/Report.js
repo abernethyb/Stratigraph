@@ -40,7 +40,7 @@ const Report = () => {
                     <Table>
 
                         <thead>
-                            <h2>Report</h2>
+                            <h2>{report.name} Report</h2>
                             <tr>
                                 <th>Name</th>
                                 <th>Start date</th>
@@ -53,6 +53,13 @@ const Report = () => {
                             <tr>
                                 <th scope="row">
                                     {report.name}
+                                    <hr />
+                                    <Button color="warning"
+                                        style={{ margin: 10 }}
+                                        onClick={() => { history.push(`/reports/edit/${reportId}`) }}
+                                    >
+                                        Edit
+                                    </Button>
                                 </th>
                                 <td>
                                     {/* {report.createDate} */}
@@ -89,19 +96,14 @@ const Report = () => {
                         </tbody>
 
 
-                        <Button color="warning"
-                            style={{ margin: 10 }}
-                            onClick={() => { history.push(`/reports/edit/${reportId}`) }}
-                        >
-                            Edit
-                    </Button>
+
                         {/* /reports/:reportId(\d+)/structures */}
                         <Button color="info"
                             style={{ margin: 10 }}
                             onClick={() => { history.push(`/reports/${reportId}/structures`) }}
                         >
                             View Structures
-                    </Button>
+                        </Button>
                         <Button color="info"
                             style={{ margin: 10 }}
                             //reports/:reportId(\d+)/samples
