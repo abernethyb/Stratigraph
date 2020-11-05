@@ -63,6 +63,9 @@ const AddSample = () => {
 
 
 
+            if (sample.dateTaken == "") {
+                sample.dateTaken = null
+            }
 
             if (sample.name !== "" && sample.structureId !== 0 && sample.image !== "" && roomNumber.current.value !== "") {
                 addSample(sample).then((res) => {
@@ -103,9 +106,9 @@ const AddSample = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="structureId">Category</Label>
+                                <Label for="structureId">Structure</Label>
                                 <select defaultValue="" name="structureId" ref={structureId} id="structureId" className="form-control">
-                                    <option value="0">Select a Structur</option>
+                                    <option value="0">Select a Structure</option>
                                     {structures.map(e => (
                                         <option key={e.id} value={e.id}>
                                             {e.name}
@@ -115,7 +118,7 @@ const AddSample = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="dateTaken">dateTaken</Label>
+                                <Label for="dateTaken">Date Taken [optional]</Label>
                                 <Input
                                     id="dateTaken"
                                     type="date"
@@ -139,7 +142,7 @@ const AddSample = () => {
                             <hr />
 
                             <FormGroup>
-                                <Label for="locationDescription">locationDescription</Label>
+                                <Label for="locationDescription">Sample Location [optional]</Label>
                                 <Input
                                     id="locationDescription"
                                     innerRef={locationDescription}
@@ -147,7 +150,7 @@ const AddSample = () => {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="roomNumber">roomNumber</Label>
+                                <Label for="roomNumber">Room Number</Label>
                                 <Input
                                     id="roomNumber"
                                     innerRef={roomNumber}

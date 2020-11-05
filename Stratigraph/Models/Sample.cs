@@ -32,7 +32,7 @@ namespace Stratigraph.Models
 
         [Required]
         public int StructureId { get; set; }
-        public DateTime DateTaken { get; set; }
+        public DateTime? DateTaken { get; set; }
 
         [Required]
         [MaxLength(4000)]
