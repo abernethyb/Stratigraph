@@ -6,6 +6,7 @@ import { LayerContext } from "../../providers/LayerProvider";
 import { SampleContext } from "../../providers/SampleProvider";
 import { StratigraphyContext } from "../../providers/StratigraphyProvider";
 import Image from 'react-bootstrap/Image'
+import ReactImageFallback from "react-image-fallback";
 
 
 const Stratigraphy = () => {
@@ -93,7 +94,14 @@ const Stratigraphy = () => {
                             <div key={sample.id}>
                                 <p>Structure: {sample.structureName}</p>
                                 <p>Room: {sample.roomNumber}</p>
-                                <Image fluid rounded src={sample.image} alt={sample.name}></Image>
+                                {/* <Image fluid rounded src={sample.image} alt={sample.name}></Image> */}
+                                <Link to={`/reports/${reportId}/samples/${sample.id}`}>
+                                    <ReactImageFallback
+                                        width="50%"
+                                        src={`/api/image/${sample.image}`}
+                                        fallbackImage={sample.image}
+                                        alt={sample.name} />
+                                </Link>
                             </div>
                         ))}
                     </div>

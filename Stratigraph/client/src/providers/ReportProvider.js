@@ -80,9 +80,19 @@ export const ReportProvider = (props) => {
                 }
             }));
     };
+    const ReOpenReport = (reportId) => {
+        return getToken().then((token) =>
+            fetch(`/api/Report/reopen/${reportId}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                }
+            }));
+    };
 
     return (
-        <ReportContext.Provider value={{ reports, getReportsByUserId, getSingleReport, addReport, EditReport, CompleteReport }}>
+        <ReportContext.Provider value={{ reports, getReportsByUserId, getSingleReport, addReport, EditReport, CompleteReport, ReOpenReport }}>
             {props.children}
         </ReportContext.Provider>
     );

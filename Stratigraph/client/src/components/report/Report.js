@@ -7,11 +7,11 @@ import { Button, Table } from "reactstrap";
 
 const Report = () => {
 
-    const { getSingleReport, CompleteReport } = useContext(ReportContext)
+    const { getSingleReport, CompleteReport, ReOpenReport } = useContext(ReportContext)
     const [report, setReport] = useState();
     const { reportId } = useParams();
     const history = useHistory();
-    const [completed, setCompleted] = useState(false)
+    const [completed, setCompleted] = useState(null)
 
 
     useEffect(() => {
@@ -62,6 +62,13 @@ const Report = () => {
                                     <td>
                                         {/* {report.completeDate} */}
                                         {HumanCompleteDate}
+                                        <hr />
+                                        <Button color="warning"
+                                            style={{ margin: 10 }}
+                                            onClick={() => { ReOpenReport(reportId).then(setCompleted(false)) }}
+                                        >
+                                            Re-Open
+                                        </Button>
 
                                     </td>
                                     :
