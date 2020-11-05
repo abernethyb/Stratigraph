@@ -9,7 +9,7 @@ import {
     NavItem,
     NavLink
 } from 'reactstrap';
-import { UserProfileContext } from "../providers/UserProfileProvider";
+import { UserProfileContext, UserProfileProvider } from "../providers/UserProfileProvider";
 
 export default function Header() {
     const { isLoggedIn, logout } = useContext(UserProfileContext);
@@ -20,6 +20,7 @@ export default function Header() {
         <div>
             <Navbar color="dark" dark expand="md">
                 <NavbarBrand tag={RRNavLink} to="/">Stratigraph</NavbarBrand>
+
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
@@ -46,6 +47,7 @@ export default function Header() {
                         }
                     </Nav>
                 </Collapse>
+                <NavbarBrand>Welcome, {JSON.parse(sessionStorage.getItem("userProfile")).firstName}</NavbarBrand>
             </Navbar>
         </div>
     );
