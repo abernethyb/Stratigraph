@@ -109,7 +109,7 @@ const AddStructure = () => {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="yearCunstructed">Year Cunstructed (YYYY)</Label>
+                                <Label for="yearCunstructed">Year Constructed (YYYY)</Label>
                                 <Input
                                     id="yearCunstructed"
                                     innerRef={yearCunstructed}

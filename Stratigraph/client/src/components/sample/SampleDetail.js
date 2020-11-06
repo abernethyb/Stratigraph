@@ -31,11 +31,30 @@ const SampleDetail = () => {
                 <Button color="info"
                     style={{ margin: 10 }}
                     onClick={() => { history.push(history.goBack()) }}>
-                    back to list
+                    Back
                     </Button>
                 <Button color="info"
-                //onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
-                >Stratigraphy</Button>
+                    style={{ margin: 10 }}
+                    //reports/:reportId(\d+)/samples
+                    onClick={() => { history.push(`/reports/${reportId}/samples`) }}
+                >
+                    All Samples
+                    </Button>
+                {sample.stratigraphyId ?
+                    <Button color="info"
+                        style={{ margin: 10 }}
+                        ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)
+                        onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${sample.stratigraphyId}`) }}
+                    >View Stratigraphy</Button>
+
+                    :
+                    <Button color="info"
+                        style={{ margin: 10 }}
+                        ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
+                        onClick={() => { history.push(`/reports/${reportId}/stratigraphies/add/${sample.id}`) }}
+                    >Add Stratigraphy</Button>
+
+                }
                 <Button color="warning"
                     style={{ margin: 10 }}
                     ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
@@ -51,7 +70,7 @@ const SampleDetail = () => {
 
                 <div>
                     <ReactImageFallback
-                        width="50%"
+                        width="100%"
                         src={`/api/image/${sample.image}`}
                         fallbackImage={sample.image}
                         alt={sample.name} />

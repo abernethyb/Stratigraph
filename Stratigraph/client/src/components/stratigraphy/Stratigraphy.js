@@ -6,6 +6,7 @@ import { LayerContext } from "../../providers/LayerProvider";
 import { SampleContext } from "../../providers/SampleProvider";
 import { StratigraphyContext } from "../../providers/StratigraphyProvider";
 import Image from 'react-bootstrap/Image'
+import ReactImageFallback from "react-image-fallback";
 
 
 const Stratigraphy = () => {
@@ -49,7 +50,8 @@ const Stratigraphy = () => {
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    {stratigraphy.createDate}
+                                    {/* {stratigraphy.createDate} */}
+                                    {` ${new Date(stratigraphy.createDate).getMonth() + 1}/${new Date(stratigraphy.createDate).getDate()}/${new Date(stratigraphy.createDate).getFullYear()} `}
                                 </th>
                                 <td>
                                     {stratigraphy.notes}
@@ -60,8 +62,21 @@ const Stratigraphy = () => {
                         <Button color="info"
                             style={{ margin: 10 }}
                             onClick={() => { history.push(history.goBack()) }}>
-                            back to samples
+                            back
                             </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            //reports/:reportId(\d+)/samples
+                            onClick={() => { history.push(`/reports/${reportId}/samples`) }}
+                        >
+                            View All Samples
+                         </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        >
+                            View Structures
+                        </Button>
                         <Button color="warning"
                             style={{ margin: 10 }}
                             ///reports/:reportId(\d+)/stratigraphies/edit/:stratigraphyId(\d+)
@@ -92,7 +107,14 @@ const Stratigraphy = () => {
                             <div key={sample.id}>
                                 <p>Structure: {sample.structureName}</p>
                                 <p>Room: {sample.roomNumber}</p>
-                                <Image fluid rounded src={sample.image} alt={sample.name}></Image>
+                                {/* <Image fluid rounded src={sample.image} alt={sample.name}></Image> */}
+                                <Link to={`/reports/${reportId}/samples/${sample.id}`}>
+                                    <ReactImageFallback
+                                        width="50%"
+                                        src={`/api/image/${sample.image}`}
+                                        fallbackImage={sample.image}
+                                        alt={sample.name} />
+                                </Link>
                             </div>
                         ))}
                     </div>
@@ -110,12 +132,12 @@ const Stratigraphy = () => {
                         <thead>
                             <h2>Layers</h2>
                             <tr>
-                                <th>FinishPeriod</th>
+                                <th>Finish Period</th>
                                 <th>Date Range</th>
                                 <th>Pigments</th>
                                 <th>Colors</th>
-                                <th>Medium</th>
                                 <th>Gloss</th>
+                                <th>Medium</th>
                                 <th>Notes</th>
                             </tr>
                         </thead>
@@ -143,7 +165,17 @@ const Stratigraphy = () => {
 
                                     </th>
                                     <td>
-                                        From {layer.beginDate} To {layer.endDate}
+                                        {layer.endDate && "From:"}
+
+                                        {/* {layer.beginDate} */}
+
+                                        {layer.beginDate && ` ${new Date(layer.beginDate).getMonth() + 1}/${new Date(layer.beginDate).getDate()}/${new Date(layer.beginDate).getFullYear()} `}
+                                        <hr />
+
+
+                                        {/* {layer.endDate} */}
+
+                                        {layer.endDate && `To: ${new Date(layer.endDate).getMonth() + 1}/${new Date(layer.endDate).getDate()}/${new Date(layer.endDate).getFullYear()} `}
                                     </td>
 
                                     <td>

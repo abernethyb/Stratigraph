@@ -44,17 +44,25 @@ const SampletList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-left">
-                    <Button color="info"
-                        style={{ margin: 10 }}
-                        onClick={() => { history.push(history.goBack()) }}>
-                        Back
-                    </Button>
-                    <Button color="success"
+                    <div>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(history.goBack()) }}>
+                            Back
+                        </Button>
+                        <Button color="info"
+                            style={{ margin: 10 }}
+                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
+                        >
+                            View Structures
+                        </Button>
+                        <Button color="success"
 
-                        onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
-                    >
-                        Add Sample
+                            onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
+                        >
+                            Add Sample
                     </Button>
+                    </div>
 
                     <hr />
                     <FormGroup>
@@ -124,17 +132,19 @@ const SampletList = () => {
 
                                     </th>
                                     <td>
-
-                                        <ReactImageFallback
-                                            width="50%"
-                                            src={`/api/image/${sample.image}`}
-                                            fallbackImage={sample.image}
-                                            alt={sample.name} />
+                                        <Link to={`/reports/${reportId}/samples/${sample.id}`}>
+                                            <ReactImageFallback
+                                                width="50%"
+                                                src={`/api/image/${sample.image}`}
+                                                fallbackImage={sample.image}
+                                                alt={sample.name} />
+                                        </Link>
 
                                     </td>
 
                                     <td>
-                                        {sample.dateTaken}
+                                        {/* {sample.dateTaken} */}
+                                        {sample.dateTaken && `${new Date(sample.dateTaken).getMonth() + 1}/${new Date(sample.dateTaken).getDate()}/${new Date(sample.dateTaken).getFullYear()}`}
                                     </td>
                                     <td>
                                         {sample.locationDescription}

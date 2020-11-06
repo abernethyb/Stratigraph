@@ -183,5 +183,24 @@ namespace Stratigraph.Repositories
                 }
             }
         }
+
+        public void ReOpen(int reportId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Report
+                        SET CompleteDate = Null
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", reportId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

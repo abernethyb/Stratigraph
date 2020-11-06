@@ -29,9 +29,15 @@ namespace Stratigraph.Controllers
         public IActionResult Get()
         {
             var currentUserProfile = GetCurrentUserProfile();
-            int userProfileId = currentUserProfile.Id;
+            if (currentUserProfile != null)
+            {
+                int userProfileId = currentUserProfile.Id;
 
-            return Ok(_reportRepository.GetReportsByUserId(userProfileId));
+                return Ok(_reportRepository.GetReportsByUserId(userProfileId));
+            } else
+            {
+                return NoContent();
+            }
             
         }
 
@@ -62,6 +68,43 @@ namespace Stratigraph.Controllers
             report.CreatingUserProfileId = currentUserProfile.Id;
             _reportRepository.Add(report);
             return CreatedAtAction("Get", new { id = report.Id }, report);
+        }
+
+        [HttpPut("complete/{id}")]
+        public IActionResult MarkComplete(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
+
+                _reportRepository.MarkAsComplete(id);
+
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+        }
+        [HttpPut("reopen/{id}")]
+        public IActionResult ReOpen(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var uprFromDB = _reportRepository.GetUserProfileReportById(id, currentUserProfile.Id);
+            if (uprFromDB != null)
+            {
+
+                _reportRepository.ReOpen(id);
+
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
         }
 
         [HttpPut("{id}")]
