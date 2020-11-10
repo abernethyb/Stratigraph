@@ -17,14 +17,12 @@ to periods of damage, disaster, or neglect, and finishes can give clues as to ho
 
 ## Getting Started
 
-[Firebase](https://console.firebase.google.com/u/0/)
+- Clone this repository.
 
-Clone this repository.
+- Open the SQL directory and run the ```01_Db_MVP_Create.sql ``` and then the ```01_SeedData.sql``` files.  
 
-Open the SQL directory and run the ```01_Db_MVP_Create.sql ``` and then the ```01_SeedData.sql``` files.  
+- Open the connection string in your ```appsettings.json``` is pointing to the correct database.
 
-Open the connection string in your ```appsettings.json``` is pointing to the correct database.
+- Set up a new [Firebase](https://console.firebase.google.com/u/0/) project and ensure the Firebase projectId is noted in ```appsettings.json```.
 
-Set up a new [Firebase](https://console.firebase.google.com/u/0/) project and ensure the Firebase projectId is noted in ```appsettings.json```.
-
-Open the ```client``` directory and run ```npm install```
+- Open the ```client``` directory and run ```npm install```
