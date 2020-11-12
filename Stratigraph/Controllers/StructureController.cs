@@ -122,11 +122,13 @@ namespace Stratigraph.Controllers
         public IActionResult Delete(int id)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            var sample = _sampleRepository.GetSampleById(id);
+            var structure = _structureRepository.GetStructureById(id);
+            var upr = _reportRepository.GetUserProfileReportById(structure.ReportId, currentUserProfile.Id);
 
-            if (sample.UserProfileId == currentUserProfile.Id)
+
+            if (upr != null)
             {
-                _sampleRepository.DeleteSample(id);
+                _structureRepository.DeleteStructure(id);
                 return NoContent();
             }
 

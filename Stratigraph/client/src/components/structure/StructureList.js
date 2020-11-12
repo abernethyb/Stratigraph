@@ -69,6 +69,12 @@ const StructuretList = () => {
                                             onClick={() => { history.push(`/reports/${reportId}/structures/edit/${structure.id}`) }}
                                         >Edit</Button>
                                         <Button
+                                            style={{ margin: 10 }}
+                                            color="danger"
+                                            ///reports/:reportId(\d+)/structures/delete/:structureId(\d+)
+                                            onClick={() => { history.push(`/reports/${reportId}/structures/delete/${structure.id}`) }}
+                                        >Delete</Button>
+                                        <Button
                                             color="info"
                                             style={{ margin: 10 }}
                                             ///reports/${reportId}/structures/${structure.id}/samples
