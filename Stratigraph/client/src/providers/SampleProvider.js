@@ -126,6 +126,42 @@ export const SampleProvider = (props) => {
             })
         );
     }
+    const LinkStratigraphy = (sampleId, StratigraphyId) => {
+        return getToken().then((token) =>
+            fetch(`/api/sample/linkStratigraphy/${sampleId}/${StratigraphyId}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                }
+            }).then(resp => {
+                if (!resp.ok) {
+                    (history.push(`/unauthorized`));
+                    //return resp.json();
+                    //throw new Error("Unauthorized")
+                }
+            })
+        );
+    }
+
+    const UnLinkStratigraphy = (sampleId) => {
+        return getToken().then((token) =>
+            fetch(`/api/sample/unlinkStratigraphy/${sampleId}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                }
+            }).then(resp => {
+                if (!resp.ok) {
+                    (history.push(`/unauthorized`));
+                    //return resp.json();
+                    //throw new Error("Unauthorized")
+                }
+            })
+        );
+    }
+
     const DeleteSample = (id) =>
         getToken().then((token) =>
             fetch(`/api/sample/${id}`, {
@@ -136,7 +172,7 @@ export const SampleProvider = (props) => {
             }));
 
     return (
-        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample, getSingleSample, EditSample, DeleteSample, searcSamplesByRoomViaReport, getSamplesByStratigraphyId }}>
+        <SampleContext.Provider value={{ samples, getSamplesByStructureId, getSamplesByReportId, addSample, getSingleSample, EditSample, DeleteSample, searcSamplesByRoomViaReport, getSamplesByStratigraphyId, LinkStratigraphy, UnLinkStratigraphy }}>
             {props.children}
         </SampleContext.Provider>
     );

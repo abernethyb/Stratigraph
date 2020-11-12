@@ -279,6 +279,43 @@ namespace Stratigraph.Repositories
             }
         }
 
+        public void LinkStratigraphy(int sampleId, int stratigraphyId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Sample
+                        SET StratigraphyId = @stratigraphyId
+                        WHERE Id = @sampleId";
+
+                    DbUtils.AddParameter(cmd, "@sampleId", sampleId);
+                    DbUtils.AddParameter(cmd, "@stratigraphyId", stratigraphyId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }public void UnLinkStratigraphy(int sampleId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Sample
+                        SET StratigraphyId = NULL
+                        WHERE Id = @sampleId";
+
+                    DbUtils.AddParameter(cmd, "@sampleId", sampleId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void DeleteSample(int id)
         {
             using (var conn = Connection)

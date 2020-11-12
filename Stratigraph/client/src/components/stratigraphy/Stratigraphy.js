@@ -92,6 +92,15 @@ const Stratigraphy = () => {
                         >
                             Add Layer
                     </Button>
+                        <Button
+                            color="info"
+                            style={{ margin: 10 }}
+                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/samples
+                            onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}/samples`) }}
+                        > Link existing Samples
+                        </Button>
+
+
                         {/* <Button color="info"
                             style={{ margin: 10 }}
                             //reports/:reportId(\d+)/samples
@@ -105,6 +114,7 @@ const Stratigraphy = () => {
                         <h2>Corresponding Samples</h2>
                         {samples.map((sample) => (
                             <div key={sample.id}>
+                                <p>Name: {sample.name}</p>
                                 <p>Structure: {sample.structureName}</p>
                                 <p>Room: {sample.roomNumber}</p>
                                 {/* <Image fluid rounded src={sample.image} alt={sample.name}></Image> */}
