@@ -82,8 +82,17 @@ export const StructureProvider = (props) => {
             }));
     };
 
+    const DeleteStructure = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/structure/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }));
+
     return (
-        <StructureContext.Provider value={{ structures, getStructuresByReportId, addStructure, getSingleStructure, EditStructure }}>
+        <StructureContext.Provider value={{ structures, getStructuresByReportId, addStructure, getSingleStructure, EditStructure, DeleteStructure }}>
             {props.children}
         </StructureContext.Provider>
     );
