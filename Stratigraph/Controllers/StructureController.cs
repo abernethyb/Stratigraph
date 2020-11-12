@@ -118,7 +118,25 @@ namespace Stratigraph.Controllers
         }
 
 
-            private UserProfile GetCurrentUserProfile()
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var sample = _sampleRepository.GetSampleById(id);
+
+            if (sample.UserProfileId == currentUserProfile.Id)
+            {
+                _sampleRepository.DeleteSample(id);
+                return NoContent();
+            }
+
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
+        private UserProfile GetCurrentUserProfile()
             {
                 var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 return _userProfileRepository.GetByFirebaseId(firebaseId);
