@@ -2,6 +2,8 @@
 
 Stratigraph is an application designed to help architectural conservators keep track of their data while preparing a paint analysis.
 
+## [Watch Demo](https://www.youtube.com/watch?v=81cU4QE0vlI&feature=youtu.be)
+
 
 ## Background
 
