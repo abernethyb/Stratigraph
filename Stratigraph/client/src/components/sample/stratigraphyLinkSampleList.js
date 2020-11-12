@@ -11,7 +11,7 @@ import ReactImageFallback from "react-image-fallback";
 
 const StratLinkSampleList = () => {
     const { reportId, stratigraphyId } = useParams();
-    const { samples, getSamplesByReportId, searcSamplesByRoomViaReport } = useContext(SampleContext);
+    const { samples, getSamplesByReportId, searcSamplesByRoomViaReport, LinkStratigraphy, UnLinkStratigraphy } = useContext(SampleContext);
     const history = useHistory();
     const roomNumbersearch = useRef(null);
     const [search, setsearch] = useState();
@@ -105,8 +105,8 @@ const StratLinkSampleList = () => {
                                         {sample.stratigraphyId == stratigraphyId ?
                                             <Button color="info"
                                                 style={{ margin: 10 }}
-                                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)
-                                            // onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${sample.stratigraphyId}`) }}
+
+                                                onClick={() => { UnLinkStratigraphy(sample.id) }}
                                             >Unlink from Stratigraphy</Button>
 
                                             :
@@ -121,8 +121,8 @@ const StratLinkSampleList = () => {
                                                     :
                                                     <Button color="info"
                                                         style={{ margin: 10 }}
-                                                    ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
-                                                    // onClick={() => { history.push(`/reports/${reportId}/stratigraphies/add/${sample.id}`) }}
+                                                        ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
+                                                        onClick={() => { LinkStratigraphy(sample.id, stratigraphyId) }}
                                                     >Link to Stratigraphy</Button>
                                             )
 
