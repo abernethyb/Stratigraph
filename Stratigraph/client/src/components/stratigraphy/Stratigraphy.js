@@ -7,6 +7,7 @@ import { SampleContext } from "../../providers/SampleProvider";
 import { StratigraphyContext } from "../../providers/StratigraphyProvider";
 import Image from 'react-bootstrap/Image'
 import ReactImageFallback from "react-image-fallback";
+//import "./strat.css"
 
 
 const Stratigraphy = () => {
@@ -113,7 +114,7 @@ const Stratigraphy = () => {
                     <div className="stragraphySamples">
                         <h2>Corresponding Samples</h2>
                         {samples.map((sample) => (
-                            <div key={sample.id}>
+                            <div className="samples" key={sample.id}>
                                 <p>Name: {sample.name}</p>
                                 <p>Structure: {sample.structureName}</p>
                                 <p>Room: {sample.roomNumber}</p>
