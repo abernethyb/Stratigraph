@@ -24,6 +24,7 @@ import AddLayer from "./layer/AddLayer";
 import EditLayer from "./layer/EditLayer";
 import ConfirmDeleteLayer from "./layer/ConfirmDeleteLayer";
 import ConfirmDeleteStructure from "./structure/ConfirmDeleteStructure";
+import StratLinkSampleList from "./sample/stratigraphyLinkSampleList";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -72,6 +73,9 @@ export default function ApplicationViews() {
                 </Route>
                 <Route path="/reports/:reportId(\d+)/structures/:structureId(\d+)/samples" exact>
                     {isLoggedIn ? <StructureSampletList /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/samples" exact>
+                    {isLoggedIn ? <StratLinkSampleList /> : <Redirect to="/login" />}
                 </Route>
                 <Route path="/reports/:reportId(\d+)/samples/add" exact>
                     {isLoggedIn ? <AddSample /> : <Redirect to="/login" />}
