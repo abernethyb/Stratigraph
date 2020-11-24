@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
-//import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Button, CardImg, Form, Table, FormGroup, Label, Input } from "reactstrap";
 import { StructureContext } from "../../providers/StructureProvider";
@@ -41,6 +40,8 @@ const StratLinkSampleList = () => {
         return null;
     }
 
+   
+
     return (
         <>
             <div className="container">
@@ -51,18 +52,6 @@ const StratLinkSampleList = () => {
                             onClick={() => { history.push(history.goBack()) }}>
                             Back
                         </Button>
-                        {/* <Button color="info"
-                            style={{ margin: 10 }}
-                            onClick={() => { history.push(`/reports/${reportId}/structures`) }}
-                        >
-                            View Structures
-                        </Button> */}
-                        {/* <Button color="success"
-
-                            onClick={() => { history.push(`/reports/${reportId}/samples/add`) }}
-                        >
-                            Add Sample
-                    </Button> */}
                     </div>
 
                     <hr />
@@ -107,7 +96,6 @@ const StratLinkSampleList = () => {
                                             <Button color="info"
                                                 style={{ margin: 10 }}
                                                 disabled
-                                            // onClick={() => { UnLinkStratigraphy(sample.id).then(setStrat(sample.id)) }}
                                             >Already Linked</Button>
 
                                             :
@@ -116,30 +104,15 @@ const StratLinkSampleList = () => {
                                                     <Button color="info"
                                                         disabled
                                                         style={{ margin: 10 }}
-                                                    ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
-                                                    // onClick={() => { history.push(`/reports/${reportId}/stratigraphies/add/${sample.id}`) }}
                                                     >Linked to different Stratigraphy</Button>
                                                     :
                                                     <Button color="info"
                                                         style={{ margin: 10 }}
-                                                        ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
                                                         onClick={() => { LinkStratigraphy(sample.id, stratigraphyId).then(history.push(history.goBack())) }}
                                                     >Link to Stratigraphy</Button>
                                             )
 
                                         }
-
-                                        {/* <Button color="warning"
-                                            style={{ margin: 10 }}
-                                            ///reports/:reportId(\d+)/samples/edit/:sampleId(\d+)
-                                            onClick={() => { history.push(`/reports/${reportId}/samples/edit/${sample.id}`) }}
-                                        >Edit</Button>
-                                        <Button color="danger"
-                                            style={{ margin: 10 }}
-                                            ///reports/:reportId(\d+)/samples/delete/:sampleId(\d+)
-                                            onClick={() => { history.push(`/reports/${reportId}/samples/delete/${sample.id}`) }}
-
-                                        >DELETE</Button> */}
 
                                     </th>
                                     <td>
@@ -154,7 +127,6 @@ const StratLinkSampleList = () => {
                                     </td>
 
                                     <td>
-                                        {/* {sample.dateTaken} */}
                                         {sample.dateTaken && `${new Date(sample.dateTaken).getMonth() + 1}/${new Date(sample.dateTaken).getDate()}/${new Date(sample.dateTaken).getFullYear()}`}
                                     </td>
                                     <td>
