@@ -109,10 +109,11 @@ const Stratigraphy = () => {
                         >
                             View Samples
                     </Button> */}
+                        <hr />
 
                     </Table>
                     <div className="stragraphySamples">
-                        <h2>Corresponding Samples</h2>
+                        <h2 className="listTitle">Corresponding Samples</h2>
                         {samples.map((sample) => (
                             <Link to={`/reports/${reportId}/samples/${sample.id}`}>
                                 <div className="samples" key={sample.id}>
@@ -132,6 +133,7 @@ const Stratigraphy = () => {
                             </Link>
                         ))}
                     </div>
+
 
                     <Table>
                         {/* "stratigraphyId": 10,

@@ -6,7 +6,7 @@
     margin: 2rem 1rem;
     justify-content: flex-start;
     /* background-color: rgba(203, 243, 240, 0.6); */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.4);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0, 0.1);
     border-radius: 0.4rem;
 }
 
@@ -18,8 +18,16 @@
     padding: 1rem;
     width: 15rem;
     height: 25rem;
+    
 }
 
 .samples:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
   }
+
+  .listTitle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 2rem;
+}
