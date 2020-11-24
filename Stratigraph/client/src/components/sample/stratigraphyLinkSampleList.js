@@ -106,9 +106,9 @@ const StratLinkSampleList = () => {
                                         {sample.stratigraphyId == stratigraphyId ?
                                             <Button color="info"
                                                 style={{ margin: 10 }}
-
-                                                onClick={() => { UnLinkStratigraphy(sample.id).then(setStrat(sample.id)) }}
-                                            >Unlink from Stratigraphy</Button>
+                                                disabled
+                                            // onClick={() => { UnLinkStratigraphy(sample.id).then(setStrat(sample.id)) }}
+                                            >Already Linked</Button>
 
                                             :
                                             (
@@ -118,7 +118,7 @@ const StratLinkSampleList = () => {
                                                         style={{ margin: 10 }}
                                                     ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
                                                     // onClick={() => { history.push(`/reports/${reportId}/stratigraphies/add/${sample.id}`) }}
-                                                    >Link to Stratigraphy</Button>
+                                                    >Linked to different Stratigraphy</Button>
                                                     :
                                                     <Button color="info"
                                                         style={{ margin: 10 }}

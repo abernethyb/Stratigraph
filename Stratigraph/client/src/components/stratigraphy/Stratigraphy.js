@@ -24,12 +24,11 @@ const Stratigraphy = () => {
         getSingleStratigraphy(stratigraphyId).then(setStratigraphy);
         getLayersByStratigraphyId(stratigraphyId);
         getSamplesByStratigraphyId(stratigraphyId);
-    }, [samples]);
+    }, []);
 
     if (!stratigraphy) {
         return null;
     }
-
 
     return (
         <>
@@ -93,13 +92,7 @@ const Stratigraphy = () => {
                         >
                             Add Layer
                     </Button>
-                        <Button
-                            color="info"
-                            style={{ margin: 10 }}
-                            ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/samples
-                            onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}/samples`) }}
-                        > Link existing Samples
-                        </Button>
+
 
 
                         {/* <Button color="info"
@@ -113,11 +106,21 @@ const Stratigraphy = () => {
 
                     </Table>
                     <div className="stragraphySamples">
-                        <h2 className="listTitle">Corresponding Samples</h2>
+                        <div className="listTitle">
+                            <h2>Corresponding Samples</h2>
+                            <Button
+                                color="info"
+                                style={{ margin: 10 }}
+                                ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/samples
+                                onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}/samples`) }}
+                            > Link existing Samples
+                        </Button>
+                        </div>
                         {samples.map((sample) => (
-                            <Link to={`/reports/${reportId}/samples/${sample.id}`}>
-                                <div className="samples" key={sample.id}>
 
+
+                            <div className="samples" key={sample.id}>
+                                < Link to={`/reports/${reportId}/samples/${sample.id}`}>
                                     <p>Name: {sample.name}</p>
                                     <p>Structure: {sample.structureName}</p>
                                     <p>Room: {sample.roomNumber}</p>
@@ -128,15 +131,16 @@ const Stratigraphy = () => {
                                         src={`/api/image/${sample.image}`}
                                         fallbackImage={sample.image}
                                         alt={sample.name} />
-
-                                    <Button color="info"
+                                </Link>
+                                <div className="unlink">
+                                    {samples.length >= 2 && <Button color="info"
                                         style={{ margin: 10 }}
-
                                         onClick={() => { UnLinkStratigraphy(sample.id) }}
                                     >Unlink from Stratigraphy</Button>
-
+                                    }
                                 </div>
-                            </Link>
+                            </div>
+
                         ))}
                     </div>
 
