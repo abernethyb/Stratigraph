@@ -144,6 +144,45 @@ namespace Stratigraph.Controllers
                 return Unauthorized();
             }
         }
+        [HttpPut("linkStratigraphy/{sampleId}/{stratigraphyId}")]
+        public IActionResult LinkStrat(int sampleId, int stratigraphyId)
+        {
+
+            var currentUserProfile = GetCurrentUserProfile();
+            var dbSample = _sampleRepository.GetSampleById(sampleId);
+
+            if (dbSample.UserProfileId == currentUserProfile.Id)
+            {
+
+                _sampleRepository.LinkStratigraphy(sampleId, stratigraphyId);
+
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
+        [HttpPut("unlinkStratigraphy/{sampleId}")]
+        public IActionResult UnlinkStrat(int sampleId)
+        {
+
+            var currentUserProfile = GetCurrentUserProfile();
+            var dbSample = _sampleRepository.GetSampleById(sampleId);
+
+            if (dbSample.UserProfileId == currentUserProfile.Id)
+            {
+
+                _sampleRepository.UnLinkStratigraphy(sampleId);
+
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

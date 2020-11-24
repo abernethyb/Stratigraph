@@ -7,28 +7,31 @@ import { SampleContext } from "../../providers/SampleProvider";
 import { StratigraphyContext } from "../../providers/StratigraphyProvider";
 import Image from 'react-bootstrap/Image'
 import ReactImageFallback from "react-image-fallback";
+import "./strat.css"
 
 
 const Stratigraphy = () => {
 
     const { getSingleStratigraphy } = useContext(StratigraphyContext)
-    const { getSamplesByStratigraphyId, samples } = useContext(SampleContext)
+    const { getSamplesByStratigraphyId, samples, UnLinkStratigraphy } = useContext(SampleContext)
     const { layers, getLayersByStratigraphyId } = useContext(LayerContext)
     const [stratigraphy, setStratigraphy] = useState();
     const { stratigraphyId, reportId } = useParams();
     const history = useHistory();
+    const [unLinked, setUnLinked] = useState(false);
+
+    //setUnLinked(1);
 
 
     useEffect(() => {
         getSingleStratigraphy(stratigraphyId).then(setStratigraphy);
         getLayersByStratigraphyId(stratigraphyId);
         getSamplesByStratigraphyId(stratigraphyId);
-    }, [samples]);
+    }, [unLinked]);
 
     if (!stratigraphy) {
         return null;
     }
-
 
     return (
         <>
@@ -92,6 +95,9 @@ const Stratigraphy = () => {
                         >
                             Add Layer
                     </Button>
+
+
+
                         {/* <Button color="info"
                             style={{ margin: 10 }}
                             //reports/:reportId(\d+)/samples
@@ -99,25 +105,48 @@ const Stratigraphy = () => {
                         >
                             View Samples
                     </Button> */}
+                        <hr />
 
                     </Table>
                     <div className="stragraphySamples">
-                        <h2>Corresponding Samples</h2>
+                        <div className="listTitle">
+                            <h2>Corresponding Samples</h2>
+                            <Button
+                                color="info"
+                                style={{ margin: 10 }}
+                                ///reports/:reportId(\d+)/stratigraphies/:stratigraphyId(\d+)/samples
+                                onClick={() => { history.push(`/reports/${reportId}/stratigraphies/${stratigraphyId}/samples`) }}
+                            > Link existing Samples
+                        </Button>
+                        </div>
                         {samples.map((sample) => (
-                            <div key={sample.id}>
-                                <p>Structure: {sample.structureName}</p>
-                                <p>Room: {sample.roomNumber}</p>
-                                {/* <Image fluid rounded src={sample.image} alt={sample.name}></Image> */}
-                                <Link to={`/reports/${reportId}/samples/${sample.id}`}>
+
+
+                            <div className="samples" key={sample.id}>
+                                < Link to={`/reports/${reportId}/samples/${sample.id}`}>
+                                    <p>Name: {sample.name}</p>
+                                    <p>Structure: {sample.structureName}</p>
+                                    <p>Room: {sample.roomNumber}</p>
+                                    {/* <Image fluid rounded src={sample.image} alt={sample.name}></Image> */}
+
                                     <ReactImageFallback
-                                        width="50%"
+                                        width="100%"
                                         src={`/api/image/${sample.image}`}
                                         fallbackImage={sample.image}
                                         alt={sample.name} />
                                 </Link>
+                                <div className="unlink">
+                                    {samples.length >= 2 && <Button color="info"
+                                        style={{ margin: 10 }}
+                                        onClick={() => { UnLinkStratigraphy(sample.id).then(setUnLinked(!unLinked)) }}
+                                    >Unlink from Stratigraphy</Button>
+                                    }
+                                </div>
                             </div>
+
                         ))}
                     </div>
+
 
                     <Table>
                         {/* "stratigraphyId": 10,
