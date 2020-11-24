@@ -13,7 +13,7 @@ import "./strat.css"
 const Stratigraphy = () => {
 
     const { getSingleStratigraphy } = useContext(StratigraphyContext)
-    const { getSamplesByStratigraphyId, samples } = useContext(SampleContext)
+    const { getSamplesByStratigraphyId, samples, UnLinkStratigraphy } = useContext(SampleContext)
     const { layers, getLayersByStratigraphyId } = useContext(LayerContext)
     const [stratigraphy, setStratigraphy] = useState();
     const { stratigraphyId, reportId } = useParams();
@@ -128,6 +128,12 @@ const Stratigraphy = () => {
                                         src={`/api/image/${sample.image}`}
                                         fallbackImage={sample.image}
                                         alt={sample.name} />
+
+                                    <Button color="info"
+                                        style={{ margin: 10 }}
+
+                                        onClick={() => { UnLinkStratigraphy(sample.id) }}
+                                    >Unlink from Stratigraphy</Button>
 
                                 </div>
                             </Link>

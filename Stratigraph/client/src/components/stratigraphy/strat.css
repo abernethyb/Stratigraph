@@ -23,6 +23,7 @@
 
 .samples:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+    
   }
 
   .listTitle {
@@ -30,4 +31,12 @@
     width: 100%;
     justify-content: space-between;
     margin-left: 2rem;
+}
+
+:any-link {
+    text-decoration: none;
+    color: black;
+}
+:any-link:hover {
+    text-decoration: none;
 }
