@@ -40,8 +40,6 @@ const StratLinkSampleList = () => {
         return null;
     }
 
-   
-
     return (
         <>
             <div className="container">
