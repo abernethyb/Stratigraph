@@ -15,7 +15,7 @@ const StratLinkSampleList = () => {
     const history = useHistory();
     const roomNumbersearch = useRef(null);
     const [search, setsearch] = useState();
-    const [strat, setStrat] = useState(0);
+
 
 
 
@@ -35,7 +35,7 @@ const StratLinkSampleList = () => {
 
     useEffect(() => {
         getSamplesByReportId(reportId);
-    }, [strat]);
+    }, []);
 
     if (!samples) {
         return null;
@@ -123,7 +123,7 @@ const StratLinkSampleList = () => {
                                                     <Button color="info"
                                                         style={{ margin: 10 }}
                                                         ///reports/:reportId(\d+)/stratigraphies/add/:sampleId(\d+)
-                                                        onClick={() => { LinkStratigraphy(sample.id, stratigraphyId).then(setStrat(sample.id * sample.id)) }}
+                                                        onClick={() => { LinkStratigraphy(sample.id, stratigraphyId).then(history.push(history.goBack())) }}
                                                     >Link to Stratigraphy</Button>
                                             )
 
