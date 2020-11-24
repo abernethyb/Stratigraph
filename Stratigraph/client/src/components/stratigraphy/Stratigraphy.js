@@ -18,13 +18,16 @@ const Stratigraphy = () => {
     const [stratigraphy, setStratigraphy] = useState();
     const { stratigraphyId, reportId } = useParams();
     const history = useHistory();
+    const [unLinked, setUnLinked] = useState(false);
+
+    //setUnLinked(1);
 
 
     useEffect(() => {
         getSingleStratigraphy(stratigraphyId).then(setStratigraphy);
         getLayersByStratigraphyId(stratigraphyId);
         getSamplesByStratigraphyId(stratigraphyId);
-    }, []);
+    }, [unLinked]);
 
     if (!stratigraphy) {
         return null;
@@ -135,7 +138,7 @@ const Stratigraphy = () => {
                                 <div className="unlink">
                                     {samples.length >= 2 && <Button color="info"
                                         style={{ margin: 10 }}
-                                        onClick={() => { UnLinkStratigraphy(sample.id) }}
+                                        onClick={() => { UnLinkStratigraphy(sample.id).then(setUnLinked(!unLinked)) }}
                                     >Unlink from Stratigraphy</Button>
                                     }
                                 </div>
