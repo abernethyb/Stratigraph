@@ -64,7 +64,8 @@ namespace Stratigraph.Repositories
                     cmd.CommandText = @"SELECT st.ReportId AS ReportID, st.Name StructureName, sa.Id AS SampleID, sa.Name AS SampleName, sa.UserProfileId, sa.StratigraphyId, sa.StructureId, 
                                         sa.DateTaken, sa.Image, sa.LocationDescription, sa.RoomNumber FROM Sample sa
                                         LEFT JOIN Structure st on sa.StructureId = st.Id
-                                        WHERE ReportID = @reportId;";
+                                        WHERE ReportID = @reportId
+                                        ORDER BY StratigraphyId;";
 
                     DbUtils.AddParameter(cmd, "@reportId", reportId);
 
