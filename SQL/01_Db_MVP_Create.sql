@@ -77,7 +77,7 @@ GO
 CREATE TABLE [Layer] (
   [Id] integer PRIMARY KEY IDENTITY,
   [StratigraphyId] integer NOT NULL,
-  [FinishPeriod] nvarchar(50),
+  [FinishPeriodId] integer NOT NULL,
   [BeginDate] datetime,
   [EndDate] datetime,
   [Pigments] nvarchar(255),
@@ -88,6 +88,17 @@ CREATE TABLE [Layer] (
 )
 GO
 
+CREATE TABLE [FinishPeriod] (
+  [Id] integer PRIMARY KEY IDENTITY,
+  [UserId] integer,
+  [StructureId] integer,
+  [Name] nvarchar(255),
+  [StartYear] integer,
+  [EndYear] integer,
+  [OwnerName] nvarchar(255),
+  [Notes] nvarchar(255)
+)
+GO
 
 ALTER TABLE [Sample] ADD FOREIGN KEY ([StratigraphyId]) REFERENCES [Stratigraphy] ([Id])
 GO
@@ -114,4 +125,10 @@ ALTER TABLE [Structure] ADD FOREIGN KEY ([ReportId]) REFERENCES [Report] ([Id])
 GO
 
 ALTER TABLE [Sample] ADD FOREIGN KEY ([StructureId]) REFERENCES [Structure] ([Id])
+GO
+
+ALTER TABLE [FinishPeriod] ADD FOREIGN KEY ([StructureId]) REFERENCES [Structure] ([Id])
+GO
+
+ALTER TABLE [Layer] ADD FOREIGN KEY ([FinishPeriodId]) REFERENCES [FinishPeriod] ([Id])
 GO
