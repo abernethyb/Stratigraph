@@ -46,7 +46,7 @@ CREATE TABLE [Structure] (
   [Id] integer PRIMARY KEY IDENTITY,
   [ReportId] integer NOT NULL,
   [Name] nvarchar(255) NOT NULL,
-  [Image] nvarchar(255),
+  [Image] nvarchar(4000),
   [Location] nvarchar(255),
   [YearCunstructed] integer
 )
@@ -59,7 +59,7 @@ CREATE TABLE [Sample] (
   [StratigraphyId] integer,
   [StructureId] integer NOT NULL,
   [DateTaken] datetime,
-  [Image] nvarchar(255) NOT NULL,
+  [Image] nvarchar(4000) NOT NULL,
   [LocationDescription] nvarchar(255),
   [RoomNumber] integer NOT NULL
 )
@@ -70,14 +70,14 @@ CREATE TABLE [Stratigraphy] (
   [UserProfileId] integer NOT NULL,
   [ReportId] integer NOT NULL,
   [CreateDate] datetime NOT NULL,
-  [Notes] nvarchar(500)
+  [Notes] nvarchar(4000)
 )
 GO
 
 CREATE TABLE [Layer] (
   [Id] integer PRIMARY KEY IDENTITY,
   [StratigraphyId] integer NOT NULL,
-  [FinishPeriodId] integer NOT NULL,
+  [FinishPeriodId] integer,
   [BeginDate] datetime,
   [EndDate] datetime,
   [Pigments] nvarchar(255),
@@ -90,13 +90,13 @@ GO
 
 CREATE TABLE [FinishPeriod] (
   [Id] integer PRIMARY KEY IDENTITY,
-  [UserId] integer,
+  [UserProfileId] integer NOT NULL,
   [StructureId] integer,
   [Name] nvarchar(255),
   [StartYear] integer,
   [EndYear] integer,
   [OwnerName] nvarchar(255),
-  [Notes] nvarchar(255)
+  [Notes] nvarchar(MAX)
 )
 GO
 
@@ -128,6 +128,9 @@ ALTER TABLE [Sample] ADD FOREIGN KEY ([StructureId]) REFERENCES [Structure] ([Id
 GO
 
 ALTER TABLE [FinishPeriod] ADD FOREIGN KEY ([StructureId]) REFERENCES [Structure] ([Id])
+GO
+
+ALTER TABLE [FinishPeriod] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 GO
 
 ALTER TABLE [Layer] ADD FOREIGN KEY ([FinishPeriodId]) REFERENCES [FinishPeriod] ([Id])

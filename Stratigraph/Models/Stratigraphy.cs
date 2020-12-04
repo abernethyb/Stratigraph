@@ -25,7 +25,7 @@ namespace Stratigraph.Models
         [Required]
         public DateTime CreateDate { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(4000)]
         public string Notes { get; set; }
 
         public int InitialSampleId { get; set; }
