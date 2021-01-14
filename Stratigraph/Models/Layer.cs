@@ -26,8 +26,12 @@ namespace Stratigraph.Models
         [Required]
         public int StratigraphyId { get; set; }
 
+        //to be replaced by finishPeriodId
         [MaxLength(50)]
         public string FinishPeriod { get; set; }
+
+        //to replace FinishPeriod String
+        public int FinishPeriodId { get; set; }
         public DateTime? BeginDate { get; set; }
         public DateTime? EndDate { get; set; }
 
