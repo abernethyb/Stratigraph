@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
 import { useHistory } from "react-router-dom";
 
+let ApiUrl = process.env.REACT_APP_BASE_URL;
+
 export const ImageContext = React.createContext();
 
 export const ImageProvider = (props) => {
@@ -11,7 +13,7 @@ export const ImageProvider = (props) => {
 
     const addImage = (image) => {
         return getToken().then((token) =>
-            fetch('/api/image', {
+            fetch(`${ApiUrl}/api/image`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`

@@ -10,7 +10,7 @@ export const StratigraphyProvider = (props) => {
 
     const getSingleStratigraphy = (id) =>
         getToken().then((token) =>
-            fetch(`/api/stratigraphy/${id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/stratigraphy/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -28,7 +28,7 @@ export const StratigraphyProvider = (props) => {
 
     const addStratigraphy = (stratigraphy) => {
         return getToken().then((token) =>
-            fetch("/api/stratigraphy/", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/stratigraphy/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ export const StratigraphyProvider = (props) => {
 
     const editStratigraphy = (stratigraphy) => {
         return getToken().then((token) =>
-            fetch(`/api/stratigraphy/${stratigraphy.id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/stratigraphy/${stratigraphy.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

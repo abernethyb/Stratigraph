@@ -11,7 +11,7 @@ export const SampleProvider = (props) => {
 
     const getSamplesByStructureId = (structureId, reportId) => {
         getToken().then((token) =>
-            fetch(`/api/sample/structureSamples/${structureId}/${reportId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/structureSamples/${structureId}/${reportId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -30,7 +30,7 @@ export const SampleProvider = (props) => {
 
     const getSamplesByReportId = (reportId) => {
         getToken().then((token) =>
-            fetch(`/api/sample/reportSamples/${reportId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/reportSamples/${reportId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -49,7 +49,7 @@ export const SampleProvider = (props) => {
 
     const getSamplesByStratigraphyId = (stratigraphyId) => {
         getToken().then((token) =>
-            fetch(`/api/sample/stratigraphySamples/${stratigraphyId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/stratigraphySamples/${stratigraphyId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -61,7 +61,7 @@ export const SampleProvider = (props) => {
     ///api/sample/reportSamples/22/room/109
     const searcSamplesByRoomViaReport = (reportId, roomNumber) => {
         getToken().then((token) =>
-            fetch(`/api/sample/reportSamples/${reportId}/room/${roomNumber}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/reportSamples/${reportId}/room/${roomNumber}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -72,7 +72,7 @@ export const SampleProvider = (props) => {
 
     const getSingleSample = (id) =>
         getToken().then((token) =>
-            fetch(`/api/sample/${id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -91,7 +91,7 @@ export const SampleProvider = (props) => {
 
     const addSample = (sample) => {
         return getToken().then((token) =>
-            fetch("/api/sample/", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -110,7 +110,7 @@ export const SampleProvider = (props) => {
 
     const EditSample = (sample) => {
         return getToken().then((token) =>
-            fetch(`/api/sample/${sample.id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/${sample.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -128,7 +128,7 @@ export const SampleProvider = (props) => {
     }
     const LinkStratigraphy = (sampleId, StratigraphyId) => {
         return getToken().then((token) =>
-            fetch(`/api/sample/linkStratigraphy/${sampleId}/${StratigraphyId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/linkStratigraphy/${sampleId}/${StratigraphyId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -146,7 +146,7 @@ export const SampleProvider = (props) => {
 
     const UnLinkStratigraphy = (sampleId) => {
         return getToken().then((token) =>
-            fetch(`/api/sample/unlinkStratigraphy/${sampleId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/unlinkStratigraphy/${sampleId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -164,7 +164,7 @@ export const SampleProvider = (props) => {
 
     const DeleteSample = (id) =>
         getToken().then((token) =>
-            fetch(`/api/sample/${id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/sample/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`

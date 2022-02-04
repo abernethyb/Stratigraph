@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Stratigraph.Repositories
 {
-    public class FinishPeriodRepository: BaseRepository
+    public class FinishPeriodRepository : BaseRepository, IFinishPeriodRepository
     {
         public FinishPeriodRepository(IConfiguration configuration) : base(configuration) { }
 

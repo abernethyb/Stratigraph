@@ -14,7 +14,7 @@ export const ReportProvider = (props) => {
 
     const getReportsByUserId = () => {
         getToken().then((token) =>
-            fetch(`/api/Report/`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/Report/`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -25,7 +25,7 @@ export const ReportProvider = (props) => {
 
     const getSingleReport = (id) =>
         getToken().then((token) =>
-            fetch(`/api/Report/${id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/Report/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -43,7 +43,7 @@ export const ReportProvider = (props) => {
 
     const addReport = (report) => {
         return getToken().then((token) =>
-            fetch("/api/Report/", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/Report/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ export const ReportProvider = (props) => {
 
     const EditReport = (report) => {
         return getToken().then((token) =>
-            fetch(`/api/Report/${report.id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/Report/${report.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ export const ReportProvider = (props) => {
     };
     const CompleteReport = (reportId) => {
         return getToken().then((token) =>
-            fetch(`/api/Report/complete/${reportId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/Report/complete/${reportId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -82,7 +82,7 @@ export const ReportProvider = (props) => {
     };
     const ReOpenReport = (reportId) => {
         return getToken().then((token) =>
-            fetch(`/api/Report/reopen/${reportId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/Report/reopen/${reportId}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

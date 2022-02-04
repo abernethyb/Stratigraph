@@ -12,7 +12,7 @@ export const LayerProvider = (props) => {
 
     const getLayersByStratigraphyId = (StratigraphyId) => {
         getToken().then((token) =>
-            fetch(`/api/layer/stratigraphyLayers/${StratigraphyId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/layer/stratigraphyLayers/${StratigraphyId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -24,7 +24,7 @@ export const LayerProvider = (props) => {
 
     const getSingleLayer = (id, reportId) =>
         getToken().then((token) =>
-            fetch(`/api/layer/${id}/${reportId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/layer/${id}/${reportId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -41,7 +41,7 @@ export const LayerProvider = (props) => {
 
     const addLayer = (layer) => {
         return getToken().then((token) =>
-            fetch("/api/layer/", {
+            fetch(`${process.env.REACT_APP_BASE_URL}api/layer/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ export const LayerProvider = (props) => {
 
     const EditLayer = (layer) => {
         return getToken().then((token) =>
-            fetch(`/api/layer/${layer.id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/layer/${layer.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -80,7 +80,7 @@ export const LayerProvider = (props) => {
 
     const DeleteLayer = (id, stratigraphyId) =>
         getToken().then((token) =>
-            fetch(`/api/layer/${id}/${stratigraphyId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/layer/${id}/${stratigraphyId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`

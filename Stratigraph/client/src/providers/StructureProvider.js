@@ -14,7 +14,7 @@ export const StructureProvider = (props) => {
 
     const getStructuresByReportId = (reportId) => {
         getToken().then((token) =>
-            fetch(`/api/structure/reportStructures/${reportId}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/structure/reportStructures/${reportId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -35,7 +35,7 @@ export const StructureProvider = (props) => {
 
     const getSingleStructure = (id) =>
         getToken().then((token) =>
-            fetch(`/api/structure/${id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/structure/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -54,7 +54,7 @@ export const StructureProvider = (props) => {
 
     const addStructure = (structure) => {
         return getToken().then((token) =>
-            fetch("/api/structure/", {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/structure/`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ export const StructureProvider = (props) => {
 
     const EditStructure = (structure) => {
         return getToken().then((token) =>
-            fetch(`/api/structure/${structure.id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/structure/${structure.id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ export const StructureProvider = (props) => {
 
     const DeleteStructure = (id) =>
         getToken().then((token) =>
-            fetch(`/api/structure/${id}`, {
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/structure/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`
